@@ -19,6 +19,11 @@ const postSignup = async obj =>{
     return res.data;
 }
 
+const getCurrentUser = async () =>{
+    const res = await axios.get(`${BACKEND_API}/profile`, headers());
+    return res.data;
+}
+
 //! fetch backup
 // const Signup = async data => {
 //     return await fetch(`${BACKEND_API}/users`, {
@@ -32,6 +37,10 @@ const postSignup = async obj =>{
 // };
 
 //* posts requests
+const getAllPosts = async () =>{
+    const res = await axios.get(`${BACKEND_API}/posts`)
+    return res.data
+}
 
 
 //* comment requests
@@ -42,7 +51,8 @@ const postSignup = async obj =>{
 
 const api={
     user:{
-        postSignup
+        postSignup,
+        getCurrentUser
     },
     post:{
         
