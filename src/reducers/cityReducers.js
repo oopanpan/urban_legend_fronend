@@ -6,6 +6,8 @@ export const cityReducer = (state={}, action) => {
             return {...state, allConts: action.payload};
         case KEYS.SELECT_CONT:
             return {...state, selectedCont: action.payload};
+        case KEYS.SET_URBAN_OPTION:
+            return {...state, urban: action.payload}
         default :
             return state
     }

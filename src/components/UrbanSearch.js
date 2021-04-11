@@ -3,11 +3,13 @@ import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-import { setAllConts } from '../actions/cityActions'
+import { setAllConts, setUrban } from '../actions/cityActions'
 import api from '../service/api'
 
-const UrbanSearch = ({ allConts, setAllConts }) => {
+const UrbanSearch = ({ allConts, setAllConts, setUrban }) => {
 
+
+    //!!! THIS WHOLE COMPONENT IS REAL FUCKED, MAJOR REFACTORING NEEDED
     const [selectedUrban, setSelectedUrban] = useState(null)
     const [selectedContinent, setSelectedContinent] = useState(null)
 
@@ -29,8 +31,15 @@ const UrbanSearch = ({ allConts, setAllConts }) => {
         .then(r => setSelectedContinent(r.data['_links']['continent:urban_areas'].href))
     }
 
-    const renderUrbanOption = () =>{
+    const renderUrbanOption = () => {
         return selectedUrban && selectedUrban.map( urban => <option value={urban.name}>{urban.name}</option>)
+    }
+
+    const handleUrban = async e => {
+        // console.log(selectedUrban.find( urban => urban.name === e.target.value).href)
+        await axios.get(selectedUrban.find( urban => urban.name === e.target.value).href)
+        .then(r => setUrban(r.data))
+        // setUrban()
     }
 
     return (
@@ -42,7 +51,7 @@ const UrbanSearch = ({ allConts, setAllConts }) => {
                     {renderContsOption()}
                 </Form.Control>
                 <Form.Label>Urban City</Form.Label>
-                <Form.Control as='select' onChange={null}>
+                <Form.Control as='select' onChange={handleUrban}>
                     {renderUrbanOption()}
                 </Form.Control>
             </Form>
@@ -51,8 +60,7 @@ const UrbanSearch = ({ allConts, setAllConts }) => {
 }
 
 const mapStateToProps = state =>{
-    console.log(state)
     return { allConts: state.geo.allConts }
 }
 
-export default connect(mapStateToProps, { setAllConts })(UrbanSearch);
+export default connect(mapStateToProps, { setAllConts , setUrban })(UrbanSearch);

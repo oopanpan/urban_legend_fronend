@@ -13,3 +13,10 @@ export const selectCont = data => (
         payload: data
     }
 )
+
+export const setUrban = data => (
+    {
+        type: KEYS.SET_URBAN_OPTION,
+        payload: data
+    }
+)
