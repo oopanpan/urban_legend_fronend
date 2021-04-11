@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { setAuth } from '../actions/setAuth'
+import { setAuth } from '../actions/userActions'
 import { Form, Button, Container } from 'react-bootstrap';
 import api from '../service/api'
 

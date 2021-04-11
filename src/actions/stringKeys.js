@@ -1,1 +1,11 @@
-export const USER_AUTH = 'USER_AUTH'
+//* USER ACTIONS
+export const SET_USER_AUTH = 'SET_USER_AUTH'
+
+export const DEL_USER_AUTH = 'DEL_USER_AUTH'
+
+//* TELEPORT ACTIONS
+export const SET_ALL_CONTS = 'SET_ALL_CONT'
+
+export const SELECT_CONT = 'SELECT_CONT'
+
+export const SET_URBAN_OPTION = 'SET_URBAN_OPTION'

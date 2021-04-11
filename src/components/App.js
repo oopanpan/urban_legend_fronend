@@ -6,7 +6,7 @@ import NavBar from './NavBar'
 import Signup from './Signup'
 import UrbanContainer from './UrbanContainer'
 
-import { setAuth } from '../actions/setAuth'
+import { setAuth } from '../actions/userActions'
 import api from '../service/api'
 
 const App = ({ user, setAuth}) => {
@@ -28,12 +28,12 @@ const App = ({ user, setAuth}) => {
                 <Route path='/signup' render={() => <Signup /> } />
                 <Route path='/urban' render={ () => <UrbanContainer />} />
             </Router>
-            <h1>{user.username}</h1>
         </div>
     )
 }
 
 const mapStateToProps = state =>{
+    console.log(state)
     return {user: state.auth}
 }
 
