@@ -26,7 +26,7 @@ export const getUrbansForCont = link => async dispatch => {
             let link2 = r.data['_links']['continent:urban_areas']['href']
             return axios.get(link2)
         })
-    return res.data['_links']['ua:items']
+    dispatch({ type: KEYS.SET_URBAN_OPTION, payload: res.data['_links']['ua:items'] })
 }
 
 export const setUrban = link => async dispatch => {
@@ -35,7 +35,7 @@ export const setUrban = link => async dispatch => {
 }
 
 export const clearUrban = () => (
-    { type: KEYS.CLEAR_URBAN}
+    { type: KEYS.CLEAR_URBAN }
 )
 
 // export const setUrban = data => (

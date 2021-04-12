@@ -16,7 +16,13 @@ const headers = () => {
 };
 
 //* user requests
-const postSignup = async obj =>{
+
+const postLogin = async obj => {
+    const res = await axios.post(`${BACKEND_API}/login`, obj, headers());
+    return res.data;
+}
+
+const postSignup = async obj => {
     const res = await axios.post(`${BACKEND_API}/users`, obj, headers());
     return res.data;
 }
@@ -71,6 +77,7 @@ const general = async link => {
 //* object to export with swag
 const api={
     user:{
+        postLogin,
         postSignup,
         getCurrentUser
     },

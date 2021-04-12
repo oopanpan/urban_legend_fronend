@@ -13,7 +13,6 @@ export const cityReducer = (state={}, action) => {
         case KEYS.CLEAR_URBAN:
             const nextState = {...state}
             delete nextState.selectedUrban
-            console.log(nextState)
             return nextState;
         default :
             return state;

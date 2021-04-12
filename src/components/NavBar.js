@@ -26,9 +26,7 @@ function NavBar() {
             <LinkContainer to='/urban'>
                 <Nav.Link>Urban</Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/logout'>
-                <Nav.Link>Logout</Nav.Link>
-            </LinkContainer>
+                <Nav.Link onClick={null}>Logout</Nav.Link>
             {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

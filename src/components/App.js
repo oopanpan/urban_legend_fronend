@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 import NavBar from './NavBar'
+import Login from './Login'
 import Signup from './Signup'
 import UrbanContainer from './UrbanContainer'
 
@@ -32,6 +33,7 @@ const App = ({ user, setAuth}) => {
             {/* Map widget */}
             <Router>
                 <NavBar />
+                <Route path='/login' render={() => <Login /> } />
                 <Route path='/signup' render={() => <Signup /> } />
                 <Route path='/urban' render={ () => <UrbanContainer />} />
             </Router>
@@ -40,6 +42,7 @@ const App = ({ user, setAuth}) => {
 }
 
 const mapStateToProps = state =>{
+    console.log(state)
     return {user: state.auth}
 }
 

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
-import axios from 'axios'
 
 import { setAllConts, setUrban, clearUrban, getAllUrbans, getUrbansForCont } from '../actions/cityActions'
-import api from '../service/api'
 
 const UrbanSearch = ({ allConts, allUrbans, setAllConts, getUrbansForCont, setUrban, clearUrban, getAllUrbans }) => {
 
@@ -32,8 +30,6 @@ const UrbanSearch = ({ allConts, allUrbans, setAllConts, getUrbansForCont, setUr
         const foundCity = allUrbans.find( urban => urban.name === e.target.value)
         foundCity ? setUrban(foundCity.href) : clearUrban()
     }
-
-    console.log(allUrbans)
 
     return (
         <div className='container' >
