@@ -9,6 +9,8 @@ import UrbanContainer from './UrbanContainer'
 import { setAuth } from '../actions/userActions'
 import api from '../service/api'
 
+import './App.css'
+
 const App = ({ user, setAuth}) => {
 
     useEffect(() => {
@@ -22,9 +24,14 @@ const App = ({ user, setAuth}) => {
     }, [setAuth])
 
     return (
-        <div>
-            <NavBar />
+        <div className='app'>
+            {/* SideBar/NAVBAR */}
+
+            {/* main Feed/All Post from the newest */}
+
+            {/* Map widget */}
             <Router>
+                <NavBar />
                 <Route path='/signup' render={() => <Signup /> } />
                 <Route path='/urban' render={ () => <UrbanContainer />} />
             </Router>
@@ -33,7 +40,6 @@ const App = ({ user, setAuth}) => {
 }
 
 const mapStateToProps = state =>{
-    console.log(state)
     return {user: state.auth}
 }
 

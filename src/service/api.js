@@ -52,8 +52,18 @@ const getAllPosts = async () =>{
 
 //* third party api request
 
+const getAllUrbans = async() => {
+    const res = await axios.get('https://api.teleport.org/api/urban_areas/')
+    return res.data
+}
+
 const getAllConts = async() =>{
     const res = await axios.get('https://api.teleport.org/api/continents/');
+    return res.data
+}
+
+const general = async link => {
+    const res = await axios.get(link);
     return res.data
 }
 
@@ -71,7 +81,9 @@ const api={
 
     },
     teleport:{
-        getAllConts
+        general,
+        getAllConts,
+        getAllUrbans
     }
 };
 

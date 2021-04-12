@@ -3,56 +3,50 @@ import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-import { setAllConts, setUrban } from '../actions/cityActions'
+import { setAllConts, setUrban, clearUrban, getAllUrbans, getUrbansForCont } from '../actions/cityActions'
 import api from '../service/api'
 
-const UrbanSearch = ({ allConts, setAllConts, setUrban }) => {
+const UrbanSearch = ({ allConts, allUrbans, setAllConts, getUrbansForCont, setUrban, clearUrban, getAllUrbans }) => {
 
-
-    //!!! THIS WHOLE COMPONENT IS REAL FUCKED, MAJOR REFACTORING NEEDED
-    const [selectedUrban, setSelectedUrban] = useState(null)
-    const [selectedContinent, setSelectedContinent] = useState(null)
-
-    useEffect(() => {
-        selectedContinent && axios.get(selectedContinent).then(r => setSelectedUrban(r.data['_links']['ua:items']))
-    }, [selectedContinent])
-
-    useEffect(() => {
-        api.teleport.getAllConts().then(r => setAllConts(r['_links']['continent:items']))
-    }, [setAllConts])
+    useEffect(()=>{
+        setAllConts()
+        getAllUrbans()
+    }, [])
 
     const renderContsOption = () => {
-        return allConts && allConts.map(cont => <option value={`${cont.name}`}>{cont.name}</option>)
+        return allConts.map(cont => <option value={`${cont.name}`}>{cont.name}</option>)
     }
-
-    const handleCont = async e => {
-        // console.log(allConts.find(cont => cont.name ===e.target.value))
-        await axios.get(allConts.find(cont => cont.name ===e.target.value).href)
-        .then(r => setSelectedContinent(r.data['_links']['continent:urban_areas'].href))
-    }
-
+    
     const renderUrbanOption = () => {
-        return selectedUrban && selectedUrban.map( urban => <option value={urban.name}>{urban.name}</option>)
+        console.log('Hello')
+        console.log(allUrbans)
+        return allUrbans.map( urban => <option value={urban.name}>{urban.name}</option>)
+    }
+
+    const handleCont = e => {
+        const selectedCont = allConts.find(cont => cont.name === e.target.value)
+        selectedCont ? getUrbansForCont(selectedCont.href) : getAllUrbans()
     }
 
     const handleUrban = async e => {
-        // console.log(selectedUrban.find( urban => urban.name === e.target.value).href)
-        await axios.get(selectedUrban.find( urban => urban.name === e.target.value).href)
-        .then(r => setUrban(r.data))
-        // setUrban()
+        const foundCity = allUrbans.find( urban => urban.name === e.target.value)
+        foundCity ? setUrban(foundCity.href) : clearUrban()
     }
 
+    console.log(allUrbans)
+
     return (
-        <div className='container'>
+        <div className='container' >
             <Form>
-                <Form.Label>Continent</Form.Label>
+                <Form.Label>Urban City</Form.Label>
+                <Form.Control as='input' list='urban-list' onChange={handleUrban} placeholder='Destination'/>
+                <datalist id='urban-list'>
+                    {allUrbans && renderUrbanOption()}
+                </datalist>
+                <Form.Label>Filter by Continent</Form.Label>
                 <Form.Control as='select' onChange={handleCont}>
                     <option value='none' style={{color:'grey'}}>Select...</option>
-                    {renderContsOption()}
-                </Form.Control>
-                <Form.Label>Urban City</Form.Label>
-                <Form.Control as='select' onChange={handleUrban}>
-                    {renderUrbanOption()}
+                    {allConts && renderContsOption()}
                 </Form.Control>
             </Form>
         </div>
@@ -60,7 +54,10 @@ const UrbanSearch = ({ allConts, setAllConts, setUrban }) => {
 }
 
 const mapStateToProps = state =>{
-    return { allConts: state.geo.allConts }
+    return { 
+        allConts: state.geo.allConts,
+        allUrbans: state.geo.urbans
+    }
 }
 
-export default connect(mapStateToProps, { setAllConts , setUrban })(UrbanSearch);
+export default connect(mapStateToProps, { setAllConts , setUrban, clearUrban , getAllUrbans, getUrbansForCont })(UrbanSearch);

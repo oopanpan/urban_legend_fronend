@@ -1,0 +1,21 @@
+.navbarOption {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navbarOption:hover {
+    background-color: green;
+    border-radius: 30px;
+
+}
+
+.navbarOption > .MuiSvgIcon-root {
+    padding: 5px;
+}
+
+.navbarOption > h2 {
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 20px;
+}

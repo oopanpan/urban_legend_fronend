@@ -11,7 +11,6 @@ const UrbanView = ({city}) => {
     const [summary, setSummary] = useState(null)
     const [mainScore, setMainScore] = useState(null)
 
-    console.log(city)
     useEffect(() => { 
         city && axios.get(city['_links']['ua:images'].href)
         .then(r => {
@@ -24,25 +23,23 @@ const UrbanView = ({city}) => {
     useEffect(()=>{
         scoreLink && axios.get(scoreLink)
         .then(r => {
-            console.log(r)
             setScores(r.data.categories)
             setSummary(r.data.summary)
             setMainScore(r.data.teleport_city_score.toFixed(2))
         })
     }, [scoreLink])
 
-    console.log(images)
     const renderScores = () => {
-        console.log(scores)
         return scores && scores.map( score => <p key={score.name}>{score.name}: {score.score_out_of_10.toFixed(2)}</p>)
     }
     
     return (
-        <div>
+        <div className='container'>
             {city ?
             <div>
                 <h1>{city.full_name}</h1>
                 <h4>Teleport Score: {mainScore}</h4>
+                <h5 dangerouslySetInnerHTML={{__html:summary}}></h5>
                 <img src={images.web} />
                 {renderScores()}
                 <ButtonGroup>
@@ -61,7 +58,7 @@ const UrbanView = ({city}) => {
 }
 
 const mapStateToProps = state =>(
-    {city: state.geo.urban}
+    {city: state.geo.selectedUrban}
 )
 
 export default connect(mapStateToProps)(UrbanView)
