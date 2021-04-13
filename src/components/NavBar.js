@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
 	Navbar,
 	NavDropdown,
@@ -13,8 +14,14 @@ import ForumIcon from '@material-ui/icons/Forum';
 
 import NavBarOption from './NavBarOption';
 import './NavBar.css';
+import { delAuth } from '../actions/userActions';
 
-function NavBar() {
+function NavBar({ username, delAuth }) {
+	console.log(username ? 'yes' : 'no');
+	const handleLogout = () => {
+		localStorage.removeItem('token');
+		delAuth();
+	};
 	return (
 		<Navbar bg='light' expand='lg'>
 			<Navbar.Brand href='#home'>Urban Legend</Navbar.Brand>
@@ -36,7 +43,7 @@ function NavBar() {
 					<LinkContainer to='/discuss'>
 						<Nav.Link>Forum</Nav.Link>
 					</LinkContainer>
-					<Nav.Link onClick={null}>Logout</Nav.Link>
+					<Nav.Link onClick={handleLogout}>Logout</Nav.Link>
 					{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -58,4 +65,9 @@ function NavBar() {
 	);
 }
 
-export default NavBar;
+const mapStateToProps = (state) => {
+	console.log(state);
+	return { username: state.auth.username };
+};
+
+export default connect(mapStateToProps, { delAuth })(NavBar);
