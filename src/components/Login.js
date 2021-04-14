@@ -39,21 +39,6 @@ function Login({ routerProps, setAuth }) {
 		});
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		const userObj = {
-			user: {
-				email_address: e.target.email.value,
-				password: e.target.password.value,
-			},
-		};
-		api.user.postLogin(userObj).then((r) => {
-			console.log(r);
-			localStorage.setItem('token', r.jwt);
-			setAuth(r);
-		});
-	};
-
 	return (
 		<Formik
 			initialValues={initialValues}
@@ -68,6 +53,7 @@ function Login({ routerProps, setAuth }) {
 					touched,
 					handleChange,
 					handleBlur,
+					isValidating,
 					isValid,
 					dirty,
 				} = formik;
@@ -126,8 +112,9 @@ function Login({ routerProps, setAuth }) {
 											size='lg'
 											block
 											style={{ borderRadius: '8px' }}
-											className='col-5 col-sm-4 col-lg-2 mt-4 mb-3'
+											className='col-5 col-md-4 col-lg-2 mt-4 mb-3'
 											type='submit'
+											disabled={isValidating}
 										>
 											Login
 										</Button>

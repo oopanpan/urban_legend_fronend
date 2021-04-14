@@ -4,8 +4,7 @@ import axios from 'axios';
 
 export const setAllConts = () => async (dispatch) => {
 	const res = await api.teleport.getAllConts();
-	console.log(res);
-	return dispatch({
+	dispatch({
 		type: KEYS.SET_ALL_CONTS,
 		payload: res['_links']['continent:items'],
 	});

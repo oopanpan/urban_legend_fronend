@@ -7,6 +7,8 @@ export const DEL_USER_AUTH = 'DEL_USER_AUTH';
 
 export const SET_CITY_KEYWORD = 'SET_CITY_KEYWORD';
 
+export const SET_ALL_POSTS = 'SET_ALL_POSTS';
+
 //* TELEPORT ACTIONS
 export const SET_ALL_CONTS = 'SET_ALL_CONT';
 

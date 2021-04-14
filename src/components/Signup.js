@@ -56,6 +56,7 @@ const Signup = ({ auth, setAuth }) => {
 					errors,
 					touched,
 					handleBlur,
+					isValidating,
 					isValid,
 					dirty,
 				} = formik;
@@ -151,7 +152,11 @@ const Signup = ({ auth, setAuth }) => {
 							</Form.Group>
 
 							<div>
-								<Button variant='dark' type='submit'>
+								<Button
+									disabled={isValidating}
+									variant='dark'
+									type='submit'
+								>
 									Signup
 								</Button>
 							</div>
