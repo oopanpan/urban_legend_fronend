@@ -1,10 +1,19 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-function CommentForm() {
+import api from '../service/api';
+
+function CommentForm({ userId, targetId, targetType }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.dir(e.target);
+		const commentObj = {
+			user_id: userId,
+			commentable_type: targetType,
+			commentable_id: targetId,
+			content: e.target.content.value,
+		};
+		api.comment.postNewComment(commentObj).then(console.log);
 	};
 	return (
 		<div>
@@ -29,4 +38,8 @@ function CommentForm() {
 	);
 }
 
-export default CommentForm;
+const mapStateToProps = (state) => {
+	return { userId: state.auth.id };
+};
+
+export default connect(mapStateToProps)(CommentForm);

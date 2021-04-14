@@ -10,7 +10,7 @@ function ForumDisplay({ posts, fetchPosts }) {
 	}, []);
 
 	const renderPosts = () => {
-		return posts.map((post) => <ContentRender data={post} />);
+		return posts.map((post) => <ContentRender key={post.id} data={post} />);
 	};
 
 	return <div className='container'>{posts && renderPosts()}</div>;

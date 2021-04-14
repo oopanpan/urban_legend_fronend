@@ -5,11 +5,12 @@ import CommentForm from './CommentForm';
 function ContentRender({ data }) {
 	const [showMore, setShowMore] = useState(false);
 	const [showComment, setShowComment] = useState(false);
+	const [showCommentForm, setShowCommentForm] = useState(false);
 
 	const renderNestedCard = (arr) => {
-		arr.map((ele) => {
+		return arr.map((ele) => {
 			console.log(ele);
-			return <ContentRender data={ele} />;
+			return <ContentRender key={ele.id} data={ele} />;
 		});
 	};
 
@@ -20,6 +21,7 @@ function ContentRender({ data }) {
 	return (
 		<>
 			<Card>
+				{/* might do another component to do some fancy stuff */}
 				<Card.Header>{data.user.username}</Card.Header>
 				<Card.Body>
 					{data.header && <Card.Title>{data.header}</Card.Title>}
@@ -45,10 +47,17 @@ function ContentRender({ data }) {
 					<Button>Like</Button>
 					<Button onClick={handleComment}>comment</Button>
 				</Card.Footer>
-				<Card.Body>
-					{showComment && <CommentForm />}
-					{data.comments && renderNestedCard(data.comments)}
-				</Card.Body>
+				{showComment || showCommentForm ? (
+					<Card.Body>
+						{showCommentForm && (
+							<CommentForm
+								targetId={data.id}
+								targetType={'Post'}
+							/>
+						)}
+						{showComment && renderNestedCard(data.comments)}
+					</Card.Body>
+				) : null}
 			</Card>
 		</>
 	);

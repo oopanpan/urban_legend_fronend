@@ -59,6 +59,15 @@ const postNewPost = async (postObj) => {
 
 //* comment requests
 
+const postNewComment = async (commentObj) => {
+	const res = await axios.post(
+		`${BACKEND_API}/comments`,
+		commentObj,
+		headers()
+	);
+	return res.data;
+};
+
 //* third party api request
 
 const getAllUrbans = async () => {
@@ -87,7 +96,9 @@ const api = {
 		getAllPosts,
 		postNewPost,
 	},
-	comment: {},
+	comment: {
+		postNewComment,
+	},
 	teleport: {
 		general,
 		getAllConts,
