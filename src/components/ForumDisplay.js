@@ -13,7 +13,7 @@ function ForumDisplay({ posts, fetchPosts }) {
 		return posts.map((post) => <ContentRender data={post} />);
 	};
 
-	return <div className='container'>{renderPosts()}</div>;
+	return <div className='container'>{posts && renderPosts()}</div>;
 }
 
 const mapStateToProps = (state) => {

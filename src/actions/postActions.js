@@ -10,7 +10,6 @@ export const setCityKeyword = (keyword) => {
 
 export const fetchPosts = () => async (dispatch) => {
 	const res = await api.post.getAllPosts();
-	console.log(res);
 	dispatch({
 		type: KEYS.SET_ALL_POSTS,
 		payload: res,
