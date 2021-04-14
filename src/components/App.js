@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import NavBar from "./NavBar";
-import Login from "./Login";
-import Signup from "./Signup";
-import UrbanContainer from "./UrbanContainer";
-import ForumContainer from "./ForumContainer";
+import NavBar from './NavBar';
+import Login from './Login';
+import Signup from './Signup';
+import UrbanContainer from './UrbanContainer';
+import ForumContainer from './ForumContainer';
 
-import { setAuth } from "../actions/userActions";
-import api from "../service/api";
+import { setAuth } from '../actions/userActions';
+import api from '../service/api';
 
-import "./App.css";
+import './App.css';
 
 const App = ({ user, setAuth }) => {
 	useEffect(() => {
@@ -32,8 +32,18 @@ const App = ({ user, setAuth }) => {
 			{/* Map widget */}
 			<Router>
 				<NavBar />
-				<Route path='/login' render={() => <Login />} />
-				<Route path='/signup' render={() => <Signup />} />
+				<Route
+					path='/login'
+					render={(routerProps) => (
+						<Login routerProps={routerProps} />
+					)}
+				/>
+				<Route
+					path='/signup'
+					render={(routerProps) => (
+						<Signup routerProps={routerProps} />
+					)}
+				/>
 				<Route path='/urban' render={() => <UrbanContainer />} />
 				<Route path='/discuss' render={() => <ForumContainer />} />
 			</Router>

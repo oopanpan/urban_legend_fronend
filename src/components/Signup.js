@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setAuth } from '../actions/userActions';
 import { Form, Button, Container } from 'react-bootstrap';
-import api from '../service/api';
-
 import { Formik } from 'formik';
 import * as yup from 'yup';
+
+import { setAuth } from '../actions/userActions';
+import api from '../service/api';
 
 const initialValues = {
 	email_address: '',
@@ -30,10 +30,6 @@ const signupSchema = yup.object().shape({
 		.required('')
 		.oneOf([yup.ref('password'), null], 'Did not match password'),
 });
-
-const submitForm = (values) => {
-	console.log(values);
-};
 
 const Signup = ({ auth, setAuth }) => {
 	const backendSubmit = (data) => {

@@ -1,15 +1,19 @@
 //* USER ACTIONS
-export const SET_USER_AUTH = 'SET_USER_AUTH'
+export const SET_USER_AUTH = 'SET_USER_AUTH';
 
-export const DEL_USER_AUTH = 'DEL_USER_AUTH'
+export const DEL_USER_AUTH = 'DEL_USER_AUTH';
+
+//* POST ACTIONS
+
+export const SET_CITY_KEYWORD = 'SET_CITY_KEYWORD';
 
 //* TELEPORT ACTIONS
-export const SET_ALL_CONTS = 'SET_ALL_CONT'
+export const SET_ALL_CONTS = 'SET_ALL_CONT';
 
-export const SELECT_CONT = 'SELECT_CONT'
+export const SELECT_CONT = 'SELECT_CONT';
 
-export const SET_URBAN_OPTION = 'SET_URBAN_OPTION'
+export const SET_URBAN_OPTION = 'SET_URBAN_OPTION';
 
-export const SELECT_URBAN = 'SELECT_URBAN'
+export const SELECT_URBAN = 'SELECT_URBAN';
 
-export const CLEAR_URBAN = 'CLEAR_URBAN'
+export const CLEAR_URBAN = 'CLEAR_URBAN';
