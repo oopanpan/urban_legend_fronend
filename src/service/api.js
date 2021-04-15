@@ -68,6 +68,11 @@ const postNewComment = async (commentObj) => {
 	return res.data;
 };
 
+const getOneComment = async (id) => {
+	const res = await axios.get(`${BACKEND_API}/comments/${id}`);
+	return res.data;
+};
+
 //* third party api request
 
 const getAllUrbans = async () => {
@@ -98,6 +103,7 @@ const api = {
 	},
 	comment: {
 		postNewComment,
+		getOneComment,
 	},
 	teleport: {
 		general,

@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import CommentForm from './CommentForm';
+import CommentRender from './CommentRender';
 
-function ContentRender({ data }) {
+function ContentRender({ userId, data }) {
 	const [showMore, setShowMore] = useState(false);
 	const [showComment, setShowComment] = useState(false);
 	const [showCommentForm, setShowCommentForm] = useState(false);
 
 	const renderNestedCard = (arr) => {
 		return arr.map((ele) => {
-			console.log(ele);
-			return <ContentRender key={ele.id} data={ele} />;
+			return <CommentRender data={ele} />;
+			// return <ContentRender key={ele.id} data={ele} />;
 		});
 	};
 
@@ -19,6 +21,8 @@ function ContentRender({ data }) {
 	const handleComment = () => setShowComment(!showComment);
 
 	const handleForm = () => setShowCommentForm(!showCommentForm);
+
+	const handleEdit = (data) => {};
 
 	return (
 		<>
@@ -31,16 +35,26 @@ function ContentRender({ data }) {
 						<Card.Text>{data.content}</Card.Text>
 					) : (
 						<Card.Text>
-							{data.content.slice(0, 300)}
+							{data.content.slice(0, 150)}
 							{showMore ? (
-								<p>
-									<span>{data.content.slice(300)}</span>
-									<p oncClick={handleShow}>show less</p>
-								</p>
+								<>
+									{data.content.slice(150)}
+									<span
+										style={{ color: 'blue' }}
+										onClick={handleShow}
+									>
+										...show less
+									</span>
+								</>
 							) : (
-								<p onClick={handleShow}>
-									<nobr>...show more</nobr>
-								</p>
+								<>
+									<span
+										style={{ color: 'blue' }}
+										onClick={handleShow}
+									>
+										...show more
+									</span>
+								</>
 							)}
 						</Card.Text>
 					)}
@@ -49,6 +63,9 @@ function ContentRender({ data }) {
 					<Button>Like</Button>
 					<Button onClick={handleComment}>comment</Button>
 					<Button onClick={handleForm}>add comment</Button>
+					{data.user.id === userId && (
+						<Button onClick={handleEdit}>Edit</Button>
+					)}
 				</Card.Footer>
 				{showComment || showCommentForm ? (
 					<Card.Body>
@@ -56,7 +73,7 @@ function ContentRender({ data }) {
 							<CommentForm
 								data={data}
 								targetId={data.id}
-								targetType={data.header ? 'Post' : 'Comment'}
+								targetType={'Post'}
 							/>
 						)}
 						{showComment && renderNestedCard(data.comments)}
@@ -67,4 +84,6 @@ function ContentRender({ data }) {
 	);
 }
 
-export default ContentRender;
+const mapStateToProps = (state) => ({ userId: state.auth.id });
+
+export default connect(mapStateToProps)(ContentRender);
