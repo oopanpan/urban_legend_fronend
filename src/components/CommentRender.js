@@ -12,13 +12,19 @@ function CommentRender({ newUpdate, update, userId, data }) {
 	const [thisComment, setThisComment] = useState(null);
 
 	useEffect(() => {
-		api.comment.getOneComment(data.id).then((r) => setThisComment(r));
-		console.log(userId);
+		const getOneComment = async () => {
+			const res = await api.comment.getOneComment(data.id);
+			setThisComment(res);
+		};
+		getOneComment();
 	}, [update]);
+
+	// console.log(`${thisComment.user.username}`);
+	console.log('userId: ' + userId);
 
 	const renderNestedCard = (arr) => {
 		return arr.map((ele) => {
-			return <CommentRender key={ele.id} data={ele} />;
+			return <CommentRender userId={userId} key={ele.id} data={ele} />;
 			// return <ContentRender key={ele.id} data={ele} />;
 		});
 	};
@@ -87,9 +93,12 @@ function CommentRender({ newUpdate, update, userId, data }) {
 	);
 }
 
-const mapStateToProps = (state) => ({
-	userId: state.auth.id,
-	update: state.post.update,
-});
+const mapStateToProps = (state) => {
+	console.log(state);
+	return {
+		userId: state.auth.id,
+		update: state.post.update,
+	};
+};
 
 export default connect(mapStateToProps, { newUpdate })(CommentRender);

@@ -52,7 +52,6 @@ const App = ({ user, setAuth }) => {
 };
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return { user: state.auth };
 };
 

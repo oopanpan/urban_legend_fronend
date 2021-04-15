@@ -10,7 +10,7 @@ function ContentRender({ userId, data }) {
 
 	const renderNestedCard = (arr) => {
 		return arr.map((ele) => {
-			return <CommentRender key={ele.id} data={ele} userId={userId} />;
+			return <CommentRender key={ele.id} data={ele} />;
 			// return <ContentRender key={ele.id} data={ele} />;
 		});
 	};

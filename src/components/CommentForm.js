@@ -15,7 +15,10 @@ function CommentForm({ newUpdate, userId, targetId, targetType }) {
 			commentable_id: targetId,
 			content: e.target.content.value,
 		};
-		api.comment.postNewComment(commentObj).then(newUpdate(true));
+		api.comment.postNewComment(commentObj).then((r) => {
+			console.log(r);
+			newUpdate(true);
+		});
 		e.target.reset();
 	};
 	return (

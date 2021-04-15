@@ -66,7 +66,6 @@ function NavBar({ username, delAuth }) {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return { username: state.auth.username };
 };
 

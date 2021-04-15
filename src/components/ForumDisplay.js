@@ -10,7 +10,6 @@ function ForumDisplay({ posts, fetchPosts, update, newUpdate }) {
 		newUpdate(false);
 	}, [update]);
 
-	console.log(update);
 	const renderPosts = () => {
 		return posts.map((post) => <ContentRender key={post.id} data={post} />);
 	};
