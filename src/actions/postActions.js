@@ -23,3 +23,5 @@ export const newUpdate = (boo) => {
 		payload: boo,
 	};
 };
+
+export const updatePost = () => async (dispatch) => {};

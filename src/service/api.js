@@ -33,18 +33,6 @@ const getCurrentUser = async () => {
 	return res.data;
 };
 
-//! fetch backup
-// const Signup = async data => {
-//     return await fetch(`${BACKEND_API}/users`, {
-//         method: 'POST',
-//         headers: headers(),
-//         body: JSON.stringify({
-//             user: data
-//         })
-//     })
-//     .then(res => res.json())
-// };
-
 //* posts requests
 
 const getAllPosts = async () => {
@@ -57,6 +45,19 @@ const postNewPost = async (postObj) => {
 	return res.data;
 };
 
+const patchPost = async (postObj) => {
+	const res = await axios.patch(
+		`${BACKEND_API}/posts/${postObj.id}`,
+		postObj,
+		headers()
+	);
+	return res.data;
+};
+
+const deletePost = async (id) => {
+	const res = await axios.delete(`${BACKEND_API}/posts/${id}`, headers());
+	return res.data;
+};
 //* comment requests
 
 const postNewComment = async (commentObj) => {
@@ -70,6 +71,20 @@ const postNewComment = async (commentObj) => {
 
 const getOneComment = async (id) => {
 	const res = await axios.get(`${BACKEND_API}/comments/${id}`);
+	return res.data;
+};
+
+const patchComment = async (commentObj) => {
+	const res = await axios.patch(
+		`${BACKEND_API}/comments/${commentObj.id}`,
+		commentObj,
+		headers()
+	);
+	return res.data;
+};
+
+const deleteComment = async (id) => {
+	const res = await axios.delete(`${BACKEND_API}/comments/${id}`, headers());
 	return res.data;
 };
 
@@ -100,10 +115,14 @@ const api = {
 	post: {
 		getAllPosts,
 		postNewPost,
+		patchPost,
+		deletePost,
 	},
 	comment: {
 		postNewComment,
 		getOneComment,
+		patchComment,
+		deleteComment,
 	},
 	teleport: {
 		general,

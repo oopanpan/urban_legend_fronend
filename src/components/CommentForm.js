@@ -6,7 +6,7 @@ import api from '../service/api';
 
 import { newUpdate } from '../actions/postActions';
 
-function CommentForm({ newUpdate, userId, targetId, targetType }) {
+function CommentForm({ setIsUpdate, newUpdate, userId, targetId, targetType }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const commentObj = {
@@ -17,6 +17,7 @@ function CommentForm({ newUpdate, userId, targetId, targetType }) {
 		};
 		api.comment.postNewComment(commentObj).then((r) => {
 			console.log(r);
+			setIsUpdate && setIsUpdate(true);
 			newUpdate(true);
 		});
 		e.target.reset();
