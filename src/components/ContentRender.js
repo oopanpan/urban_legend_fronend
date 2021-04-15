@@ -18,6 +18,8 @@ function ContentRender({ data }) {
 
 	const handleComment = () => setShowComment(!showComment);
 
+	const handleForm = () => setShowCommentForm(!showCommentForm);
+
 	return (
 		<>
 			<Card>
@@ -46,13 +48,15 @@ function ContentRender({ data }) {
 				<Card.Footer>
 					<Button>Like</Button>
 					<Button onClick={handleComment}>comment</Button>
+					<Button onClick={handleForm}>add comment</Button>
 				</Card.Footer>
 				{showComment || showCommentForm ? (
 					<Card.Body>
 						{showCommentForm && (
 							<CommentForm
+								data={data}
 								targetId={data.id}
-								targetType={'Post'}
+								targetType={data.header ? 'Post' : 'Comment'}
 							/>
 						)}
 						{showComment && renderNestedCard(data.comments)}
