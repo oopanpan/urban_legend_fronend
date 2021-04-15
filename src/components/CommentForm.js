@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 
 import api from '../service/api';
 
-function CommentForm({ userId, targetId, targetType }) {
+import { newUpdate } from '../actions/postActions';
+
+function CommentForm({ newUpdate, userId, targetId, targetType }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const commentObj = {
@@ -13,7 +15,8 @@ function CommentForm({ userId, targetId, targetType }) {
 			commentable_id: targetId,
 			content: e.target.content.value,
 		};
-		api.comment.postNewComment(commentObj).then(console.log);
+		api.comment.postNewComment(commentObj).then(newUpdate(true));
+		e.target.reset();
 	};
 	return (
 		<div>
@@ -42,4 +45,4 @@ const mapStateToProps = (state) => {
 	return { userId: state.auth.id };
 };
 
-export default connect(mapStateToProps)(CommentForm);
+export default connect(mapStateToProps, { newUpdate })(CommentForm);

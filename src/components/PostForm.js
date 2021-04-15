@@ -6,7 +6,7 @@ import { newUpdate } from '../actions/postActions';
 
 import api from '../service/api';
 
-function PostForm({ userID }) {
+function PostForm({ newUpdate, userID }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const postObj = {

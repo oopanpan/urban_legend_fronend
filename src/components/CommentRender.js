@@ -4,20 +4,21 @@ import CommentForm from './CommentForm';
 import { connect } from 'react-redux';
 
 import api from '../service/api';
+import { newUpdate } from '../actions/postActions';
 
-function CommentRender({ userId, data }) {
+function CommentRender({ newUpdate, update, userId, data }) {
 	const [showMore, setShowMore] = useState(false);
 	const [showComment, setShowComment] = useState(false);
-	const [showCommentForm, setShowCommentForm] = useState(false);
 	const [thisComment, setThisComment] = useState(null);
 
 	useEffect(() => {
 		api.comment.getOneComment(data.id).then((r) => setThisComment(r));
-	}, []);
+		console.log(userId);
+	}, [update]);
 
 	const renderNestedCard = (arr) => {
 		return arr.map((ele) => {
-			return <CommentRender data={ele} />;
+			return <CommentRender key={ele.id} data={ele} />;
 			// return <ContentRender key={ele.id} data={ele} />;
 		});
 	};
@@ -25,8 +26,6 @@ function CommentRender({ userId, data }) {
 	const handleShow = () => setShowMore(!showMore);
 
 	const handleComment = () => setShowComment(!showComment);
-
-	const handleForm = () => setShowCommentForm(!showCommentForm);
 
 	const handleEdit = () => {};
 
@@ -37,7 +36,7 @@ function CommentRender({ userId, data }) {
 					{/* might do another component to do some fancy stuff */}
 					<Card.Header>{thisComment.user.username}</Card.Header>
 					<Card.Body>
-						{thisComment.content.length <= 300 ? (
+						{thisComment.content.length <= 150 ? (
 							<Card.Text>{thisComment.content}</Card.Text>
 						) : (
 							<Card.Text>
@@ -68,22 +67,18 @@ function CommentRender({ userId, data }) {
 					<Card.Footer>
 						<Button>Like</Button>
 						<Button onClick={handleComment}>comment</Button>
-						<Button onClick={handleForm}>add comment</Button>
-						{data.user.id === userId && (
+						{thisComment.user.id === userId && (
 							<Button onClick={handleEdit}>Edit</Button>
 						)}
 					</Card.Footer>
-					{showComment || showCommentForm ? (
+					{showComment ? (
 						<Card.Body>
-							{showCommentForm && (
-								<CommentForm
-									thisComment={thisComment}
-									targetId={thisComment.id}
-									targetType={'Comment'}
-								/>
-							)}
-							{showComment &&
-								renderNestedCard(thisComment.comments)}
+							{renderNestedCard(thisComment.comments)}
+							<CommentForm
+								thisComment={thisComment}
+								targetId={thisComment.id}
+								targetType={'Comment'}
+							/>
 						</Card.Body>
 					) : null}
 				</Card>
@@ -92,6 +87,9 @@ function CommentRender({ userId, data }) {
 	);
 }
 
-const mapStateToProps = (state) => ({ userId: state.auth.id });
+const mapStateToProps = (state) => ({
+	userId: state.auth.id,
+	update: state.post.update,
+});
 
-export default connect(mapStateToProps)(CommentRender);
+export default connect(mapStateToProps, { newUpdate })(CommentRender);
