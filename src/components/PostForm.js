@@ -2,6 +2,8 @@ import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
+import { newUpdate } from '../actions/postActions';
+
 import api from '../service/api';
 
 function PostForm({ userID }) {
@@ -14,7 +16,7 @@ function PostForm({ userID }) {
 				content: e.target.content.value,
 			},
 		};
-		api.post.postNewPost(postObj).then(console.log);
+		api.post.postNewPost(postObj).then(newUpdate(true));
 	};
 
 	return (
@@ -49,4 +51,4 @@ const mapStateToProps = (state) => ({
 	postKeyword: state.post.keyword,
 });
 
-export default connect(mapStateToProps, {})(PostForm);
+export default connect(mapStateToProps, { newUpdate })(PostForm);

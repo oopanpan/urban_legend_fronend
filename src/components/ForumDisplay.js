@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPosts } from '../actions/postActions';
+import { fetchPosts, newUpdate } from '../actions/postActions';
 import ContentRender from './ContentRender';
 
-function ForumDisplay({ posts, fetchPosts }) {
+function ForumDisplay({ posts, fetchPosts, update, newUpdate }) {
 	useEffect(() => {
 		fetchPosts();
-	}, []);
+		newUpdate(false);
+	}, [update]);
 
+	console.log(update);
 	const renderPosts = () => {
 		return posts.map((post) => <ContentRender key={post.id} data={post} />);
 	};
@@ -19,7 +21,10 @@ function ForumDisplay({ posts, fetchPosts }) {
 const mapStateToProps = (state) => {
 	return {
 		posts: state.post.posts,
+		update: state.post.update,
 	};
 };
 
-export default connect(mapStateToProps, { fetchPosts })(ForumDisplay);
+export default connect(mapStateToProps, { fetchPosts, newUpdate })(
+	ForumDisplay
+);

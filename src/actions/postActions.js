@@ -16,3 +16,10 @@ export const fetchPosts = () => async (dispatch) => {
 	});
 	return res;
 };
+
+export const newUpdate = (boo) => {
+	return {
+		type: KEYS.POST_UPDATE_STATUS,
+		payload: boo,
+	};
+};
