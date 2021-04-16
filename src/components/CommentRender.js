@@ -80,7 +80,6 @@ function CommentRender({ newUpdate, update, userId, data }) {
 								)}
 							</Card.Body>
 							<Card.Footer>
-								<Button>Like</Button>
 								<Button onClick={handleComment}>
 									comment({thisComment.comments.length})
 								</Button>
