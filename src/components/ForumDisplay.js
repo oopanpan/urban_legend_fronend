@@ -20,21 +20,21 @@ function ForumDisplay({
 	}, []);
 
 	useEffect(() => {
-		fetchPosts(currentPage);
-		newUpdate(false);
+		if (currentPage) {
+			console.log(currentPage);
+			fetchPosts(currentPage);
+			newUpdate(false);
+		}
 	}, [update]);
 
 	useEffect(() => {
 		if (isBottom) {
-			handleNext();
+			setIsBottom(false);
+			fetchPosts(currentPage);
 		}
 	}, [isBottom]);
 
-	const handleNext = () => {
-		nextPage();
-		fetchPosts(currentPage);
-		setIsBottom(false);
-	};
+	const handleNext = () => {};
 
 	const handleScroll = () => {
 		const scrollTop =
@@ -65,6 +65,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { fetchPosts, newUpdate, nextPage })(
+export default connect(mapStateToProps, { nextPage, fetchPosts, newUpdate })(
 	ForumDisplay
 );

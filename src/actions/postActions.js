@@ -15,7 +15,7 @@ export const fetchPosts = (currentPage) => async (dispatch) => {
 		payload: res,
 	});
 	dispatch({
-		type: KEYS.SET_TOTAL_PAGES,
+		type: KEYS.NEXT_PAGE_POSTS,
 		payload: res.total_pages,
 	});
 	return res;
