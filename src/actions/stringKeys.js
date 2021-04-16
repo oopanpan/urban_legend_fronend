@@ -15,6 +15,10 @@ export const SET_TOTAL_PAGES = 'SET_TOTAL_PAGES';
 
 export const NEXT_PAGE_POSTS = 'NEXT_PAGE_POSTS';
 
+export const UPDATE_POST = 'UPDATE_POST';
+
+export const ADD_NEW_POST = 'ADD_NEW_POST';
+
 //* TELEPORT ACTIONS
 export const SET_ALL_CONTS = 'SET_ALL_CONT';
 

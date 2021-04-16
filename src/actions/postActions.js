@@ -14,10 +14,6 @@ export const fetchPosts = (currentPage) => async (dispatch) => {
 		type: KEYS.SET_ALL_POSTS,
 		payload: res.posts,
 	});
-	// dispatch({
-	// 	type: KEYS.NEXT_PAGE_POSTS,
-	// 	// payload: res.total_pages,
-	// });
 	dispatch({
 		type: KEYS.SET_TOTAL_PAGES,
 		payload: res.total_pages,
@@ -31,11 +27,24 @@ export const nextPage = () => {
 	};
 };
 
+export const updatePost = (data) => {
+	return {
+		type: KEYS.UPDATE_POST,
+		payload: data,
+	};
+};
+
+export const addPost = (obj) => async (dispatch) => {
+	const res = await api.post.postNewPost(obj);
+	dispatch({
+		type: KEYS.ADD_NEW_POST,
+		payload: res,
+	});
+};
+
 export const newUpdate = (boo) => {
 	return {
 		type: KEYS.POST_UPDATE_STATUS,
 		payload: boo,
 	};
 };
-
-export const updatePost = () => async (dispatch) => {};

@@ -2,11 +2,11 @@ import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { newUpdate } from '../actions/postActions';
+import { addPost, newUpdate } from '../actions/postActions';
 
 import api from '../service/api';
 
-function PostForm({ newUpdate, userId }) {
+function PostForm({ addPost, userId }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const postObj = {
@@ -16,7 +16,7 @@ function PostForm({ newUpdate, userId }) {
 				content: e.target.content.value,
 			},
 		};
-		api.post.postNewPost(postObj).then(console.log);
+		addPost(postObj);
 	};
 
 	return (
@@ -60,4 +60,4 @@ const mapStateToProps = (state) => ({
 	postKeyword: state.post.keyword,
 });
 
-export default connect(mapStateToProps, { newUpdate })(PostForm);
+export default connect(mapStateToProps, { newUpdate, addPost })(PostForm);

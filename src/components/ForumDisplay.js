@@ -22,8 +22,7 @@ function ForumDisplay({
 
 	useEffect(() => {
 		fetchPosts(currentPage);
-		newUpdate(false);
-	}, [update]);
+	}, []);
 
 	useEffect(() => {
 		if (currentPage < totalPage && isBottom) {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Form, Card, Button } from 'react-bootstrap';
 
-import { newUpdate } from '../actions/postActions';
+import { newUpdate, updatePost } from '../actions/postActions';
 import api from '../service/api';
 
 function EditingForm({
@@ -12,6 +12,7 @@ function EditingForm({
 	setIsUpdate,
 	handleEdit,
 	data,
+	updatePost,
 	newUpdate,
 }) {
 	const [formHeader, setFormHeader] = useState(data.header);
@@ -30,7 +31,9 @@ function EditingForm({
 				header: formHeader,
 				content: formContent,
 			};
-			api.post.patchPost(postObj).then(newUpdate(true), handleEdit());
+			api.post.patchPost(postObj).then((r) => {
+				updatePost(r);
+			}, handleEdit());
 		} else {
 			const commentObj = {
 				id: data.id,
@@ -58,7 +61,7 @@ function EditingForm({
 	return (
 		<Form onSubmit={handleSubmit}>
 			<Card.Body>
-				{formHeader && (
+				{data.header && (
 					<Form.Control
 						as='input'
 						name='header'
@@ -88,4 +91,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { newUpdate })(EditingForm);
+export default connect(mapStateToProps, { newUpdate, updatePost })(EditingForm);
