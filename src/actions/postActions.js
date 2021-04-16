@@ -42,6 +42,14 @@ export const addPost = (obj) => async (dispatch) => {
 	});
 };
 
+export const deletePost = (id) => async (dispatch) => {
+	api.post.deletePost(id);
+	dispatch({
+		type: KEYS.DELETE_POST,
+		payload: id,
+	});
+};
+
 export const newUpdate = (boo) => {
 	return {
 		type: KEYS.POST_UPDATE_STATUS,

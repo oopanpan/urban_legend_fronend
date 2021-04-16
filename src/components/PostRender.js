@@ -84,7 +84,8 @@ function PostRender({ userId, data }) {
 								dataId={data.id}
 							/>
 							<Button onClick={handleComment}>
-								comment ({data.comments.length})
+								comment
+								{comments.length > 0 && `(${comments.length})`}
 							</Button>
 							{data.user.id === userId && (
 								<Button onClick={handleEdit}>Edit</Button>
@@ -96,6 +97,8 @@ function PostRender({ userId, data }) {
 					<Card.Body>
 						{showComment && renderNestedCard()}
 						<CommentForm
+							comments={comments}
+							setComments={setComments}
 							data={data}
 							targetId={data.id}
 							targetType={'Post'}

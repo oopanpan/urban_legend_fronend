@@ -19,6 +19,8 @@ export const UPDATE_POST = 'UPDATE_POST';
 
 export const ADD_NEW_POST = 'ADD_NEW_POST';
 
+export const DELETE_POST = 'DELETE_POST';
+
 //* TELEPORT ACTIONS
 export const SET_ALL_CONTS = 'SET_ALL_CONT';
 

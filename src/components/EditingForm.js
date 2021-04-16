@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Form, Card, Button } from 'react-bootstrap';
 
-import { newUpdate, updatePost } from '../actions/postActions';
+import { newUpdate, updatePost, deletePost } from '../actions/postActions';
 import api from '../service/api';
 
 function EditingForm({
@@ -13,6 +13,7 @@ function EditingForm({
 	handleEdit,
 	data,
 	updatePost,
+	deletePost,
 	newUpdate,
 }) {
 	const [formHeader, setFormHeader] = useState(data.header);
@@ -47,7 +48,7 @@ function EditingForm({
 
 	const handleDelete = () => {
 		if (data.header) {
-			api.post.deletePost(data.id).then(newUpdate(true));
+			deletePost(data.id);
 		} else {
 			api.comment
 				.deleteComment(data.id)
@@ -91,4 +92,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { newUpdate, updatePost })(EditingForm);
+export default connect(mapStateToProps, { newUpdate, updatePost, deletePost })(
+	EditingForm
+);

@@ -34,6 +34,12 @@ export const postReducer = (
 			const index = newPosts.indexOf(oldPost);
 			newPosts.splice(index, 1, action.payload);
 			return { ...state, posts: newPosts };
+
+		case KEYS.DELETE_POST:
+			const deletedPosts = state.posts.filter(
+				(post) => post.id !== action.payload
+			);
+			return { ...state, posts: deletedPosts };
 		default:
 			return state;
 	}
