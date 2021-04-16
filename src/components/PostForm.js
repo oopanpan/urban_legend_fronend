@@ -16,7 +16,7 @@ function PostForm({ newUpdate, userId }) {
 				content: e.target.content.value,
 			},
 		};
-		api.post.postNewPost(postObj).then(newUpdate(true));
+		api.post.postNewPost(postObj).then(console.log);
 	};
 
 	return (

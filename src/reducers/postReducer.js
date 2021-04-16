@@ -1,7 +1,7 @@
 import * as KEYS from '../actions/stringKeys';
 
 export const postReducer = (
-	state = { page: 1, update: false, posts: [] },
+	state = { page: 0, update: false, posts: [] },
 	action
 ) => {
 	switch (action.type) {
@@ -10,6 +10,7 @@ export const postReducer = (
 		case KEYS.SET_CITY_KEYWORD:
 			return { ...state, keyword: action.payload };
 		case KEYS.SET_ALL_POSTS:
+			console.log(action.payload);
 			return { ...state, posts: [...state.posts, ...action.payload] };
 		case KEYS.SET_TOTAL_PAGES:
 			return { ...state, totalPage: action.payload };

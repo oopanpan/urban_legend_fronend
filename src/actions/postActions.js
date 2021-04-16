@@ -12,10 +12,14 @@ export const fetchPosts = (currentPage) => async (dispatch) => {
 	const res = await api.post.getAllPosts(currentPage);
 	dispatch({
 		type: KEYS.SET_ALL_POSTS,
-		payload: res,
+		payload: res.posts,
 	});
+	// dispatch({
+	// 	type: KEYS.NEXT_PAGE_POSTS,
+	// 	// payload: res.total_pages,
+	// });
 	dispatch({
-		type: KEYS.NEXT_PAGE_POSTS,
+		type: KEYS.SET_TOTAL_PAGES,
 		payload: res.total_pages,
 	});
 	return res;

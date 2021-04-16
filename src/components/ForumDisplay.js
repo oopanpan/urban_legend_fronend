@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPosts, newUpdate, nextPage } from '../actions/postActions';
+import { nextPage, fetchPosts, newUpdate } from '../actions/postActions';
 import PostRender from './PostRender';
 
 function ForumDisplay({
 	currentPage,
+	totalPage,
 	nextPage,
 	posts,
 	fetchPosts,
@@ -20,17 +21,15 @@ function ForumDisplay({
 	}, []);
 
 	useEffect(() => {
-		if (currentPage) {
-			console.log(currentPage);
-			fetchPosts(currentPage);
-			newUpdate(false);
-		}
+		fetchPosts(currentPage);
+		newUpdate(false);
 	}, [update]);
 
 	useEffect(() => {
-		if (isBottom) {
+		if (currentPage < totalPage && isBottom) {
 			setIsBottom(false);
-			fetchPosts(currentPage);
+			nextPage();
+			fetchPosts(currentPage + 1);
 		}
 	}, [isBottom]);
 
@@ -44,7 +43,7 @@ function ForumDisplay({
 			(document.documentElement &&
 				document.documentElement.scrollHeight) ||
 			document.body.scrollHeight;
-		if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
+		if (scrollTop + window.innerHeight + 2 >= scrollHeight) {
 			setIsBottom(true);
 		}
 	};
@@ -53,7 +52,12 @@ function ForumDisplay({
 		return posts.map((post) => <PostRender key={post.id} data={post} />);
 	};
 
-	return <div className='container'>{posts && renderPosts(posts)}</div>;
+	return (
+		<div className='container'>
+			{posts && renderPosts(posts)}
+			<h1>Bottom of the page</h1>
+		</div>
+	);
 }
 
 const mapStateToProps = (state) => {
@@ -61,10 +65,11 @@ const mapStateToProps = (state) => {
 	return {
 		posts: state.post.posts,
 		currentPage: state.post.page,
+		totalPage: state.post.totalPage,
 		update: state.post.update,
 	};
 };
 
-export default connect(mapStateToProps, { nextPage, fetchPosts, newUpdate })(
+export default connect(mapStateToProps, { fetchPosts, newUpdate, nextPage })(
 	ForumDisplay
 );
