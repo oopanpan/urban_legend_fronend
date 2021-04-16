@@ -12,6 +12,10 @@ function ContentRender({ userId, data }) {
 	const [editing, setEditing] = useState(false);
 	const [comments, setComments] = useState(data.comments);
 
+	useEffect(() => {
+		setComments(data.comments);
+	}, [data]);
+
 	const renderNestedCard = () => {
 		return comments.map((comment) => {
 			return (
