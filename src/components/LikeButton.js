@@ -10,8 +10,6 @@ function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
 	const userLiked = likedUsers.find((like) => like.user_id === userId);
 	const count = likedUsers.length;
 
-	console.log(userLiked);
-
 	const handleLike = () => {
 		if (!userLiked) {
 			const likeObj = {

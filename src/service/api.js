@@ -47,8 +47,8 @@ const unLike = async (id) => {
 
 //* posts requests
 
-const getAllPosts = async () => {
-	const res = await axios.get(`${BACKEND_API}/posts`);
+const getAllPosts = async (page) => {
+	const res = await axios.get(`${BACKEND_API}/posts?limit=10&page=${page}`);
 	return res.data;
 };
 

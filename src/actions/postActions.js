@@ -8,13 +8,23 @@ export const setCityKeyword = (keyword) => {
 	};
 };
 
-export const fetchPosts = () => async (dispatch) => {
-	const res = await api.post.getAllPosts();
+export const fetchPosts = (currentPage) => async (dispatch) => {
+	const res = await api.post.getAllPosts(currentPage);
 	dispatch({
 		type: KEYS.SET_ALL_POSTS,
 		payload: res,
 	});
+	dispatch({
+		type: KEYS.SET_TOTAL_PAGES,
+		payload: res.total_pages,
+	});
 	return res;
+};
+
+export const nextPage = () => {
+	return {
+		type: KEYS.NEXT_PAGE_POSTS,
+	};
 };
 
 export const newUpdate = (boo) => {

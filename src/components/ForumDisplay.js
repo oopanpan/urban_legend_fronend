@@ -1,29 +1,70 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPosts, newUpdate } from '../actions/postActions';
+import { fetchPosts, newUpdate, nextPage } from '../actions/postActions';
 import PostRender from './PostRender';
 
-function ForumDisplay({ posts, fetchPosts, update, newUpdate }) {
+function ForumDisplay({
+	currentPage,
+	nextPage,
+	posts,
+	fetchPosts,
+	update,
+	newUpdate,
+}) {
+	const [isBottom, setIsBottom] = useState(false);
+
 	useEffect(() => {
-		fetchPosts();
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
+	useEffect(() => {
+		fetchPosts(currentPage);
 		newUpdate(false);
 	}, [update]);
 
-	const renderPosts = () => {
+	useEffect(() => {
+		if (isBottom) {
+			handleNext();
+		}
+	}, [isBottom]);
+
+	const handleNext = () => {
+		nextPage();
+		fetchPosts(currentPage);
+		setIsBottom(false);
+	};
+
+	const handleScroll = () => {
+		const scrollTop =
+			(document.documentElement && document.documentElement.scrollTop) ||
+			document.body.scrollTop;
+		const scrollHeight =
+			(document.documentElement &&
+				document.documentElement.scrollHeight) ||
+			document.body.scrollHeight;
+		if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
+			setIsBottom(true);
+		}
+	};
+
+	const renderPosts = (posts) => {
 		return posts.map((post) => <PostRender key={post.id} data={post} />);
 	};
 
-	return <div className='container'>{posts && renderPosts()}</div>;
+	return <div className='container'>{posts && renderPosts(posts)}</div>;
 }
 
 const mapStateToProps = (state) => {
+	console.log(state);
 	return {
 		posts: state.post.posts,
+		currentPage: state.post.page,
 		update: state.post.update,
 	};
 };
 
-export default connect(mapStateToProps, { fetchPosts, newUpdate })(
+export default connect(mapStateToProps, { fetchPosts, newUpdate, nextPage })(
 	ForumDisplay
 );

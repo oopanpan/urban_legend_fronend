@@ -11,6 +11,10 @@ export const SET_ALL_POSTS = 'SET_ALL_POSTS';
 
 export const POST_UPDATE_STATUS = 'POST_UPDATE_STATUS';
 
+export const SET_TOTAL_PAGES = 'SET_TOTAL_PAGES';
+
+export const NEXT_PAGE_POSTS = 'NEXT_PAGE_POSTS';
+
 //* TELEPORT ACTIONS
 export const SET_ALL_CONTS = 'SET_ALL_CONT';
 
