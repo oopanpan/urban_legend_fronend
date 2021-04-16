@@ -33,6 +33,18 @@ const getCurrentUser = async () => {
 	return res.data;
 };
 
+//* Likes request
+
+const addLike = async (obj) => {
+	const res = await axios.post(`${BACKEND_API}/likes`, obj, headers());
+	return res.data;
+};
+
+const unLike = async (id) => {
+	const res = await axios.delete(`${BACKEND_API}/likes/${id}`, headers());
+	return res.data;
+};
+
 //* posts requests
 
 const getAllPosts = async () => {
@@ -123,6 +135,10 @@ const api = {
 		getOneComment,
 		patchComment,
 		deleteComment,
+	},
+	like: {
+		addLike,
+		unLike,
 	},
 	teleport: {
 		general,

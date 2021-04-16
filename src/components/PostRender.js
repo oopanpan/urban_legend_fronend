@@ -5,8 +5,9 @@ import CommentRender from './CommentRender';
 
 import CommentForm from './CommentForm';
 import EditingForm from './EditingForm';
+import LikeButton from './LikeButton';
 
-function ContentRender({ userId, data }) {
+function PostRender({ userId, data }) {
 	const [showMore, setShowMore] = useState(false);
 	const [showComment, setShowComment] = useState(false);
 	const [editing, setEditing] = useState(false);
@@ -78,7 +79,10 @@ function ContentRender({ userId, data }) {
 							)}
 						</Card.Body>
 						<Card.Footer>
-							<Button>Like</Button>
+							<LikeButton
+								likedUsers={data.likes}
+								dataId={data.id}
+							/>
 							<Button onClick={handleComment}>
 								comment ({data.comments.length})
 							</Button>
@@ -105,4 +109,4 @@ function ContentRender({ userId, data }) {
 
 const mapStateToProps = (state) => ({ userId: state.auth.id });
 
-export default connect(mapStateToProps)(ContentRender);
+export default connect(mapStateToProps)(PostRender);

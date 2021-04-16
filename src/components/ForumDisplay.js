@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchPosts, newUpdate } from '../actions/postActions';
-import ContentRender from './ContentRender';
+import PostRender from './PostRender';
 
 function ForumDisplay({ posts, fetchPosts, update, newUpdate }) {
 	useEffect(() => {
@@ -11,7 +11,7 @@ function ForumDisplay({ posts, fetchPosts, update, newUpdate }) {
 	}, [update]);
 
 	const renderPosts = () => {
-		return posts.map((post) => <ContentRender key={post.id} data={post} />);
+		return posts.map((post) => <PostRender key={post.id} data={post} />);
 	};
 
 	return <div className='container'>{posts && renderPosts()}</div>;

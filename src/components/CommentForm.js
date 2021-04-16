@@ -23,25 +23,29 @@ function CommentForm({ setIsUpdate, newUpdate, userId, targetId, targetType }) {
 		e.target.reset();
 	};
 	return (
-		<div>
-			<Form onSubmit={handleSubmit}>
-				<Form.Group controlId='postContent'>
-					<Form.Label>New Comment</Form.Label>
-					<Form.Control
-						require
-						as='textarea'
-						name='content'
-						rows={3}
-					/>
-				</Form.Group>
-				<Form.Group controlId='postKeyword'></Form.Group>
-				<div>
-					<Button variant='dark' type='submit'>
-						Submit
-					</Button>
-				</div>
-			</Form>
-		</div>
+		<>
+			{userId ? (
+				<Form onSubmit={handleSubmit}>
+					<Form.Group controlId='postContent'>
+						<Form.Label>New Comment</Form.Label>
+						<Form.Control
+							require
+							as='textarea'
+							name='content'
+							rows={3}
+						/>
+					</Form.Group>
+					<Form.Group controlId='postKeyword'></Form.Group>
+					<div>
+						<Button variant='dark' type='submit'>
+							Submit
+						</Button>
+					</div>
+				</Form>
+			) : (
+				<div>Log in or singup to start banging</div>
+			)}
+		</>
 	);
 }
 

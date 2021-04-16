@@ -70,7 +70,10 @@ function CommentRender({
 											<>
 												{thisComment.content.slice(150)}
 												<span
-													style={{ color: 'blue' }}
+													style={{
+														color: 'blue',
+														cursor: 'pointer',
+													}}
 													onClick={handleShow}
 												>
 													...show less
@@ -79,7 +82,10 @@ function CommentRender({
 										) : (
 											<>
 												<span
-													style={{ color: 'blue' }}
+													style={{
+														color: 'blue',
+														cursor: 'pointer',
+													}}
 													onClick={handleShow}
 												>
 													...show more
