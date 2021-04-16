@@ -10,10 +10,18 @@ function ContentRender({ userId, data }) {
 	const [showMore, setShowMore] = useState(false);
 	const [showComment, setShowComment] = useState(false);
 	const [editing, setEditing] = useState(false);
+	const [comments, setComments] = useState(data.comments);
 
-	const renderNestedCard = (arr) => {
-		return arr.map((ele) => {
-			return <CommentRender key={ele.id} data={ele} />;
+	const renderNestedCard = () => {
+		return comments.map((comment) => {
+			return (
+				<CommentRender
+					comments={comments}
+					setComments={setComments}
+					key={comment.id}
+					data={comment}
+				/>
+			);
 			// return <ContentRender key={ele.id} data={ele} />;
 		});
 	};
@@ -78,7 +86,7 @@ function ContentRender({ userId, data }) {
 				)}
 				{showComment ? (
 					<Card.Body>
-						{showComment && renderNestedCard(data.comments)}
+						{showComment && renderNestedCard()}
 						<CommentForm
 							data={data}
 							targetId={data.id}

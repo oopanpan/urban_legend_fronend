@@ -7,7 +7,14 @@ import CommentForm from './CommentForm';
 import api from '../service/api';
 import { newUpdate } from '../actions/postActions';
 
-function CommentRender({ newUpdate, update, userId, data }) {
+function CommentRender({
+	comments,
+	setComments,
+	newUpdate,
+	update,
+	userId,
+	data,
+}) {
 	const [showMore, setShowMore] = useState(false);
 	const [showComment, setShowComment] = useState(false);
 	const [thisComment, setThisComment] = useState(null);
@@ -17,7 +24,7 @@ function CommentRender({ newUpdate, update, userId, data }) {
 	useEffect(() => {
 		const getOneComment = async () => {
 			const res = await api.comment.getOneComment(data.id);
-			res ? setThisComment(res) : setThisComment(null);
+			setThisComment(res);
 		};
 		getOneComment();
 		setIsUpdate(false);
@@ -44,6 +51,9 @@ function CommentRender({ newUpdate, update, userId, data }) {
 					<Card.Header>{thisComment.user.username}</Card.Header>
 					{editing ? (
 						<EditingForm
+							commentId={data.id}
+							comments={comments}
+							setComments={setComments}
 							setIsUpdate={setIsUpdate}
 							handleEdit={handleEdit}
 							data={thisComment}

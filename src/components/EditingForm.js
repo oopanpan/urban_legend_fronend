@@ -5,7 +5,15 @@ import { Form, Card, Button } from 'react-bootstrap';
 import { newUpdate } from '../actions/postActions';
 import api from '../service/api';
 
-function EditingForm({ setIsUpdate, handleEdit, data, newUpdate }) {
+function EditingForm({
+	comments,
+	setComments,
+	commentId,
+	setIsUpdate,
+	handleEdit,
+	data,
+	newUpdate,
+}) {
 	const [formHeader, setFormHeader] = useState(data.header);
 	const [formContent, setFormContent] = useState(data.content);
 
@@ -38,7 +46,13 @@ function EditingForm({ setIsUpdate, handleEdit, data, newUpdate }) {
 		if (data.header) {
 			api.post.deletePost(data.id).then(newUpdate(true));
 		} else {
-			api.comment.deleteComment(data.id).then(setIsUpdate(true));
+			api.comment
+				.deleteComment(data.id)
+				.then(
+					setComments(
+						comments.filter((comment) => comment.id !== commentId)
+					)
+				);
 		}
 	};
 	return (
