@@ -7,6 +7,8 @@ import CommentForm from './CommentForm';
 import EditingForm from './EditingForm';
 import LikeButton from './LikeButton';
 
+const BACKEND_API = 'http://localhost:3000/';
+
 function PostRender({ userId, data }) {
 	const [showMore, setShowMore] = useState(false);
 	const [showComment, setShowComment] = useState(false);
@@ -42,7 +44,12 @@ function PostRender({ userId, data }) {
 			<Card style={{ marginBottom: '25px' }}>
 				{/* might do another component to do some fancy stuff */}
 				<Card.Header>
-					<img alt='user-avatar' href={data.user.avatar} />
+					<img
+						alt='user-avatar'
+						src={BACKEND_API + data.user.avatar}
+						width='20'
+						height='20'
+					/>
 					{data.user.username}
 				</Card.Header>
 				{editing ? (

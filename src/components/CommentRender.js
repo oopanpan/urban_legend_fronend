@@ -7,6 +7,8 @@ import CommentForm from './CommentForm';
 import api from '../service/api';
 import { newUpdate } from '../actions/postActions';
 
+const BACKEND_API = 'http://localhost:3000/';
+
 function CommentRender({
 	comments,
 	setComments,
@@ -42,13 +44,23 @@ function CommentRender({
 	const handleComment = () => setShowComment(!showComment);
 
 	const handleEdit = () => setEditing(!editing);
+	console.log(thisComment);
 
 	return (
 		<>
 			{thisComment ? (
 				<Card>
 					{/* might do another component to do some fancy stuff */}
-					<Card.Header>{thisComment.user.username}</Card.Header>
+					<Card.Header>
+						<img
+							alt='user-avatar'
+							src={BACKEND_API + thisComment.user.avatar}
+							width='20'
+							height='20'
+						/>
+						{data.user.username}
+						{thisComment.user.username}
+					</Card.Header>
 					{editing ? (
 						<EditingForm
 							commentId={data.id}
