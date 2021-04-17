@@ -97,7 +97,9 @@ function CommentRender({
 							</Card.Body>
 							<Card.Footer>
 								<Button onClick={handleComment}>
-									comment({thisComment.comments.length})
+									comment
+									{thisComment.comments.length > 0 &&
+										`(${thisComment.comments.length})`}
 								</Button>
 								{thisComment.user.id === userId && (
 									<Button onClick={handleEdit}>Edit</Button>

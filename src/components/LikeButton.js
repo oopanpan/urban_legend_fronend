@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -7,8 +7,10 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { newLike, unLike } from '../actions/likeActions';
 
 function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
-	const userLiked = likedUsers.find((like) => like.user_id === userId);
-	const count = likedUsers.length;
+	const [userArr, setUserArr] = useState(likedUsers);
+	console.log(userArr);
+	const userLiked = userArr.find((like) => like.user_id === userId);
+	const count = userArr.length;
 
 	const handleLike = () => {
 		if (!userLiked) {
@@ -16,9 +18,9 @@ function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
 				user_id: userId,
 				post_id: dataId,
 			};
-			newLike(likeObj);
+			newLike(likeObj, userArr, setUserArr);
 		} else {
-			unLike(userLiked.id);
+			unLike(userLiked.id, userArr, setUserArr);
 		}
 	};
 	return (
@@ -29,7 +31,7 @@ function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
 					<FavoriteIcon />
 				</Button>
 			) : (
-				<Button onClick={handleLike}>
+				<Button onClick={handleLike} disabled={!userId}>
 					{count > 0 && count}
 					<FavoriteBorderIcon />
 				</Button>
