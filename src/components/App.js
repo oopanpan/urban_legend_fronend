@@ -7,6 +7,8 @@ import Login from './Login';
 import Signup from './Signup';
 import UrbanContainer from './UrbanContainer';
 import ForumContainer from './ForumContainer';
+import UserProfile from './UserProfile';
+import Footer from './Footer';
 
 import { setAuth } from '../actions/userActions';
 import api from '../service/api';
@@ -46,6 +48,8 @@ const App = ({ user, setAuth }) => {
 				/>
 				<Route path='/urban' render={() => <UrbanContainer />} />
 				<Route path='/discuss' render={() => <ForumContainer />} />
+				<Route path='/profile' render={() => <UserProfile />} />
+				<Footer />
 			</Router>
 		</div>
 	);

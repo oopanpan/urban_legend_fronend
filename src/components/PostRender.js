@@ -39,9 +39,12 @@ function PostRender({ userId, data }) {
 
 	return (
 		<>
-			<Card>
+			<Card style={{ marginBottom: '25px' }}>
 				{/* might do another component to do some fancy stuff */}
-				<Card.Header>{data.user.username}</Card.Header>
+				<Card.Header>
+					<img alt='user-avatar' href={data.user.avatar} />
+					{data.user.username}
+				</Card.Header>
 				{editing ? (
 					<EditingForm handleEdit={handleEdit} data={data} />
 				) : (

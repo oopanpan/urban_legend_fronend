@@ -42,7 +42,7 @@ function ForumDisplay({
 			(document.documentElement &&
 				document.documentElement.scrollHeight) ||
 			document.body.scrollHeight;
-		if (scrollTop + window.innerHeight + 2 >= scrollHeight) {
+		if (scrollTop + window.innerHeight + 10 >= scrollHeight) {
 			setIsBottom(true);
 		}
 	};
