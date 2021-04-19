@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { DirectUpload } from 'activestorage';
 
 import { getProfile } from '../actions/profileActions';
 import { newFollow, unFollow } from '../actions/followActions';
+
+import UserHeader from './UserHeader';
+import PostRender from './PostRender';
+import UserDetails from './UserDetails';
 
 function UserProfile({
 	routerProps,
@@ -14,21 +18,29 @@ function UserProfile({
 	newFollow,
 	unFollow,
 }) {
-	console.log(routerProps);
-	console.log(routerProps.match.params.id);
 	const [selectedFile, setSelectedFile] = useState(null);
+	const [isFollowed, setIsFollowed] = useState(false);
+	const [onView, setOnView] = useState('posts');
 
-	useEffect(() => {
-		getProfile(routerProps.match.params.id);
-	}, []);
-
-	const handleFollow = () => {
-		const isFollowed = thisUser.follower.find(
-			(friend) => friend.follower_id === currentUser.id
+	useEffect(async () => {
+		const following = await getProfile(
+			routerProps.match.params.id
+		).then((r) =>
+			r.inverse_friendships.find(
+				(friend) => friend.follower_id === currentUser.id
+			)
 		);
-		console.log(isFollowed);
-		if (isFollowed) {
-			unFollow(isFollowed.id, thisUser.follower);
+		console.log(following);
+		following && setIsFollowed(true);
+	}, [isFollowed, routerProps]);
+
+	const handleFollow = async () => {
+		const friendship = thisUser.follower.find(
+			(follower) => follower.follower_id === currentUser.id
+		);
+		if (friendship) {
+			await unFollow(friendship.id, thisUser.follower);
+			setIsFollowed(false);
 		} else {
 			const followObj = {
 				user_id: currentUser.id,
@@ -39,25 +51,74 @@ function UserProfile({
 				username: currentUser.username,
 				avatar: currentUser.avatar,
 			};
-			newFollow(followObj, thisUser.follower, newFollowerObj);
+			await newFollow(followObj, thisUser.follower, newFollowerObj);
+			setIsFollowed(true);
 		}
+	};
+
+	const postRender = () => {
+		return thisUser.posts.map((post) => (
+			<PostRender userId={thisUser.id} data={post} />
+		));
 	};
 	return (
 		<div>
-			<Container>
-				<img
-					alt='user-avatar'
-					src={'http://localhost:3000/' + thisUser.avatar}
-					width='200'
-					height='200'
-				/>
-				<h1>{thisUser.username}</h1>
-				<button onClick={handleFollow}>Follow</button>
-				<h2>{thisUser.emailAddress}</h2>
-				<h2>{thisUser.bio}</h2>
-				<h2>{thisUser.keyword}</h2>
-				<form></form>
-			</Container>
+			{thisUser.id ? (
+				<Container style={{ margin: '3rem' }}>
+					<UserHeader
+						thisUser={thisUser}
+						isFollowed={isFollowed}
+						handleFollow={handleFollow}
+					/>
+					<UserDetails thisUser={thisUser} />
+					{/* <Card>
+						<Card.Body>
+							<div style={{ float: 'left' }}>
+								<img
+									alt='user-avatar'
+									src={
+										'http://localhost:3000/' +
+										thisUser.avatar
+									}
+									width='150px'
+									height='150px'
+								/>
+							</div>
+							<Col style={{ marginLeft: '2rem' }}>
+								<h1>{thisUser.username}</h1>
+							</Col>
+							{authUser ? (
+								<button onClick={handleEdit}>Edit</button>
+							) : (
+								<button onClick={handleFollow}>
+									{isFollowed ? 'Following' : 'Follow'}
+								</button>
+							)}
+							<h2>{thisUser.emailAddress}</h2>
+							<h2>{thisUser.bio}</h2>
+							<h2>{thisUser.keyword}</h2>
+						</Card.Body>
+					</Card> */}
+					{/* <Row>
+						<Col>{thisUser.posts.count}</Col>
+						<Col>{thisUser.following.length}</Col>
+						<Col>{thisUser.follower.length}</Col>
+					</Row>
+					<Row>
+						<Col>
+							<button>Post</button>
+						</Col>
+						<Col>
+							<button>Following</button>
+						</Col>
+						<Col>
+							<button>Follower</button>
+						</Col>
+					</Row>
+					<form></form> */}
+					{/* {thisUser.posts && postRender()} */}
+				</Container>
+			) : null}
 		</div>
 	);
 }

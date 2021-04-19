@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { Button, ButtonGroup, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 const UrbanView = ({ city }) => {
@@ -43,7 +43,7 @@ const UrbanView = ({ city }) => {
 	};
 
 	return (
-		<div className='container'>
+		<Row className='container'>
 			{city ? (
 				<div>
 					<h1>{city.full_name}</h1>
@@ -63,7 +63,7 @@ const UrbanView = ({ city }) => {
 					<Button>A Button that leads to the forum</Button>
 				</div>
 			)}
-		</div>
+		</Row>
 	);
 };
 

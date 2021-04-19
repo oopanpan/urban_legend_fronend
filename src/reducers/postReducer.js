@@ -15,6 +15,9 @@ export const postReducer = (
 			console.log(action.payload);
 			return { ...state, posts: [...state.posts, ...action.payload] };
 
+		case KEYS.CLEAR_POSTS:
+			return { ...state, posts: [] };
+
 		case KEYS.SET_TOTAL_PAGES:
 			return { ...state, totalPage: action.payload };
 

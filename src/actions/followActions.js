@@ -11,14 +11,16 @@ export const newFollow = (followObj, follower, followerObj) => async (
 		type: KEYS.UPDATE_FOLLOWER,
 		payload: newList,
 	});
+	return res.data;
 };
 
 export const unFollow = (id, follower) => async (dispatch) => {
-	api.follow.unFollow(id);
+	const res = await api.follow.unFollow(id);
 	const newList = follower.filter((follow) => follow.id !== id);
 	console.log(newList);
 	dispatch({
 		type: KEYS.UPDATE_FOLLOWER,
 		payload: newList,
 	});
+	return res.data;
 };

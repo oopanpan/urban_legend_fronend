@@ -5,6 +5,8 @@ export const getProfile = (id) => async (dispatch) => {
 	const res = await api.user.getProfile(id);
 	dispatch({
 		type: KEYS.GET_PROFILE,
-		payload: res,
+		payload: res.user,
 	});
+	console.log(res);
+	return res.user;
 };

@@ -7,9 +7,11 @@ import CommentForm from './CommentForm';
 import EditingForm from './EditingForm';
 import LikeButton from './LikeButton';
 
+import { Link } from 'react-router-dom';
+
 const BACKEND_API = 'http://localhost:3000/';
 
-function PostRender({ userId, data }) {
+function PostRender({ userId, data, setUpdated }) {
 	const [showMore, setShowMore] = useState(false);
 	const [showComment, setShowComment] = useState(false);
 	const [editing, setEditing] = useState(false);
@@ -50,10 +52,16 @@ function PostRender({ userId, data }) {
 						width='20'
 						height='20'
 					/>
-					{data.user.username}
+					<Link to={`/profile/${data.user.id}`}>
+						{data.user.username}
+					</Link>
 				</Card.Header>
 				{editing ? (
-					<EditingForm handleEdit={handleEdit} data={data} />
+					<EditingForm
+						handleEdit={handleEdit}
+						data={data}
+						setUpdated={setUpdated}
+					/>
 				) : (
 					<>
 						<Card.Body>

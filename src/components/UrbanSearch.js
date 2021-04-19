@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import {
@@ -58,25 +58,27 @@ const UrbanSearch = ({
 
 	return (
 		<div className='container'>
-			<Form>
-				<Form.Label>Urban City</Form.Label>
-				<Form.Control
-					as='input'
-					list='urban-list'
-					onChange={handleUrban}
-					placeholder='Destination'
-				/>
-				<datalist id='urban-list'>
-					{allUrbans && renderUrbanOption()}
-				</datalist>
-				<Form.Label>Filter by Continent</Form.Label>
-				<Form.Control as='select' onChange={handleCont}>
-					<option value='none' style={{ color: 'grey' }}>
-						Select...
-					</option>
-					{allConts && renderContsOption()}
-				</Form.Control>
-			</Form>
+			<Row>
+				<Form>
+					<Form.Label>Urban City</Form.Label>
+					<Form.Control
+						as='input'
+						list='urban-list'
+						onChange={handleUrban}
+						placeholder='Destination'
+					/>
+					<datalist id='urban-list'>
+						{allUrbans && renderUrbanOption()}
+					</datalist>
+					<Form.Label>Filter by Continent</Form.Label>
+					<Form.Control as='select' onChange={handleCont}>
+						<option value='none' style={{ color: 'grey' }}>
+							Select...
+						</option>
+						{allConts && renderContsOption()}
+					</Form.Control>
+				</Form>
+			</Row>
 		</div>
 	);
 };

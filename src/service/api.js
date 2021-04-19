@@ -57,6 +57,11 @@ const getAllPosts = async (page) => {
 	return res.data;
 };
 
+const getOnePost = async (id) => {
+	const res = await axios.get(`${BACKEND_API}/posts/${id}`);
+	return res.data;
+};
+
 const postNewPost = async (postObj) => {
 	const res = await axios.post(`${BACKEND_API}/posts`, postObj, headers());
 	return res.data;
@@ -147,6 +152,7 @@ const api = {
 	},
 	post: {
 		getAllPosts,
+		getOnePost,
 		postNewPost,
 		patchPost,
 		deletePost,

@@ -14,6 +14,7 @@ import { setAuth } from '../actions/userActions';
 import api from '../service/api';
 
 import './App.css';
+import PostsContainer from './PostsContainer';
 
 const App = ({ user, setAuth }) => {
 	useEffect(() => {
@@ -34,6 +35,7 @@ const App = ({ user, setAuth }) => {
 			{/* Map widget */}
 			<Router>
 				<NavBar />
+				<Route exact path='/' render={() => <UrbanContainer />} />
 				<Route
 					path='/login'
 					render={(routerProps) => (
@@ -46,12 +48,17 @@ const App = ({ user, setAuth }) => {
 						<Signup routerProps={routerProps} />
 					)}
 				/>
-				<Route path='/urban' render={() => <UrbanContainer />} />
 				<Route path='/discuss' render={() => <ForumContainer />} />
 				<Route
 					path='/profile/:id'
 					render={(routerProps) => (
 						<UserProfile routerProps={routerProps} />
+					)}
+				/>
+				<Route
+					path='/posts/:id'
+					render={(routerProps) => (
+						<PostsContainer routerProps={routerProps} />
 					)}
 				/>
 				{/* <Footer /> */}

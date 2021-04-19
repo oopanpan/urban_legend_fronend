@@ -14,7 +14,7 @@ function EditingForm({
 	data,
 	updatePost,
 	deletePost,
-	newUpdate,
+	setUpdated,
 }) {
 	const [formHeader, setFormHeader] = useState(data.header);
 	const [formContent, setFormContent] = useState(data.content);
@@ -33,7 +33,7 @@ function EditingForm({
 				content: formContent,
 			};
 			api.post.patchPost(postObj).then((r) => {
-				updatePost(r);
+				setUpdated ? setUpdated(true) : updatePost(r);
 			}, handleEdit());
 		} else {
 			const commentObj = {
@@ -92,6 +92,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { newUpdate, updatePost, deletePost })(
+export default connect(mapStateToProps, { updatePost, deletePost })(
 	EditingForm
 );

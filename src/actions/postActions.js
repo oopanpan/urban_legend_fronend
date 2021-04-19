@@ -27,6 +27,12 @@ export const nextPage = () => {
 	};
 };
 
+export const clearPosts = () => {
+	return {
+		type: KEYS.CLEAR_POSTS,
+	};
+};
+
 export const updatePost = (data) => {
 	return {
 		type: KEYS.UPDATE_POST,

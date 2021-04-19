@@ -20,7 +20,7 @@ function PostForm({ addPost, userId }) {
 	};
 
 	return (
-		<div>
+		<div className='container'>
 			{userId ? (
 				<Form onSubmit={handleSubmit}>
 					<Form.Group controlId='postHeader'>

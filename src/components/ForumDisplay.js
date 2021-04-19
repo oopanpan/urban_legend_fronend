@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { nextPage, fetchPosts, newUpdate } from '../actions/postActions';
+import {
+	nextPage,
+	fetchPosts,
+	clearPosts,
+	newUpdate,
+} from '../actions/postActions';
 import PostRender from './PostRender';
 
 function ForumDisplay({
@@ -10,6 +15,7 @@ function ForumDisplay({
 	nextPage,
 	posts,
 	fetchPosts,
+	clearPosts,
 	update,
 	newUpdate,
 }) {
@@ -22,6 +28,9 @@ function ForumDisplay({
 
 	useEffect(() => {
 		fetchPosts(currentPage);
+		return () => {
+			clearPosts();
+		};
 	}, []);
 
 	useEffect(() => {
@@ -69,6 +78,9 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { fetchPosts, newUpdate, nextPage })(
-	ForumDisplay
-);
+export default connect(mapStateToProps, {
+	fetchPosts,
+	clearPosts,
+	newUpdate,
+	nextPage,
+})(ForumDisplay);

@@ -9,6 +9,8 @@ export const SET_CITY_KEYWORD = 'SET_CITY_KEYWORD';
 
 export const SET_ALL_POSTS = 'SET_ALL_POSTS';
 
+export const CLEAR_POSTS = 'CLEAR_POSTS';
+
 export const POST_UPDATE_STATUS = 'POST_UPDATE_STATUS';
 
 export const SET_TOTAL_PAGES = 'SET_TOTAL_PAGES';
