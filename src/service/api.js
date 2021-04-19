@@ -33,6 +33,11 @@ const getCurrentUser = async () => {
 	return res.data;
 };
 
+const getProfile = async (id) => {
+	const res = await axios.get(`${BACKEND_API}/users/${id}`);
+	return res.data;
+};
+
 //* Likes request
 
 const addLike = async (obj) => {
@@ -100,6 +105,21 @@ const deleteComment = async (id) => {
 	return res.data;
 };
 
+//* Follow/Friendship request
+
+const newFollow = async (obj) => {
+	const res = await axios.post(`${BACKEND_API}/friendships/`, obj, headers());
+	return res.data;
+};
+
+const unFollow = async (id) => {
+	const res = await axios.delete(
+		`${BACKEND_API}/friendships/${id}`,
+		headers()
+	);
+	return res.data;
+};
+
 //* third party api request
 
 const getAllUrbans = async () => {
@@ -123,6 +143,7 @@ const api = {
 		postLogin,
 		postSignup,
 		getCurrentUser,
+		getProfile,
 	},
 	post: {
 		getAllPosts,
@@ -139,6 +160,10 @@ const api = {
 	like: {
 		addLike,
 		unLike,
+	},
+	follow: {
+		newFollow,
+		unFollow,
 	},
 	teleport: {
 		general,

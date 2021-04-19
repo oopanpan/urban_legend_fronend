@@ -21,6 +21,16 @@ export const ADD_NEW_POST = 'ADD_NEW_POST';
 
 export const DELETE_POST = 'DELETE_POST';
 
+//* PROFILE REDUCERS
+
+export const GET_PROFILE = 'GET_PROFILE';
+
+export const ADD_FOLLOWER = 'ADD_FOLLOWER';
+
+export const DEL_FOLLOWER = 'DEL_FOLLOWER';
+
+export const UPDATE_FOLLOWER = 'UPDATE_FOLLOWER';
+
 //* TELEPORT ACTIONS
 export const SET_ALL_CONTS = 'SET_ALL_CONT';
 

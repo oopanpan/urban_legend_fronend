@@ -48,8 +48,13 @@ const App = ({ user, setAuth }) => {
 				/>
 				<Route path='/urban' render={() => <UrbanContainer />} />
 				<Route path='/discuss' render={() => <ForumContainer />} />
-				<Route path='/profile' render={() => <UserProfile />} />
-				<Footer />
+				<Route
+					path='/profile/:id'
+					render={(routerProps) => (
+						<UserProfile routerProps={routerProps} />
+					)}
+				/>
+				{/* <Footer /> */}
 			</Router>
 		</div>
 	);

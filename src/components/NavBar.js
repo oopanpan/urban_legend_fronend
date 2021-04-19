@@ -16,7 +16,7 @@ import NavBarOption from './NavBarOption';
 import './NavBar.css';
 import { delAuth } from '../actions/userActions';
 
-function NavBar({ username, delAuth }) {
+function NavBar({ userId, username, delAuth }) {
 	console.log(username ? 'yes' : 'no');
 	const handleLogout = () => {
 		localStorage.removeItem('token');
@@ -44,7 +44,7 @@ function NavBar({ username, delAuth }) {
 						<Nav.Link>Forum</Nav.Link>
 					</LinkContainer>
 					<Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-					<LinkContainer to='/profile'>
+					<LinkContainer to={`/profile/${userId}`}>
 						<Nav.Link>Profile</Nav.Link>
 					</LinkContainer>
 					{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
@@ -69,7 +69,7 @@ function NavBar({ username, delAuth }) {
 }
 
 const mapStateToProps = (state) => {
-	return { username: state.auth.username };
+	return { username: state.auth.username, userId: state.auth.id };
 };
 
 export default connect(mapStateToProps, { delAuth })(NavBar);
