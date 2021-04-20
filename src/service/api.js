@@ -4,6 +4,8 @@ const BACKEND_API = 'http://localhost:3000/api/v1';
 
 const TELEPORT_API = 'https://api.teleport.org/api/';
 
+const AVATAR = 'http://localhost:3000';
+
 const token = () => localStorage.getItem('token');
 
 const headers = () => {
@@ -176,6 +178,7 @@ const api = {
 		getAllConts,
 		getAllUrbans,
 	},
+	AVATAR,
 };
 
 export default api;

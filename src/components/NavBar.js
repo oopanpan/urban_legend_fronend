@@ -1,13 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-	Navbar,
-	NavDropdown,
-	Nav,
-	Button,
-	Form,
-	FormControl,
-} from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import HomeIcon from '@material-ui/icons/Home';
 import ForumIcon from '@material-ui/icons/Forum';
@@ -15,15 +8,17 @@ import ForumIcon from '@material-ui/icons/Forum';
 import NavBarOption from './NavBarOption';
 import './NavBar.css';
 import { delAuth } from '../actions/userActions';
+import api from '../service/api';
 
-function NavBar({ userId, username, delAuth }) {
-	console.log(username ? 'yes' : 'no');
+function NavBar({ userId, username, delAuth, avatar }) {
 	const handleLogout = () => {
 		localStorage.removeItem('token');
 		delAuth();
+		window.history.pushState({}, '', '/');
+		window.location.reload();
 	};
 	return (
-		<Navbar bg='light' expand='lg'>
+		<Navbar bg='light' expand='lg' sticky='top'>
 			<Navbar.Brand href='#home'>Urban Legend</Navbar.Brand>
 			<Navbar.Toggle aria-controls='basic-navbar-nav' />
 			<Navbar.Collapse id='basic-navbar-nav'>
@@ -31,21 +26,12 @@ function NavBar({ userId, username, delAuth }) {
 					<LinkContainer to='/'>
 						<Nav.Link>Home</Nav.Link>
 					</LinkContainer>
-					<LinkContainer to='/login'>
-						<Nav.Link>Login</Nav.Link>
-					</LinkContainer>
-					<LinkContainer to='/signup'>
-						<Nav.Link>Signup</Nav.Link>
-					</LinkContainer>
+
 					<LinkContainer to='/urban'>
 						<Nav.Link>Urban</Nav.Link>
 					</LinkContainer>
 					<LinkContainer to='/discuss'>
 						<Nav.Link>Forum</Nav.Link>
-					</LinkContainer>
-					<Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-					<LinkContainer to={`/profile/${userId}`}>
-						<Nav.Link>Profile</Nav.Link>
 					</LinkContainer>
 					{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -55,21 +41,45 @@ function NavBar({ userId, username, delAuth }) {
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown> */}
 				</Nav>
-				<Form inline>
+				{username ? (
+					<Nav className='ms-auto'>
+						<LinkContainer to={`/profile/${userId}`}>
+							<Nav.Link>
+								<img src={api.AVATAR + avatar} width='20' />{' '}
+								{username}
+							</Nav.Link>
+						</LinkContainer>
+						<Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+					</Nav>
+				) : (
+					<Nav className='ms-auto'>
+						<LinkContainer to='/login'>
+							<Nav.Link>Login</Nav.Link>
+						</LinkContainer>
+						<LinkContainer to='/signup'>
+							<Nav.Link>Signup</Nav.Link>
+						</LinkContainer>
+					</Nav>
+				)}
+				{/* <Form inline>
 					<FormControl
 						type='text'
 						placeholder='Search'
 						className='mr-sm-2'
 					/>
 					<Button variant='outline-success'>Search</Button>
-				</Form>
+				</Form> */}
 			</Navbar.Collapse>
 		</Navbar>
 	);
 }
 
 const mapStateToProps = (state) => {
-	return { username: state.auth.username, userId: state.auth.id };
+	return {
+		username: state.auth.username,
+		userId: state.auth.id,
+		avatar: state.auth.avatar,
+	};
 };
 
 export default connect(mapStateToProps, { delAuth })(NavBar);

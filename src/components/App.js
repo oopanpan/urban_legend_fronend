@@ -9,12 +9,14 @@ import UrbanContainer from './UrbanContainer';
 import ForumContainer from './ForumContainer';
 import UserProfile from './UserProfile';
 import Footer from './Footer';
+import HomePage from './HomePage';
 
 import { setAuth } from '../actions/userActions';
 import api from '../service/api';
 
 import './App.css';
 import PostsContainer from './PostsContainer';
+import PostForm from './PostForm';
 
 const App = ({ user, setAuth }) => {
 	useEffect(() => {
@@ -35,13 +37,14 @@ const App = ({ user, setAuth }) => {
 			{/* Map widget */}
 			<Router>
 				<NavBar />
-				<Route exact path='/' render={() => <UrbanContainer />} />
+				<Route exact path='/' render={() => <HomePage />} />
 				<Route
 					path='/login'
 					render={(routerProps) => (
 						<Login routerProps={routerProps} />
 					)}
 				/>
+				<Route path='/urban' render={() => <UrbanContainer />} />
 				<Route
 					path='/signup'
 					render={(routerProps) => (
@@ -61,7 +64,8 @@ const App = ({ user, setAuth }) => {
 						<PostsContainer routerProps={routerProps} />
 					)}
 				/>
-				{/* <Footer /> */}
+				<Route path='/newpost' render={() => <PostForm />} />
+				<Footer />
 			</Router>
 		</div>
 	);

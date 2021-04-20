@@ -28,9 +28,9 @@ function ForumDisplay({
 
 	useEffect(() => {
 		fetchPosts(currentPage);
-		return () => {
-			clearPosts();
-		};
+		// return () => {
+		// 	clearPosts();
+		// };
 	}, []);
 
 	useEffect(() => {

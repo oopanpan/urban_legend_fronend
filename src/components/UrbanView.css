@@ -1,0 +1,37 @@
+.urban-container {
+	justify-content: center;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.left-container {
+	border: 3px;
+	justify-content: flex-start;
+}
+
+div.img-container {
+	position: relative;
+}
+
+div.img-container img {
+	max-width: 100%;
+	transform: translateX(-10px);
+}
+
+div.img-container img + div {
+	padding: 0.25rem 2rem;
+	background-color: white;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 2rem;
+	text-align: center;
+	font-weight: 600;
+	font-style: italic;
+}
+
+.button-row {
+	justify-content: center;
+	margin: 0.5rem;
+}

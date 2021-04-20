@@ -1,7 +1,10 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Button, ButtonGroup, Row } from 'react-bootstrap';
+import { Button, ButtonGroup, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import './UrbanView.css';
 
 const UrbanView = ({ city }) => {
 	const [images, setImages] = useState({});
@@ -9,6 +12,7 @@ const UrbanView = ({ city }) => {
 	const [scores, setScores] = useState(null);
 	const [summary, setSummary] = useState(null);
 	const [mainScore, setMainScore] = useState(null);
+	const [width, setWindowWidth] = useState(0);
 
 	useEffect(() => {
 		city &&
@@ -31,39 +35,93 @@ const UrbanView = ({ city }) => {
 			});
 	}, [scoreLink]);
 
+	useEffect(() => {
+		updateDimensions();
+		window.addEventListener('resize', updateDimensions);
+		return () => {
+			window.removeEventListener('resize', updateDimensions);
+		};
+	}, []);
+
+	const updateDimensions = () => {
+		const width = window.innerWidth;
+		setWindowWidth(width);
+	};
+
 	const renderScores = () => {
 		return (
 			scores &&
 			scores.map((score) => (
-				<p key={score.name}>
+				<Col xs={6} md={4} key={score.name}>
 					{score.name}: {score.score_out_of_10.toFixed(2)}
-				</p>
+				</Col>
 			))
 		);
 	};
 
 	return (
-		<Row className='container'>
+		<>
 			{city ? (
-				<div>
-					<h1>{city.full_name}</h1>
-					<h4>Teleport Score: {mainScore}</h4>
-					<h5 dangerouslySetInnerHTML={{ __html: summary }}></h5>
-					<img src={images.web} />
-					{renderScores()}
-					<ButtonGroup>
+				<>
+					<Row className='urban-container'>
+						<div className='img-container'>
+							<img
+								src={width > 800 ? images.web : images.mobile}
+							/>
+							<div>{city.name}</div>
+						</div>
+					</Row>
+					<Row className='urban-container'>
+						<Col className='left-container' xs={12} md={6}>
+							<h3>Overall Score: {mainScore}</h3>
+							<h5
+								dangerouslySetInnerHTML={{ __html: summary }}
+							></h5>
+						</Col>
+						<Col xs={12} md={6}>
+							<Row className='button-row'>
+								<Button variant='outline-dark'>
+									See Post About This City
+								</Button>
+							</Row>
+							<Row className='button-row'>
+								<Button
+									variant='outline-dark'
+									as={Link}
+									to='/newpost'
+								>
+									Write About This City
+								</Button>
+							</Row>
+							<Row className='button-row'>
+								<Button
+									variant='outline-dark'
+									as={Link}
+									to='/discuss'
+								>
+									See All Post
+								</Button>
+							</Row>
+						</Col>
+						{/* <Col className='left-container' xs={12} md={6}>
+							{renderScores()}
+						</Col> */}
+					</Row>
+					<Row className='left-container'>{renderScores()}</Row>
+					{/* <ButtonGroup style={{ margin: '3rem' }}>
 						<Button>See post for this place</Button>
 						<Button>All Post</Button>
 						<Button>Start Writing Post</Button>
-					</ButtonGroup>
-				</div>
+					</ButtonGroup> */}
+					<div style={{ margin: '3rem' }}>-</div>
+				</>
 			) : (
 				<div>
-					<h1>Default Render when there's nothing to see</h1>
-					<Button>A Button that leads to the forum</Button>
+					<h1>Your New Journey Starts Here</h1>
+					<Button>See what people are talking about</Button>
 				</div>
 			)}
-		</Row>
+		</>
 	);
 };
 

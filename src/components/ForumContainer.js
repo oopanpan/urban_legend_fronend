@@ -6,7 +6,6 @@ import ForumDisplay from './ForumDisplay';
 function ForumContainer() {
 	return (
 		<div>
-			<PostForm />
 			<ForumDisplay />
 		</div>
 	);
