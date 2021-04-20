@@ -18,6 +18,7 @@ const UrbanSearch = ({
 	setUrban,
 	clearUrban,
 	getAllUrbans,
+	postKeyword,
 }) => {
 	useEffect(() => {
 		setAllConts();
@@ -92,6 +93,7 @@ const mapStateToProps = (state) => {
 	return {
 		allConts: state.geo.allConts,
 		allUrbans: state.geo.urbans,
+		postKeyword: state.post.keyword,
 	};
 };
 

@@ -8,7 +8,7 @@ function Footer() {
 				width: '100%',
 				height: '50px',
 				bottom: '0',
-				backgroundColor: 'black',
+				backgroundColor: 'white',
 				color: 'white',
 			}}
 		>

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import { Icon } from 'semantic-ui-react';
 import { newLike, unLike } from '../actions/likeActions';
 
 function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
@@ -28,12 +27,12 @@ function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
 			{userLiked ? (
 				<Button onClick={handleLike}>
 					{count > 0 && count}
-					<FavoriteIcon />
+					{/* <FavoriteIcon /> */}
 				</Button>
 			) : (
 				<Button onClick={handleLike} disabled={!userId}>
 					{count > 0 && count}
-					<FavoriteBorderIcon />
+					{/* <FavoriteBorderIcon /> */}
 				</Button>
 			)}
 		</>

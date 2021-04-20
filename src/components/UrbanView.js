@@ -4,9 +4,10 @@ import { Button, ButtonGroup, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { setCityKeyword } from '../actions/postActions';
 import './UrbanView.css';
 
-const UrbanView = ({ city }) => {
+const UrbanView = ({ city, setCityKeyword }) => {
 	const [images, setImages] = useState({});
 	const [scoreLink, setScoreLink] = useState(null);
 	const [scores, setScores] = useState(null);
@@ -80,12 +81,18 @@ const UrbanView = ({ city }) => {
 						</Col>
 						<Col xs={12} md={6}>
 							<Row className='button-row'>
-								<Button variant='outline-dark'>
+								<Button
+									as={Link}
+									to='/discuss'
+									onClick={() => setCityKeyword(city.name)}
+									variant='outline-dark'
+								>
 									See Post About This City
 								</Button>
 							</Row>
 							<Row className='button-row'>
 								<Button
+									onClick={() => setCityKeyword(city.name)}
 									variant='outline-dark'
 									as={Link}
 									to='/newpost'
@@ -113,7 +120,7 @@ const UrbanView = ({ city }) => {
 						<Button>All Post</Button>
 						<Button>Start Writing Post</Button>
 					</ButtonGroup> */}
-					<div style={{ margin: '3rem' }}>-</div>
+					<div style={{ margin: '5rem' }}>-</div>
 				</>
 			) : (
 				<div>
@@ -127,4 +134,4 @@ const UrbanView = ({ city }) => {
 
 const mapStateToProps = (state) => ({ city: state.geo.selectedUrban });
 
-export default connect(mapStateToProps)(UrbanView);
+export default connect(mapStateToProps, { setCityKeyword })(UrbanView);

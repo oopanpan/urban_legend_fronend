@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Navbar, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import HomeIcon from '@material-ui/icons/Home';
-import ForumIcon from '@material-ui/icons/Forum';
+import { Icon } from 'semantic-ui-react';
 
 import NavBarOption from './NavBarOption';
 import './NavBar.css';
@@ -43,6 +42,13 @@ function NavBar({ userId, username, delAuth, avatar }) {
 				</Nav>
 				{username ? (
 					<Nav className='ms-auto'>
+						<LinkContainer to='/newpost'>
+							<Nav.Link>
+								<Icon.Group size='large'>
+									<Icon name='edit outline' color='grey' />
+								</Icon.Group>
+							</Nav.Link>
+						</LinkContainer>
 						<LinkContainer to={`/profile/${userId}`}>
 							<Nav.Link>
 								<img src={api.AVATAR + avatar} width='20' />{' '}

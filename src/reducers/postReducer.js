@@ -1,7 +1,7 @@
 import * as KEYS from '../actions/stringKeys';
 
 export const postReducer = (
-	state = { page: 0, update: false, posts: [] },
+	state = { page: 0, update: false, posts: [], keyword: 'Global' },
 	action
 ) => {
 	switch (action.type) {
