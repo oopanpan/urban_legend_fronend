@@ -17,7 +17,10 @@ function PostsContainer({ routerProps, currentUser }) {
 	}, [updated]);
 	return (
 		// <div></div>
-		<div className='container justify-center'>
+		<div
+			className='container justify-content-center'
+			style={{ marginTop: '2rem', marginBottom: '2rem' }}
+		>
 			{data && (
 				<PostRender
 					userId={currentUser.id}

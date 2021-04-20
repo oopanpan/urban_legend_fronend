@@ -54,10 +54,17 @@ const unLike = async (id) => {
 
 //* posts requests
 
-const getAllPosts = async (page) => {
-	const res = await axios.get(`${BACKEND_API}/posts?limit=10&page=${page}`);
+const getAllPosts = async (keyword, page) => {
+	const res = await axios.get(
+		`${BACKEND_API}/posts?limit=10&page=${page}&key=${keyword}`
+	);
 	return res.data;
 };
+
+// const getCityPosts = async (keyword, page) => {
+// 	const res = await axios.get(`${BACKEND_API}/posts?limit=10&page=${page}`)
+// 	return res.data;
+// }
 
 const getOnePost = async (id) => {
 	const res = await axios.get(`${BACKEND_API}/posts/${id}`);

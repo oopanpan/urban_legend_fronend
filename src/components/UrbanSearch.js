@@ -34,8 +34,6 @@ const UrbanSearch = ({
 	};
 
 	const renderUrbanOption = () => {
-		console.log('Hello');
-		console.log(allUrbans);
 		return allUrbans.map((urban) => (
 			<option key={urban.name} value={urban.name}>
 				{urban.name}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Form } from 'react-bootstrap';
+import { Card, Button, Form, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import CommentRender from './CommentRender';
 
@@ -41,90 +41,104 @@ function PostRender({ userId, data, setUpdated }) {
 
 	const handleEdit = () => setEditing(!editing);
 
+	const displayTime = () => {
+		return data.created_at === data.updated_at
+			? data.created_at.split('T')[0]
+			: '(edited) ' + data.updated_at.split('T')[0];
+	};
 	return (
-		<>
-			<Card style={{ marginBottom: '25px' }}>
-				{/* might do another component to do some fancy stuff */}
-				<Card.Header>
-					<img
-						alt='user-avatar'
-						src={BACKEND_API + data.user.avatar}
-						width='20'
-						height='20'
-					/>
-					<Link to={`/profile/${data.user.id}`}>
-						{data.user.username}
-					</Link>
-				</Card.Header>
-				{editing ? (
-					<EditingForm
-						handleEdit={handleEdit}
-						data={data}
-						setUpdated={setUpdated}
-					/>
-				) : (
-					<>
-						<Card.Body>
-							{data.header && (
-								<Card.Title>{data.header}</Card.Title>
-							)}
-							{data.content.length <= 150 ? (
-								<Card.Text>{data.content}</Card.Text>
-							) : (
-								<Card.Text>
-									{data.content.slice(0, 150)}
-									{showMore ? (
-										<>
-											{data.content.slice(150)}
-											<span
-												style={{ color: 'blue' }}
-												onClick={handleShow}
-											>
-												...show less
-											</span>
-										</>
-									) : (
-										<>
-											<span
-												style={{ color: 'blue' }}
-												onClick={handleShow}
-											>
-												...show more
-											</span>
-										</>
-									)}
-								</Card.Text>
-							)}
-						</Card.Body>
-						<Card.Footer>
-							<LikeButton
-								likedUsers={data.likes}
-								dataId={data.id}
-							/>
-							<Button onClick={handleComment}>
-								comment
-								{comments.length > 0 && `(${comments.length})`}
-							</Button>
-							{data.user.id === userId && (
-								<Button onClick={handleEdit}>Edit</Button>
-							)}
-						</Card.Footer>{' '}
-					</>
-				)}
-				{showComment ? (
-					<Card.Body>
-						{showComment && renderNestedCard()}
-						<CommentForm
-							comments={comments}
-							setComments={setComments}
-							data={data}
-							targetId={data.id}
-							targetType={'Post'}
+		<Row className='justify-content-center'>
+			<Col xs={12} md={6}>
+				<Card style={{ marginBottom: '25px' }}>
+					{/* might do another component to do some fancy stuff */}
+					<Card.Header>
+						<img
+							alt='user-avatar'
+							src={BACKEND_API + data.user.avatar}
+							width='20'
+							height='20'
 						/>
-					</Card.Body>
-				) : null}
-			</Card>
-		</>
+						<Link
+							to={`/profile/${data.user.id}`}
+							style={{ marginLeft: '5px' }}
+						>
+							{data.user.username}
+						</Link>
+						<p style={{ float: 'right', color: 'grey' }}>
+							{displayTime()}
+						</p>
+					</Card.Header>
+					{editing ? (
+						<EditingForm
+							handleEdit={handleEdit}
+							data={data}
+							setUpdated={setUpdated}
+						/>
+					) : (
+						<>
+							<Card.Body>
+								{data.header && (
+									<Card.Title>{data.header}</Card.Title>
+								)}
+								{data.content.length <= 150 ? (
+									<Card.Text>{data.content}</Card.Text>
+								) : (
+									<Card.Text>
+										{data.content.slice(0, 150)}
+										{showMore ? (
+											<>
+												{data.content.slice(150)}
+												<span
+													style={{ color: 'blue' }}
+													onClick={handleShow}
+												>
+													...show less
+												</span>
+											</>
+										) : (
+											<span>
+												<span
+													style={{ color: 'blue' }}
+													onClick={handleShow}
+												>
+													...show more
+												</span>
+											</span>
+										)}
+									</Card.Text>
+								)}
+							</Card.Body>
+							<Card.Footer>
+								<LikeButton
+									likedUsers={data.likes}
+									dataId={data.id}
+								/>
+								<Button onClick={handleComment}>
+									comment
+									{comments.length > 0 &&
+										`(${comments.length})`}
+								</Button>
+								{data.user.id === userId && (
+									<Button onClick={handleEdit}>Edit</Button>
+								)}
+							</Card.Footer>{' '}
+						</>
+					)}
+					{showComment ? (
+						<Card.Body>
+							{showComment && renderNestedCard()}
+							<CommentForm
+								comments={comments}
+								setComments={setComments}
+								data={data}
+								targetId={data.id}
+								targetType={'Post'}
+							/>
+						</Card.Body>
+					) : null}
+				</Card>
+			</Col>
+		</Row>
 	);
 }
 

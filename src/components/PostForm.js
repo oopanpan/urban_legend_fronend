@@ -15,7 +15,7 @@ function PostForm({ addPost, userId, postKeyword }) {
 				user_id: userId,
 				header: e.target.header.value,
 				content: e.target.content.value,
-				keyword: keyword,
+				keyword: keyword.toLowerCase(),
 			},
 		};
 		addPost(postObj);

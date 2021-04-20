@@ -7,9 +7,10 @@ import { Icon } from 'semantic-ui-react';
 import NavBarOption from './NavBarOption';
 import './NavBar.css';
 import { delAuth } from '../actions/userActions';
+import { setCityKeyword } from '../actions/postActions';
 import api from '../service/api';
 
-function NavBar({ userId, username, delAuth, avatar }) {
+function NavBar({ userId, username, delAuth, setCityKeyword, avatar }) {
 	const handleLogout = () => {
 		localStorage.removeItem('token');
 		delAuth();
@@ -29,7 +30,10 @@ function NavBar({ userId, username, delAuth, avatar }) {
 					<LinkContainer to='/urban'>
 						<Nav.Link>Urban</Nav.Link>
 					</LinkContainer>
-					<LinkContainer to='/discuss'>
+					<LinkContainer
+						to='/discuss'
+						onClick={() => setCityKeyword('Global')}
+					>
 						<Nav.Link>Forum</Nav.Link>
 					</LinkContainer>
 					{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
@@ -88,4 +92,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { delAuth })(NavBar);
+export default connect(mapStateToProps, { delAuth, setCityKeyword })(NavBar);

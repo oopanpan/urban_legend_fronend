@@ -105,6 +105,7 @@ const UrbanView = ({ city, setCityKeyword }) => {
 									variant='outline-dark'
 									as={Link}
 									to='/discuss'
+									onClick={() => setCityKeyword('Global')}
 								>
 									See All Post
 								</Button>

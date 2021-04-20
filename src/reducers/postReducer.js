@@ -5,9 +5,6 @@ export const postReducer = (
 	action
 ) => {
 	switch (action.type) {
-		case KEYS.NEXT_PAGE_POSTS:
-			return { ...state, page: state.page + 1 };
-
 		case KEYS.SET_CITY_KEYWORD:
 			return { ...state, keyword: action.payload };
 
@@ -18,6 +15,11 @@ export const postReducer = (
 		case KEYS.CLEAR_POSTS:
 			return { ...state, posts: [] };
 
+		case KEYS.NEXT_PAGE_POSTS:
+			return { ...state, page: state.page + 1 };
+
+		case KEYS.RESET_PAGE:
+			return { ...state, page: 0 };
 		case KEYS.SET_TOTAL_PAGES:
 			return { ...state, totalPage: action.payload };
 

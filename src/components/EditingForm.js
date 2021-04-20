@@ -75,6 +75,7 @@ function EditingForm({
 					name='content'
 					onChange={handleChange}
 					value={formContent}
+					row={5}
 				/>
 			</Card.Body>
 			<Card.Footer>

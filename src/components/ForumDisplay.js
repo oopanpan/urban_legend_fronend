@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import {
 	nextPage,
+	resetPage,
 	fetchPosts,
 	clearPosts,
 	newUpdate,
@@ -13,11 +14,11 @@ function ForumDisplay({
 	currentPage,
 	totalPage,
 	nextPage,
+	resetPage,
 	posts,
+	keyword,
 	fetchPosts,
 	clearPosts,
-	update,
-	newUpdate,
 }) {
 	const [isBottom, setIsBottom] = useState(false);
 
@@ -27,17 +28,18 @@ function ForumDisplay({
 	}, []);
 
 	useEffect(() => {
-		fetchPosts(currentPage);
-		// return () => {
-		// 	clearPosts();
-		// };
-	}, []);
+		fetchPosts(keyword, currentPage);
+		return () => {
+			resetPage();
+			clearPosts();
+		};
+	}, [keyword]);
 
 	useEffect(() => {
 		if (currentPage < totalPage && isBottom) {
 			setIsBottom(false);
 			nextPage();
-			fetchPosts(currentPage + 1);
+			fetchPosts(keyword, currentPage + 1);
 		}
 	}, [isBottom]);
 
@@ -61,7 +63,10 @@ function ForumDisplay({
 	};
 
 	return (
-		<div className='container'>
+		<div
+			className='container justify-content-center'
+			style={{ marginTop: '6rem' }}
+		>
 			{posts && renderPosts(posts)}
 			<h1>Bottom of the page</h1>
 		</div>
@@ -69,12 +74,13 @@ function ForumDisplay({
 }
 
 const mapStateToProps = (state) => {
-	console.log(state);
+	const { posts, page, totalPage, update, keyword } = state.post;
 	return {
-		posts: state.post.posts,
-		currentPage: state.post.page,
-		totalPage: state.post.totalPage,
-		update: state.post.update,
+		posts,
+		currentPage: page,
+		totalPage,
+		update,
+		keyword: keyword.toLowerCase(),
 	};
 };
 
@@ -83,4 +89,5 @@ export default connect(mapStateToProps, {
 	clearPosts,
 	newUpdate,
 	nextPage,
+	resetPage,
 })(ForumDisplay);
