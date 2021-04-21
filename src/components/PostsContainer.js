@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PostRender from './PostRender';
-
+import { setModal } from '../actions/modalActions';
 import api from '../service/api';
 
-function PostsContainer({ routerProps, currentUser }) {
+function PostsContainer({ routerProps, currentUser, setModal }) {
 	const [data, setData] = useState(null);
 	const [updated, setUpdated] = useState(false);
 
@@ -28,6 +28,14 @@ function PostsContainer({ routerProps, currentUser }) {
 					setUpdated={setUpdated}
 				/>
 			)}
+			<div>
+				<button
+					style={{ height: '100vh' }}
+					onClick={() => setModal(true, 'Hello', 'Modal')}
+				>
+					Modal
+				</button>
+			</div>
 		</div>
 	);
 }
@@ -38,4 +46,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps)(PostsContainer);
+export default connect(mapStateToProps, { setModal })(PostsContainer);

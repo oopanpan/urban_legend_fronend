@@ -6,3 +6,14 @@ export const displayModal = (boo) => {
 		payload: boo,
 	};
 };
+
+export const setModal = (display, header, body) => {
+	return {
+		type: KEYS.SET_MODAL,
+		payload: {
+			display,
+			header,
+			body,
+		},
+	};
+};

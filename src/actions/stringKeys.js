@@ -50,3 +50,5 @@ export const CLEAR_URBAN = 'CLEAR_URBAN';
 //* MODAL ACTIONS
 
 export const DISPLAY_MODAL = 'DISPLAY_MODAL';
+
+export const SET_MODAL = 'SET_MODAL';

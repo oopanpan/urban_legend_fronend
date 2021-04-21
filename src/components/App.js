@@ -10,7 +10,7 @@ import ForumContainer from './ForumContainer';
 import UserProfile from './UserProfile';
 import Footer from './Footer';
 import HomePage from './HomePage';
-import Modal from './Modal';
+import ModalComp from './ModalComp';
 
 import { setAuth } from '../actions/userActions';
 import api from '../service/api';
@@ -60,8 +60,8 @@ const App = ({ user, setAuth }) => {
 				/>
 				<Route path='/newpost' render={() => <PostForm />} />
 				<Footer />
-				<Modal />
 			</Router>
+			<ModalComp />
 		</div>
 	);
 };

@@ -58,9 +58,15 @@ function Login({ routerProps, setAuth }) {
 					dirty,
 				} = formik;
 				return (
-					<Container>
+					<Container style={{ marginTop: '3rem' }}>
+						<Row
+							className='justify-content-md-center'
+							style={{ margin: '1rem' }}
+						>
+							<h1>User Login</h1>
+						</Row>
 						<Row className='justify-content-md-center'>
-							<Col xs lg='auto'>
+							<Col xs={12} md={5}>
 								<Form onSubmit={handleSubmit}>
 									<Form.Group controlID='userEmail'>
 										<Form.Label>Email Address</Form.Label>
@@ -106,9 +112,9 @@ function Login({ routerProps, setAuth }) {
 											{errors.password}
 										</Form.Control.Feedback>
 									</Form.Group>
-									<Row className='justify-content-center align-items-center'>
+									<Row className='justify-content-center'>
 										<Button
-											variant='dark'
+											variant='outline-dark'
 											size='lg'
 											block
 											style={{ borderRadius: '8px' }}

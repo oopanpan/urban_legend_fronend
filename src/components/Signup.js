@@ -4,6 +4,7 @@ import { Form, Button, Container } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
+import { setModal } from '../actions/modalActions';
 import { setAuth } from '../actions/userActions';
 import api from '../service/api';
 
@@ -31,17 +32,28 @@ const signupSchema = yup.object().shape({
 		.oneOf([yup.ref('password'), null], 'Did not match password'),
 });
 
-const Signup = ({ auth, setAuth }) => {
-	const backendSubmit = (data) => {
+const Signup = ({ setModal, setAuth }) => {
+	const backendSubmit = async (data) => {
 		const userObj = {
 			user: { ...data },
 		};
-		api.user.postSignup(userObj).then((r) => {
-			console.log(r);
-			localStorage.setItem('token', r.jwt);
-			setAuth(r);
-		});
+		const res = await api.user.postSignup(userObj);
+		// console.log(r);
+		console.log(res);
+		if (res.jwt) {
+			localStorage.setItem('token', res.jwt);
+			setAuth(res);
+			const body = `Welcome to Urban Legend, ${res.user.username}. Where would you like to go?`;
+			const buttons = [
+				{ content: 'Explore', path: '/urban' },
+				{ content: 'All Post', path: '/discuss' },
+			];
+			setModal(true, 'Congratulations!', body, buttons);
+		} else {
+			setModal(true, 'Sign Up Error', res.message);
+		}
 	};
+
 	return (
 		<Formik
 			initialValues={initialValues}
@@ -168,4 +180,4 @@ const Signup = ({ auth, setAuth }) => {
 	);
 };
 
-export default connect(null, { setAuth })(Signup);
+export default connect(null, { setAuth, setModal })(Signup);

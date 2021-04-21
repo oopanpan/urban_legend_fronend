@@ -7,8 +7,9 @@ export const modalReducer = (
 	switch (action.type) {
 		case KEYS.DISPLAY_MODAL:
 			return { ...state, display: action.payload };
-		case KEY.SET_HEADER:
-			return state;
+		case KEYS.SET_MODAL:
+			const { display, header, body } = action.payload;
+			return { display, header, body };
 		default:
 			return state;
 	}
