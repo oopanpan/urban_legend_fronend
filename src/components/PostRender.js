@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Form, Col, Row } from 'react-bootstrap';
+import { Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import CommentRender from './CommentRender';
 
+import CommentRender from './CommentRender';
 import CommentForm from './CommentForm';
 import EditingForm from './EditingForm';
 import LikeButton from './LikeButton';
+import OnScreenKeyword from './OnScreenKeyword';
 
 import { Link } from 'react-router-dom';
 
@@ -31,7 +33,6 @@ function PostRender({ userId, data, setUpdated }) {
 					data={comment}
 				/>
 			);
-			// return <ContentRender key={ele.id} data={ele} />;
 		});
 	};
 
@@ -109,18 +110,42 @@ function PostRender({ userId, data, setUpdated }) {
 								)}
 							</Card.Body>
 							<Card.Footer>
-								<LikeButton
-									likedUsers={data.likes}
-									dataId={data.id}
-								/>
-								<Button onClick={handleComment}>
-									comment
-									{comments.length > 0 &&
-										`(${comments.length})`}
-								</Button>
-								{data.user.id === userId && (
-									<Button onClick={handleEdit}>Edit</Button>
-								)}
+								<Row
+									style={{
+										paddingRight: '1rem',
+									}}
+								>
+									<Col>
+										{data.keyword && (
+											<OnScreenKeyword
+												string={data.keyword}
+											/>
+										)}
+									</Col>
+									<LikeButton
+										likedUsers={data.likes}
+										dataId={data.id}
+									/>
+									<div>
+										{comments.length > 0 && comments.length}
+										<Icon
+											title='Comments'
+											name='comments outline'
+											size='large'
+											onClick={handleComment}
+										/>
+									</div>
+									<div>
+										{data.user.id === userId && (
+											<Icon
+												title='Edit'
+												name='pencil'
+												size='large'
+												onClick={handleEdit}
+											/>
+										)}
+									</div>
+								</Row>
 							</Card.Footer>{' '}
 						</>
 					)}

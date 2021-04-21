@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Icon } from 'semantic-ui-react';
 
 import EditingForm from './EditingForm';
 import CommentForm from './CommentForm';
@@ -58,7 +59,6 @@ function CommentRender({
 							width='20'
 							height='20'
 						/>
-						{data.user.username}
 						{thisComment.user.username}
 					</Card.Header>
 					{editing ? (

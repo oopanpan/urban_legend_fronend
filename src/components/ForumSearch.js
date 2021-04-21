@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Form, FormControl, Button, Row, Col } from 'react-bootstrap';
 
@@ -6,6 +6,10 @@ import { setCityKeyword } from '../actions/postActions';
 
 function ForumSearch({ keyword, setCityKeyword, setIsBottom }) {
 	const [search, setSearch] = useState(keyword);
+
+	useEffect(() => {
+		setSearch(keyword);
+	}, [keyword]);
 
 	const handleChange = (e) => {
 		setSearch(e.target.value);

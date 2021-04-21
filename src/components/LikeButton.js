@@ -25,15 +25,27 @@ function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
 	return (
 		<>
 			{userLiked ? (
-				<Button onClick={handleLike}>
+				<>
 					{count > 0 && count}
-					{/* <FavoriteIcon /> */}
-				</Button>
+					<Icon
+						title='Unlike Button'
+						name='heart'
+						size='large'
+						color='red'
+						onClick={handleLike}
+					/>
+				</>
 			) : (
-				<Button onClick={handleLike} disabled={!userId}>
+				<>
 					{count > 0 && count}
-					{/* <FavoriteBorderIcon /> */}
-				</Button>
+					<Icon
+						title='Like Button'
+						name='heart outline'
+						size='large'
+						onClick={handleLike}
+						disabled={!userId}
+					/>
+				</>
 			)}
 		</>
 	);

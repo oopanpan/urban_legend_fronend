@@ -23,7 +23,6 @@ function ForumDisplay({
 	clearPosts,
 }) {
 	const [isBottom, setIsBottom] = useState(false);
-	const [searching, setSearching] = useState(false);
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll);
@@ -75,10 +74,7 @@ function ForumDisplay({
 			className='container justify-content-center'
 			style={{ marginTop: '3rem' }}
 		>
-			<ForumSearch
-				setSearching={setSearching}
-				setIsBottom={setIsBottom}
-			/>
+			<ForumSearch setIsBottom={setIsBottom} />
 			{posts && renderPosts(posts)}
 			<h1>Bottom of the page</h1>
 		</div>
