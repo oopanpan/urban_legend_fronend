@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 import EditingForm from './EditingForm';
 import CommentForm from './CommentForm';
@@ -45,13 +46,19 @@ function CommentRender({
 	const handleComment = () => setShowComment(!showComment);
 
 	const handleEdit = () => setEditing(!editing);
+
+	const displayTime = () => {
+		return thisComment.created_at === thisComment.updated_at
+			? thisComment.created_at.split('T')[0]
+			: '(edited) ' + thisComment.updated_at.split('T')[0];
+	};
 	console.log(thisComment);
 
 	return (
 		<>
 			{thisComment ? (
-				<Card>
-					{/* might do another component to do some fancy stuff */}
+				<Card className='comment-card'>
+					//! Can be extracted into a component
 					<Card.Header>
 						<img
 							alt='user-avatar'
@@ -59,7 +66,15 @@ function CommentRender({
 							width='20'
 							height='20'
 						/>
-						{thisComment.user.username}
+						<Link
+							to={`/profile/${thisComment.user.id}`}
+							style={{ marginLeft: '5px' }}
+						>
+							{thisComment.user.username}
+						</Link>
+						<p style={{ float: 'right', color: 'grey' }}>
+							{displayTime()}
+						</p>
 					</Card.Header>
 					{editing ? (
 						<EditingForm
@@ -108,14 +123,29 @@ function CommentRender({
 								)}
 							</Card.Body>
 							<Card.Footer>
-								<Button onClick={handleComment}>
-									comment
-									{thisComment.comments.length > 0 &&
-										`(${thisComment.comments.length})`}
-								</Button>
-								{thisComment.user.id === userId && (
-									<Button onClick={handleEdit}>Edit</Button>
-								)}
+								<Row>
+									<Col></Col>
+									<div className='icon-div'>
+										{thisComment.comments.length > 0 &&
+											thisComment.comments.length}
+										<Icon
+											title='Comments'
+											name='comments outline'
+											size='large'
+											onClick={handleComment}
+										/>
+									</div>
+									{thisComment.user.id === userId && (
+										<div className='icon-div'>
+											<Icon
+												title='Edit'
+												name='pencil'
+												size='large'
+												onClick={handleEdit}
+											/>
+										</div>
+									)}
+								</Row>
 							</Card.Footer>
 						</>
 					)}

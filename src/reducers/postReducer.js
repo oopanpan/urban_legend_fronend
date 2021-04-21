@@ -6,7 +6,8 @@ export const postReducer = (
 ) => {
 	switch (action.type) {
 		case KEYS.SET_CITY_KEYWORD:
-			return { ...state, keyword: action.payload };
+			const stylizePayload = action.payload.split(' ').join('');
+			return { ...state, keyword: stylizePayload };
 
 		case KEYS.SET_ALL_POSTS:
 			console.log(action.payload);

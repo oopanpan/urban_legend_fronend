@@ -8,6 +8,15 @@ import api from '../service/api';
 
 function PostForm({ addPost, userId, postKeyword }) {
 	const [keyword, setKeyword] = useState(postKeyword);
+
+	const stylizedKeyword = (str) => {
+		const output = str
+			.toLowerCase()
+			.split(' ')
+			.filter((word) => word.length);
+		return output.join('#');
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const postObj = {
@@ -15,11 +24,12 @@ function PostForm({ addPost, userId, postKeyword }) {
 				user_id: userId,
 				header: e.target.header.value,
 				content: e.target.content.value,
-				keyword: keyword.toLowerCase(),
+				keyword: stylizedKeyword(keyword),
 			},
 		};
 		//! MODAL ACTIVATION && REDIRECTION
 		addPost(postObj);
+		e.target.reset();
 	};
 
 	return (

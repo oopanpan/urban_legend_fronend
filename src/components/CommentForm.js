@@ -37,7 +37,9 @@ function CommentForm({
 			{userId ? (
 				<Form onSubmit={handleSubmit}>
 					<Form.Group controlId='postContent'>
-						<Form.Label>New Comment</Form.Label>
+						<Form.Label style={{ marginTop: '1rem' }}>
+							New Comment
+						</Form.Label>
 						<Form.Control
 							id='comment-textarea'
 							as='textarea'

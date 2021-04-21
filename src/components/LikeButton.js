@@ -25,7 +25,7 @@ function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
 	return (
 		<>
 			{userLiked ? (
-				<>
+				<div className='icon-div'>
 					{count > 0 && count}
 					<Icon
 						title='Unlike Button'
@@ -34,9 +34,9 @@ function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
 						color='red'
 						onClick={handleLike}
 					/>
-				</>
+				</div>
 			) : (
-				<>
+				<div className='icon-div'>
 					{count > 0 && count}
 					<Icon
 						title='Like Button'
@@ -45,7 +45,7 @@ function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
 						onClick={handleLike}
 						disabled={!userId}
 					/>
-				</>
+				</div>
 			)}
 		</>
 	);

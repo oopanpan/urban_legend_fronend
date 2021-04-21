@@ -24,5 +24,6 @@ a {
 }
 
 a:hover {
-	color: black;
+	color: rgb(29, 58, 184);
+	font-style: italic;
 }

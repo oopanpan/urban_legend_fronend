@@ -47,6 +47,39 @@ function PostRender({ userId, data, setUpdated }) {
 			? data.created_at.split('T')[0]
 			: '(edited) ' + data.updated_at.split('T')[0];
 	};
+
+	const contentFormatting = () => {
+		return (
+			<>
+				{data.content.slice(0, 150)}{' '}
+				{showMore ? (
+					<>
+						{data.content.slice(150)}
+						<span
+							style={{
+								color: 'blue',
+							}}
+							onClick={handleShow}
+						>
+							...show less
+						</span>
+					</>
+				) : (
+					<span>
+						<span
+							style={{
+								color: 'blue',
+							}}
+							onClick={handleShow}
+						>
+							...show more
+						</span>
+					</span>
+				)}
+			</>
+		);
+	};
+
 	return (
 		<Row className='justify-content-center post-row'>
 			<Col xs={12} md={6}>
@@ -84,29 +117,7 @@ function PostRender({ userId, data, setUpdated }) {
 								{data.content.length <= 150 ? (
 									<Card.Text>{data.content}</Card.Text>
 								) : (
-									<Card.Text>
-										{data.content.slice(0, 150)}
-										{showMore ? (
-											<>
-												{data.content.slice(150)}
-												<span
-													style={{ color: 'blue' }}
-													onClick={handleShow}
-												>
-													...show less
-												</span>
-											</>
-										) : (
-											<span>
-												<span
-													style={{ color: 'blue' }}
-													onClick={handleShow}
-												>
-													...show more
-												</span>
-											</span>
-										)}
-									</Card.Text>
+									<Card.Text>{contentFormatting()}</Card.Text>
 								)}
 							</Card.Body>
 							<Card.Footer>
@@ -126,7 +137,7 @@ function PostRender({ userId, data, setUpdated }) {
 										likedUsers={data.likes}
 										dataId={data.id}
 									/>
-									<div>
+									<div className='icon-div'>
 										{comments.length > 0 && comments.length}
 										<Icon
 											title='Comments'
@@ -135,7 +146,7 @@ function PostRender({ userId, data, setUpdated }) {
 											onClick={handleComment}
 										/>
 									</div>
-									<div>
+									<div className='icon-div'>
 										{data.user.id === userId && (
 											<Icon
 												title='Edit'

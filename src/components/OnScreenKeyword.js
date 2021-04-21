@@ -13,7 +13,7 @@ function OnScreenKeyword({ setCityKeyword, string }) {
 		`${string[0].toUpperCase()}` + `${string.slice(1)}`;
 
 	const renderArr = () => {
-		const strArr = string.split(' ');
+		const strArr = string.split('#');
 		return strArr.map((str) => {
 			return (
 				<Link to='/discuss' onClick={() => handleClick(str)} key='str'>

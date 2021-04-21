@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Form, Card, Button } from 'react-bootstrap';
+import { Form, Card, Button, Row, Col } from 'react-bootstrap';
+import { Icon } from 'semantic-ui-react';
 
 import { newUpdate, updatePost, deletePost } from '../actions/postActions';
 import api from '../service/api';
+import './EditingForm.css';
 
 function EditingForm({
 	comments,
@@ -81,9 +83,35 @@ function EditingForm({
 				/>
 			</Card.Body>
 			<Card.Footer>
-				<Button onClick={handleEdit}>Cancel</Button>
-				<Button type='submit'>Save</Button>
-				<Button onClick={handleDelete}>Delete</Button>
+				<Row
+					style={{
+						paddingRight: '1rem',
+					}}
+				>
+					<Col></Col>
+					<Icon
+						title='Cancel'
+						name='backward'
+						size='large'
+						onClick={handleEdit}
+					/>
+
+					<button id='edit-submit-btn' type='submit'>
+						<Icon
+							title='Save'
+							name='save outline'
+							size='large'
+							type='submit'
+						/>
+					</button>
+					<Icon
+						className='icon'
+						title='Delete'
+						name='trash alternate outline'
+						size='large'
+						onClick={handleDelete}
+					/>
+				</Row>
 			</Card.Footer>
 		</Form>
 	);

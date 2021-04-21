@@ -54,10 +54,11 @@ export const updatePost = (data) => {
 
 export const addPost = (obj) => async (dispatch) => {
 	const res = await api.post.postNewPost(obj);
-	dispatch({
-		type: KEYS.ADD_NEW_POST,
-		payload: res,
-	});
+	// dispatch({
+	// 	type: KEYS.ADD_NEW_POST,
+	// 	payload: res,
+	// });
+	return res.data;
 };
 
 export const deletePost = (id) => async (dispatch) => {
