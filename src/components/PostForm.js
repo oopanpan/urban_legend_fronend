@@ -18,6 +18,7 @@ function PostForm({ addPost, userId, postKeyword }) {
 				keyword: keyword.toLowerCase(),
 			},
 		};
+		//! MODAL ACTIVATION && REDIRECTION
 		addPost(postObj);
 	};
 

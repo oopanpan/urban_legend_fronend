@@ -40,6 +40,11 @@ const getProfile = async (id) => {
 	return res.data;
 };
 
+const patchUser = async (id, obj) => {
+	const res = await axios.patch(`${BACKEND_API}/users/${id}`, obj, headers());
+	return res.data;
+};
+
 //* Likes request
 
 const addLike = async (obj) => {
@@ -158,6 +163,7 @@ const api = {
 		postSignup,
 		getCurrentUser,
 		getProfile,
+		patchUser,
 	},
 	post: {
 		getAllPosts,

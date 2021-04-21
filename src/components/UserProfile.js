@@ -9,6 +9,7 @@ import { newFollow, unFollow } from '../actions/followActions';
 import UserHeader from './UserHeader';
 import PostRender from './PostRender';
 import UserDetails from './UserDetails';
+import UserEditForm from './UserEditForm';
 
 function UserProfile({
 	routerProps,
@@ -70,53 +71,8 @@ function UserProfile({
 						isFollowed={isFollowed}
 						handleFollow={handleFollow}
 					/>
+					<UserEditForm />
 					<UserDetails thisUser={thisUser} />
-					{/* <Card>
-						<Card.Body>
-							<div style={{ float: 'left' }}>
-								<img
-									alt='user-avatar'
-									src={
-										'http://localhost:3000/' +
-										thisUser.avatar
-									}
-									width='150px'
-									height='150px'
-								/>
-							</div>
-							<Col style={{ marginLeft: '2rem' }}>
-								<h1>{thisUser.username}</h1>
-							</Col>
-							{authUser ? (
-								<button onClick={handleEdit}>Edit</button>
-							) : (
-								<button onClick={handleFollow}>
-									{isFollowed ? 'Following' : 'Follow'}
-								</button>
-							)}
-							<h2>{thisUser.emailAddress}</h2>
-							<h2>{thisUser.bio}</h2>
-							<h2>{thisUser.keyword}</h2>
-						</Card.Body>
-					</Card> */}
-					{/* <Row>
-						<Col>{thisUser.posts.count}</Col>
-						<Col>{thisUser.following.length}</Col>
-						<Col>{thisUser.follower.length}</Col>
-					</Row>
-					<Row>
-						<Col>
-							<button>Post</button>
-						</Col>
-						<Col>
-							<button>Following</button>
-						</Col>
-						<Col>
-							<button>Follower</button>
-						</Col>
-					</Row>
-					<form></form> */}
-					{/* {thisUser.posts && postRender()} */}
 				</Container>
 			) : null}
 		</div>
@@ -130,8 +86,8 @@ const mapStateToProps = (state) => {
 		email_address,
 		bio,
 		keyword,
-		posts,
 		avatar,
+		posts,
 		friendships,
 		inverse_friendships,
 	} = state.profile;

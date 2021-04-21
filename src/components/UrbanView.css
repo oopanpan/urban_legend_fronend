@@ -19,7 +19,7 @@ div.img-container img {
 }
 
 div.img-container img + div {
-	padding: 0.25rem 2rem;
+	padding: 0.8rem 2rem;
 	background-color: white;
 	position: absolute;
 	top: 50%;

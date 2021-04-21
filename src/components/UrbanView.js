@@ -124,9 +124,15 @@ const UrbanView = ({ city, setCityKeyword }) => {
 					<div style={{ margin: '5rem' }}>-</div>
 				</>
 			) : (
-				<div>
-					<h1>Your New Journey Starts Here</h1>
-					<Button>See what people are talking about</Button>
+				<div className='urban-container'>
+					<Row className='justify-content-center'>
+						<Col>
+							<h1>Your New Journey Starts Here</h1>
+							<Button variant='outline-dark'>
+								See what people are talking about
+							</Button>
+						</Col>
+					</Row>
 				</div>
 			)}
 		</>

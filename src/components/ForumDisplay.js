@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Row } from 'react-bootstrap';
 
 import {
 	nextPage,
@@ -9,6 +10,7 @@ import {
 	newUpdate,
 } from '../actions/postActions';
 import PostRender from './PostRender';
+import ForumSearch from './ForumSearch';
 
 function ForumDisplay({
 	currentPage,
@@ -21,14 +23,20 @@ function ForumDisplay({
 	clearPosts,
 }) {
 	const [isBottom, setIsBottom] = useState(false);
+	const [searching, setSearching] = useState(false);
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll);
-		return () => window.removeEventListener('scroll', handleScroll);
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
 	}, []);
 
+	console.log(isBottom);
+
 	useEffect(() => {
-		fetchPosts(keyword, currentPage);
+		fetchPosts(keyword, 0);
+		console.log('1');
 		return () => {
 			resetPage();
 			clearPosts();
@@ -65,8 +73,12 @@ function ForumDisplay({
 	return (
 		<div
 			className='container justify-content-center'
-			style={{ marginTop: '6rem' }}
+			style={{ marginTop: '3rem' }}
 		>
+			<ForumSearch
+				setSearching={setSearching}
+				setIsBottom={setIsBottom}
+			/>
 			{posts && renderPosts(posts)}
 			<h1>Bottom of the page</h1>
 		</div>
@@ -80,7 +92,7 @@ const mapStateToProps = (state) => {
 		currentPage: page,
 		totalPage,
 		update,
-		keyword: keyword.toLowerCase(),
+		keyword: keyword,
 	};
 };
 

@@ -35,6 +35,7 @@ function EditingForm({
 			api.post.patchPost(postObj).then((r) => {
 				setUpdated ? setUpdated(true) : updatePost(r);
 			}, handleEdit());
+			//! MODAL ACTIVATION && REDIRECTION
 		} else {
 			const commentObj = {
 				id: data.id,
@@ -43,6 +44,7 @@ function EditingForm({
 			api.comment
 				.patchComment(commentObj)
 				.then(setIsUpdate(true), handleEdit());
+			//! MODAL ACTIVATION && REDIRECTION
 		}
 	};
 
