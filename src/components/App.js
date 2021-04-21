@@ -18,12 +18,8 @@ import './App.css';
 import PostsContainer from './PostsContainer';
 import PostForm from './PostForm';
 
-const backDrop = '../../assets/classic2_backdrop.jpg';
-
 const App = ({ user, setAuth }) => {
 	useEffect(() => {
-		//* get user info into state from the backend
-		//* if token presents
 		const token = localStorage.token;
 		if (token) {
 			api.user.getCurrentUser().then((r) => setAuth(r));
@@ -31,12 +27,7 @@ const App = ({ user, setAuth }) => {
 	}, [setAuth]);
 
 	return (
-		<div className='app' style={{ backgroundImage: `url(${backDrop})` }}>
-			{/* SideBar/NAVBAR */}
-
-			{/* main Feed/All Post from the newest */}
-
-			{/* Map widget */}
+		<div className='app'>
 			<Router>
 				<NavBar />
 				<Route exact path='/' render={() => <HomePage />} />
@@ -69,7 +60,6 @@ const App = ({ user, setAuth }) => {
 				<Route path='/newpost' render={() => <PostForm />} />
 				<Footer />
 			</Router>
-			<img src={backDrop} />
 		</div>
 	);
 };

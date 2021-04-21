@@ -48,7 +48,7 @@ function PostRender({ userId, data, setUpdated }) {
 			: '(edited) ' + data.updated_at.split('T')[0];
 	};
 	return (
-		<Row className='justify-content-center'>
+		<Row className='justify-content-center post-row'>
 			<Col xs={12} md={6}>
 				<Card style={{ marginBottom: '25px' }}>
 					{/* might do another component to do some fancy stuff */}

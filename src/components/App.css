@@ -8,7 +8,6 @@
 	height: 100vh;
 	width: 100%;
 	min-height: 100vh !important;
-	background-size: cover;
-	background-position: center;
 	font-family: 'Lora', serif;
+	z-index: 1000;
 }
