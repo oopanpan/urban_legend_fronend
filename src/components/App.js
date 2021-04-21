@@ -18,6 +18,8 @@ import './App.css';
 import PostsContainer from './PostsContainer';
 import PostForm from './PostForm';
 
+const backDrop = '../../assets/classic2_backdrop.jpg';
+
 const App = ({ user, setAuth }) => {
 	useEffect(() => {
 		//* get user info into state from the backend
@@ -29,7 +31,7 @@ const App = ({ user, setAuth }) => {
 	}, [setAuth]);
 
 	return (
-		<div className='app'>
+		<div className='app' style={{ backgroundImage: `url(${backDrop})` }}>
 			{/* SideBar/NAVBAR */}
 
 			{/* main Feed/All Post from the newest */}
@@ -67,6 +69,7 @@ const App = ({ user, setAuth }) => {
 				<Route path='/newpost' render={() => <PostForm />} />
 				<Footer />
 			</Router>
+			<img src={backDrop} />
 		</div>
 	);
 };

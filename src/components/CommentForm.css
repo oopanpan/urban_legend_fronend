@@ -1,0 +1,10 @@
+#comment-submit-btn {
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	margin: 1.5rem;
+}
+
+.card-footer + .card-body {
+	min-height: 13rem;
+}

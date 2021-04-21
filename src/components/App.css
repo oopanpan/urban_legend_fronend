@@ -6,8 +6,9 @@
 
 .app {
 	height: 100vh;
-	/* margin-left: 20px;
-	margin-right: 20px; */
-	/* display: flex; */
+	width: 100%;
+	min-height: 100vh !important;
+	background-size: cover;
+	background-position: center;
 	font-family: 'Lora', serif;
 }

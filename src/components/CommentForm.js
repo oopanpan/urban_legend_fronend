@@ -1,10 +1,12 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import api from '../service/api';
 
 import { newUpdate } from '../actions/postActions';
+
+import './CommentForm.css';
 
 function CommentForm({
 	setComments,
@@ -37,18 +39,20 @@ function CommentForm({
 					<Form.Group controlId='postContent'>
 						<Form.Label>New Comment</Form.Label>
 						<Form.Control
-							require
+							id='comment-textarea'
 							as='textarea'
 							name='content'
 							rows={3}
 						/>
-					</Form.Group>
-					<Form.Group controlId='postKeyword'></Form.Group>
-					<div>
-						<Button variant='dark' type='submit'>
+						<Button
+							id='comment-submit-btn'
+							variant='outline-dark'
+							size='sm'
+							type='submit'
+						>
 							Submit
 						</Button>
-					</div>
+					</Form.Group>
 				</Form>
 			) : (
 				<div>Log in or singup to start banging</div>
