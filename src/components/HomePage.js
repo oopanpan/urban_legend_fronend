@@ -2,6 +2,8 @@ import React from 'react';
 import './HomePage.css';
 import backDrop from '../assets/blue_backdrop.png';
 import cloud from '../assets/white_cloud.png';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
 	return (
@@ -16,8 +18,8 @@ function HomePage() {
 				<img
 					src={cloud}
 					className='cloud-img'
-					width='100px'
-					height='100'
+					width='95px'
+					height='95px'
 					style={{
 						top: '8%',
 						left: '35%',
@@ -26,27 +28,42 @@ function HomePage() {
 				<img
 					src={cloud}
 					className='cloud-img'
-					width='110px'
-					height='110px'
+					width='120px'
+					height='120px'
 					style={{
 						top: '20%',
 						left: '60%',
 						zIndex: '5',
-						animationDelay: '1s',
+						animationDelay: '2s',
 					}}
 				/>
 				<img
 					src={cloud}
 					className='cloud-img'
-					width='80px'
-					height='80px'
+					width='75px'
+					height='75px'
 					style={{
 						top: '32%',
 						left: '25%',
 						zIndex: '-1',
-						animationDelay: '3s',
+						animationDelay: '5s',
 					}}
 				/>
+			</div>
+			<div className='button-div'>
+				<Button as={Link} to='/urban' variant='outline-dark' size='lg'>
+					Start Exploring
+				</Button>
+			</div>
+			<div className='button-div'>
+				<Button
+					as={Link}
+					to='/discuss'
+					variant='outline-dark'
+					size='lg'
+				>
+					Enter Discussion
+				</Button>
 			</div>
 		</div>
 	);

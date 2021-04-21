@@ -126,12 +126,14 @@ const UrbanView = ({ city, setCityKeyword }) => {
 			) : (
 				<div className='urban-container'>
 					<Row className='justify-content-center'>
-						<Col>
+						<Col xs={12} md={6} style={{ textAlign: 'center' }}>
 							<h1>Your New Journey Starts Here</h1>
-							<Button variant='outline-dark'>
-								See what people are talking about
-							</Button>
 						</Col>
+					</Row>
+					<Row className='button-row' style={{ margin: '2rem' }}>
+						<Button title='link to discuss' variant='outline-dark'>
+							See what people are talking about
+						</Button>
 					</Row>
 				</div>
 			)}

@@ -9,6 +9,8 @@
 	font-size: 4.8rem;
 	font-weight: 400;
 	font-family: 'Sacramento', cursive;
+	letter-spacing: 0.1rem;
+	line-height: 100%;
 	text-shadow: 2px 4px #0000004f;
 	position: absolute;
 	top: 20%;
@@ -24,6 +26,7 @@
 	font-weight: bolder;
 	text-shadow: 1px 1px #00000088;
 	position: absolute;
+	margin-top: 1rem;
 	top: 30%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -36,6 +39,21 @@
 	opacity: 0;
 	position: absolute;
 	animation: across 10s linear infinite alternate;
+}
+
+.button-div {
+	opacity: 0;
+	position: absolute;
+	background-color: rgba(244, 252, 255, 0.925);
+	top: 55%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 5px;
+	animation: fadein 1s 1s forwards;
+}
+
+.button-div + .button-div {
+	top: 66%;
 }
 
 @keyframes dropin {
