@@ -58,7 +58,7 @@ function CommentRender({
 		<>
 			{thisComment ? (
 				<Card className='comment-card'>
-					//! Can be extracted into a component
+					{/*  Can be extracted into a component */}
 					<Card.Header>
 						<img
 							alt='user-avatar'
