@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import { authReducer } from './authReducer';
 import { cityReducer } from './cityReducers';
+import { modalReducer } from './modalReducer';
 import { postReducer } from './postReducer';
 import { profileReducer } from './profileReducer';
 
@@ -12,4 +13,5 @@ export default combineReducers({
 	geo: cityReducer,
 	post: postReducer,
 	profile: profileReducer,
+	modal: modalReducer,
 });
