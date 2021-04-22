@@ -50,7 +50,8 @@ const Signup = ({ setModal, setAuth }) => {
 			];
 			setModal(true, 'Congratulations!', body, buttons);
 		} else {
-			setModal(true, 'Sign Up Error', res.message);
+			const buttons = [{ content: 'Close' }];
+			setModal(true, 'Sign Up Error', res.message, buttons);
 		}
 	};
 

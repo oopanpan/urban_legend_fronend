@@ -7,13 +7,14 @@ export const displayModal = (boo) => {
 	};
 };
 
-export const setModal = (display, header, body) => {
+export const setModal = (display, header, body, buttons) => {
 	return {
 		type: KEYS.SET_MODAL,
 		payload: {
 			display,
 			header,
 			body,
+			buttons,
 		},
 	};
 };

@@ -60,8 +60,8 @@ const App = ({ user, setAuth }) => {
 				/>
 				<Route path='/newpost' render={() => <PostForm />} />
 				<Footer />
+				<ModalComp />
 			</Router>
-			<ModalComp />
 		</div>
 	);
 };

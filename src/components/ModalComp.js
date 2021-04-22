@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import { displayModal } from '../actions/modalActions';
 
@@ -8,6 +9,35 @@ function ModalComp({ displayModal, modal }) {
 	const handleClose = () => {
 		displayModal(false);
 	};
+
+	const renderButtons = (arr) => {
+		return arr.map((button) => {
+			if (button.path) {
+				return (
+					<Button
+						variant='outline-dark'
+						as={Link}
+						to={button.path}
+						title={button.content}
+						key={button.content}
+						onClick={handleClose}
+					>
+						{button.content}
+					</Button>
+				);
+			}
+			return (
+				<Button
+					variant='outline-dark'
+					key={button.content}
+					onClick={handleClose}
+				>
+					{button.content}
+				</Button>
+			);
+		});
+	};
+
 	return (
 		<>
 			{modal && (
@@ -24,12 +54,7 @@ function ModalComp({ displayModal, modal }) {
 						<Modal.Title>{modal.header}</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>{modal.body}</Modal.Body>
-					<Modal.Footer>
-						{/* <Button variant='secondary' onClick={handleClose}>
-						Close
-					</Button>
-					<Button variant='primary'>Understood</Button> */}
-					</Modal.Footer>
+					<Modal.Footer>{renderButtons(modal.buttons)}</Modal.Footer>
 				</Modal>
 			)}
 		</>
