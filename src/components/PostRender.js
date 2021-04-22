@@ -87,10 +87,11 @@ function PostRender({ userId, data, setUpdated }) {
 					{/* might do another component to do some fancy stuff */}
 					<Card.Header>
 						<img
+							className='user-avatar'
 							alt='user-avatar'
 							src={BACKEND_API + data.user.avatar}
-							width='20'
-							height='20'
+							width='30'
+							height='30'
 						/>
 						<Link
 							to={`/profile/${data.user.id}`}
@@ -110,7 +111,7 @@ function PostRender({ userId, data, setUpdated }) {
 						/>
 					) : (
 						<>
-							<Card.Body>
+							<Card.Body className='taller-body'>
 								{data.header && (
 									<Card.Title>{data.header}</Card.Title>
 								)}

@@ -46,17 +46,22 @@ function NavBar({ userId, username, delAuth, setCityKeyword, avatar }) {
 				</Nav>
 				{username ? (
 					<Nav className='ms-auto'>
+						<LinkContainer to={`/profile/${userId}`}>
+							<Nav.Link>
+								<img
+									className='user-avatar'
+									src={api.AVATAR + avatar}
+									width='20'
+									height='20'
+								/>{' '}
+								{username}
+							</Nav.Link>
+						</LinkContainer>
 						<LinkContainer to='/newpost'>
 							<Nav.Link>
 								<Icon.Group size='large'>
 									<Icon name='edit outline' color='grey' />
 								</Icon.Group>
-							</Nav.Link>
-						</LinkContainer>
-						<LinkContainer to={`/profile/${userId}`}>
-							<Nav.Link>
-								<img src={api.AVATAR + avatar} width='20' />{' '}
-								{username}
 							</Nav.Link>
 						</LinkContainer>
 						<Nav.Link onClick={handleLogout}>Logout</Nav.Link>

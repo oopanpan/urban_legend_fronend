@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 
 import { patchProfile } from '../actions/profileActions';
+import { setModal } from '../actions/modalActions';
 
-function UserEditForm({ thisUser, patchProfile }) {
+function UserEditForm({ thisUser, patchProfile, setEditing, setModal }) {
 	const [username, setUsername] = useState(thisUser.username);
 	const [bio, setBio] = useState(thisUser.bio);
 	const [keyword, setKeyword] = useState(thisUser.keyword);
 	const [newImg, setNewImg] = useState(null);
 
 	const handleChange = (e) => {
-		console.log(e.target.name);
 		if (e.target.files) {
 			setNewImg(e.target.files[0]);
 		} else {
@@ -28,31 +29,78 @@ function UserEditForm({ thisUser, patchProfile }) {
 		}
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(e.target);
 		const formData = new FormData();
 		formData.append('username', username);
 		formData.append('bio', bio);
 		formData.append('keyword', keyword);
 		newImg && formData.append('avatar', newImg);
-		patchProfile(thisUser.id, formData);
+		const res = await patchProfile(thisUser.id, formData);
+		console.log(res);
+		if (res.user) {
+			setEditing();
+		} else {
+			const buttons = [{ content: 'Close' }];
+			setModal(true, 'Editing Errors', res.message, buttons);
+		}
 	};
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				hi I'm a form
-				<input
-					name='username'
-					onChange={handleChange}
-					value={username}
-				/>
-				<input name='bio' onChange={handleChange} value={bio} />
-				<input name='keyword' onChange={handleChange} value={keyword} />
-				<input type='file' name='avatar' onChange={handleChange} />
-				<input type='submit' />
-			</form>
-		</div>
+		<>
+			<Form onSubmit={handleSubmit}>
+				<Row>
+					<Col>
+						<div>
+							<img
+								id='user-avatar'
+								alt='user-avatar'
+								src={'http://localhost:3000/' + thisUser.avatar}
+								width='120px'
+								height='120px'
+							/>
+						</div>
+						<input
+							id='file-btn'
+							type='file'
+							name='avatar'
+							onChange={handleChange}
+						/>
+					</Col>
+					<Col>
+						<Form.Label>Username</Form.Label>
+						<Form.Control
+							name='username'
+							onChange={handleChange}
+							value={username}
+						/>
+						<Form.Label>Tags</Form.Label>
+						<Form.Control
+							name='keyword'
+							onChange={handleChange}
+							value={keyword}
+						/>
+						<Form.Label>Bio</Form.Label>
+						<Form.Control
+							name='bio'
+							onChange={handleChange}
+							value={bio}
+						/>
+					</Col>
+				</Row>
+				<div id='editing-btn-group'>
+					<Button
+						size='sm'
+						variant='outline-dark'
+						onClick={() => setEditing()}
+					>
+						Cancel
+					</Button>
+					<Button size='sm' variant='outline-dark' type='submit'>
+						Submit
+					</Button>
+				</div>
+			</Form>
+		</>
 	);
 }
 
@@ -70,4 +118,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { patchProfile })(UserEditForm);
+export default connect(mapStateToProps, { patchProfile, setModal })(
+	UserEditForm
+);
