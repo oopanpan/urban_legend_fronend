@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import UserEditForm from './UserEditForm';
 import { setCityKeyword } from '../actions/postActions';
-import './UserHeader.css';
+import './UserProfile.css';
 
 function UserHeader({
 	thisUser,

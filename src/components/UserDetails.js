@@ -80,28 +80,29 @@ function UserDetails({ thisUser }) {
 		}
 	};
 	return (
-		<div className='d-flex justify-content-center'>
-			<Table style={{ borderCollapse: 'collapse', width: '80%' }}>
-				<thead>
-					<tr>
-						<th>{thisUser.posts.length}</th>
-						<th>{thisUser.following.length}</th>
-						<th>{thisUser.follower.length}</th>
-					</tr>
-					<tr>
-						<th key='post' onClick={handleClick}>
-							Post
-						</th>
-						<th key='following' onClick={handleClick}>
-							Following
-						</th>
-						<th key='follower' onClick={handleClick}>
-							Follower
-						</th>
-					</tr>
-				</thead>
-				<tbody>{renderTable(thisUser)}</tbody>
-			</Table>
+		<div className='container justify-content-center' id='detail-container'>
+			<Row id='first-detail-row'>
+				<Col xs={12} md={4} key='post' onClick={handleClick}>
+					<p>{thisUser.posts.length}</p>
+					<p>Post</p>
+				</Col>
+				<Col xs={12} md={4} key='following' onClick={handleClick}>
+					<p>{thisUser.following.length}</p>
+					<p>Following</p>
+				</Col>
+				<Col xs={12} md={4} key='follower' onClick={handleClick}>
+					<p>{thisUser.follower.length}</p>
+					<p>Follower</p>
+				</Col>
+			</Row>
+			<Row className='justify-content-center'>
+				<Table
+					id='user-detail-table'
+					style={{ borderCollapse: 'collapse', width: '80%' }}
+				>
+					<tbody>{renderTable(thisUser)}</tbody>
+				</Table>
+			</Row>
 		</div>
 	);
 }
