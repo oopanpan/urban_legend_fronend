@@ -1,11 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-function UserHeader({ thisUser, handleFollow, isFollowed, currentUser }) {
+import UserEditForm from './UserEditForm';
+import { setCityKeyword } from '../actions/postActions';
+import './UserHeader.css';
+
+function UserHeader({
+	thisUser,
+	handleFollow,
+	isFollowed,
+	currentUser,
+	setCityKeyword,
+}) {
 	const authUser = currentUser.id === thisUser.id;
+	const [editing, setEditing] = useState(false);
 
-	const handleEdit = () => {};
+	const handleEdit = () => {
+		setEditing(!editing);
+	};
+
+	const turnKeywordsToLinks = () => {
+		const parseArr = thisUser.keyword.split(' ');
+		return parseArr.map((ele) => (
+			<Link to='/discuss' key={ele} onClick={() => setCityKeyword(ele)}>
+				{`#${ele}`}
+			</Link>
+		));
+	};
 	return (
 		<div className='d-flex justify-content-center'>
 			<Card
@@ -13,37 +36,57 @@ function UserHeader({ thisUser, handleFollow, isFollowed, currentUser }) {
 				style={{ width: '80%', alignSelf: 'center' }}
 			>
 				<Card.Body className='container'>
-					<Row>
-						<Col>
-							<div>
-								<img
-									alt='user-avatar'
-									src={
-										'http://localhost:3000/' +
-										thisUser.avatar
-									}
-									width='150px'
-									height='150px'
-								/>
-							</div>
-						</Col>
-						<Col
-							className='justify-content-center'
-							style={{ marginLeft: '2rem' }}
-						>
-							<h1>{thisUser.username}</h1>
-							{authUser ? (
-								<button onClick={handleEdit}>Edit</button>
-							) : (
-								<button onClick={handleFollow}>
-									{isFollowed ? 'Unfollow' : 'Follow'}
-								</button>
-							)}
-							<h2>{thisUser.emailAddress}</h2>
-							<h2>{thisUser.bio}</h2>
-							<h2>{thisUser.keyword}</h2>
-						</Col>
-					</Row>
+					{editing ? (
+						<UserEditForm setEditing={setEditing} />
+					) : (
+						<Row>
+							<Col className='justify-content-center'>
+								<div>
+									<img
+										id='user-avatar'
+										alt='user-avatar'
+										src={
+											'http://localhost:3000/' +
+											thisUser.avatar
+										}
+										width='120px'
+										height='120px'
+									/>
+								</div>
+								<div>
+									{authUser ? (
+										<Button
+											className='profile-main'
+											size='sm'
+											variant='outline-dark'
+											onClick={handleEdit}
+										>
+											Edit Profile
+										</Button>
+									) : (
+										<Button
+											className='profile-main'
+											size='sm'
+											variant='outline-dark'
+											onClick={handleFollow}
+										>
+											{isFollowed ? 'Unfollow' : 'Follow'}
+										</Button>
+									)}
+								</div>
+							</Col>
+							<Col
+								className='user-info'
+								style={{ marginLeft: '2rem' }}
+							>
+								<h1>{thisUser.username}</h1>
+								<div>{turnKeywordsToLinks()}</div>
+								<br></br>
+								<bio>{thisUser.bio}</bio>
+							</Col>
+						</Row>
+					)}
+					<Row></Row>
 				</Card.Body>
 			</Card>
 		</div>
@@ -54,4 +97,4 @@ const mapStateToProps = (state) => {
 	return { currentUser: state.auth };
 };
 
-export default connect(mapStateToProps)(UserHeader);
+export default connect(mapStateToProps, { setCityKeyword })(UserHeader);

@@ -52,13 +52,12 @@ function CommentRender({
 			? thisComment.created_at.split('T')[0]
 			: '(edited) ' + thisComment.updated_at.split('T')[0];
 	};
-	console.log(thisComment);
 
 	return (
 		<>
 			{thisComment ? (
 				<Card className='comment-card'>
-					{/*  Can be extracted into a component */}
+					{/* Will extract into standalone component */}
 					<Card.Header>
 						<img
 							alt='user-avatar'

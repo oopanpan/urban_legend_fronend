@@ -3,10 +3,11 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { addPost, newUpdate } from '../actions/postActions';
+import { setModal } from '../actions/modalActions';
 
 import api from '../service/api';
 
-function PostForm({ addPost, userId, postKeyword }) {
+function PostForm({ addPost, userId, postKeyword, setModal }) {
 	const [keyword, setKeyword] = useState(postKeyword);
 
 	const stylizedKeyword = (str) => {
@@ -17,7 +18,7 @@ function PostForm({ addPost, userId, postKeyword }) {
 		return output.join('#');
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const postObj = {
 			post: {
@@ -28,8 +29,19 @@ function PostForm({ addPost, userId, postKeyword }) {
 			},
 		};
 		//! MODAL ACTIVATION && REDIRECTION
-		addPost(postObj);
-		e.target.reset();
+		const res = await addPost(postObj);
+		if (res.id) {
+			const buttons = [
+				{ content: 'Check it out', path: `/posts/${res.id}` },
+				{ content: 'All Post', path: '/discuss' },
+				{ content: 'Close' },
+			];
+			setModal(true, 'Success', 'Your post is up now', buttons);
+			e.target.reset();
+		} else {
+			const buttons = [{ content: 'Close' }];
+			setModal(true, 'Something went wrong', res.message, buttons);
+		}
 	};
 
 	return (
@@ -89,4 +101,6 @@ const mapStateToProps = (state) => ({
 	postKeyword: state.post.keyword,
 });
 
-export default connect(mapStateToProps, { newUpdate, addPost })(PostForm);
+export default connect(mapStateToProps, { newUpdate, addPost, setModal })(
+	PostForm
+);

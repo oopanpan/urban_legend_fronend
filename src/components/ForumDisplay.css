@@ -1,0 +1,9 @@
+#forum-container {
+	background-color: transparent;
+	padding-bottom: 50px;
+	min-width: 100%;
+}
+
+.taller-body {
+	min-height: 10rem;
+}

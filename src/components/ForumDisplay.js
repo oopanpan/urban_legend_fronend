@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Row } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
+import './ForumDisplay.css';
 
 import {
 	nextPage,
@@ -35,7 +38,6 @@ function ForumDisplay({
 
 	useEffect(() => {
 		fetchPosts(keyword, 0);
-		console.log('1');
 		return () => {
 			resetPage();
 			clearPosts();
@@ -49,8 +51,6 @@ function ForumDisplay({
 			fetchPosts(keyword, currentPage + 1);
 		}
 	}, [isBottom]);
-
-	const handleNext = () => {};
 
 	const handleScroll = () => {
 		const scrollTop =
@@ -71,12 +71,27 @@ function ForumDisplay({
 
 	return (
 		<div
+			id='forum-container'
 			className='container justify-content-center'
 			style={{ marginTop: '3rem' }}
 		>
 			<ForumSearch setIsBottom={setIsBottom} />
 			{posts && renderPosts(posts)}
-			<h1>Bottom of the page</h1>
+			<Row className='justify-content-center'>
+				<Col xs={12} md={6} style={{ textAlign: 'center' }}>
+					<h1>Didn't see what you came for?</h1>
+				</Col>
+			</Row>
+			<Row className='button-row' style={{ margin: '2rem' }}>
+				<Button
+					as={Link}
+					to='/newpost'
+					title='New post link'
+					variant='outline-dark'
+				>
+					Spark a convo!
+				</Button>
+			</Row>
 		</div>
 	);
 }

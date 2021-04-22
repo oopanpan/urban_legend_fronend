@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PostRender from './PostRender';
-
 import api from '../service/api';
 
 function PostsContainer({ routerProps, currentUser }) {

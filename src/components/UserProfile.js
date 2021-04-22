@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { DirectUpload } from 'activestorage';
 
 import { getProfile } from '../actions/profileActions';
 import { newFollow, unFollow } from '../actions/followActions';
@@ -9,7 +8,6 @@ import { newFollow, unFollow } from '../actions/followActions';
 import UserHeader from './UserHeader';
 import PostRender from './PostRender';
 import UserDetails from './UserDetails';
-import UserEditForm from './UserEditForm';
 
 function UserProfile({
 	routerProps,
@@ -65,13 +63,12 @@ function UserProfile({
 	return (
 		<div>
 			{thisUser.id ? (
-				<Container style={{ margin: '3rem' }}>
+				<Container style={{ marginTop: '3rem' }}>
 					<UserHeader
 						thisUser={thisUser}
 						isFollowed={isFollowed}
 						handleFollow={handleFollow}
 					/>
-					<UserEditForm />
 					<UserDetails thisUser={thisUser} />
 				</Container>
 			) : null}
