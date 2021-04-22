@@ -27,14 +27,44 @@ i {
 }
 
 .comment-card {
-	padding-top: 2rem;
-	border-left: 3px solid rgb(30, 122, 134);
+	/* padding-top: 0rem; */
+	border-left: 3px solid rgb(35, 115, 190);
 }
 
-.comment-card:last-of-type {
-	border-bottom: 3px solid rgb(30, 122, 134);
+.comment-card > .card-header {
+	background-color: rgb(232, 252, 250);
 }
 
 .comment-card > .card-footer {
+	background-color: rgb(232, 252, 250);
+}
+
+/* .comment-card:last-of-type {
+	border-bottom: 3px solid rgb(30, 122, 134);
+} */
+
+.comment-card > .card-footer {
 	border: none;
+}
+
+.comment-card + form {
+	padding-left: 10px;
+	padding-right: 10px;
+	border-left: 3px solid rgb(35, 115, 190);
+	border-bottom-left-radius: 10px;
+}
+
+.post-card {
+	opacity: 0;
+	animation: flowup 1s forwards;
+}
+
+@keyframes flowup {
+	0% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	100% {
+		opacity: 1;
+	}
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container, Col, Row } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
@@ -74,106 +74,134 @@ const Signup = ({ setModal, setAuth }) => {
 					dirty,
 				} = formik;
 				return (
-					<Container>
-						<h1>Signup Form</h1>
-						<Form noValidate onSubmit={handleSubmit}>
-							<Form.Group controlId='formBasicEmail'>
-								<Form.Label>Email address</Form.Label>
-								<Form.Control
-									placeholder='Enter email'
-									name='email_address'
-									value={values.email_address}
-									onBlur={handleBlur}
-									onChange={handleChange}
-									isValid={
-										touched.email_address &&
-										!errors.email_address
-									}
-									isInvalid={
-										touched.email_address &&
-										!!errors.email_address
-									}
-								/>
-								<Form.Control.Feedback type='invalid'>
-									{errors.email_address}
-								</Form.Control.Feedback>
-								<Form.Text className='text-muted'>
-									We'll never share your email with anyone
-									else.
-								</Form.Text>
-							</Form.Group>
-
-							<Form.Group controlId='formUsername'>
-								<Form.Label>Username</Form.Label>
-								<Form.Control
-									placeholder='Your display name'
-									type='text'
-									name='username'
-									value={values.username}
-									onBlur={handleBlur}
-									onChange={handleChange}
-									isValid={
-										touched.username && !errors.username
-									}
-									isInvalid={
-										touched.username && !!errors.username
-									}
-								/>
-								<Form.Control.Feedback type='invalid'>
-									{errors.username}
-								</Form.Control.Feedback>
-							</Form.Group>
-
-							<Form.Group controlId='formBasicPassword'>
-								<Form.Label>Password</Form.Label>
-								<Form.Control
-									type='password'
-									placeholder='Password'
-									name='password'
-									value={values.password}
-									onBlur={handleBlur}
-									onChange={handleChange}
-									isValid={
-										touched.password && !errors.password
-									}
-									isInvalid={
-										touched.password && !!errors.password
-									}
-								/>
-								<Form.Control.Feedback type='invalid'>
-									{errors.password}
-								</Form.Control.Feedback>
-							</Form.Group>
-
-							<Form.Group controlId='formBasicPasswordConfirm'>
-								<Form.Label>Confirm Password</Form.Label>
-								<Form.Control
-									type='password'
-									placeholder='Confirm Password'
-									name='password_confirmation'
-									onChange={handleChange}
-									value={values.password_confirmation}
-									isValid={
-										!!values.password_confirmation &&
-										!errors.password_confirmation
-									}
-									isInvalid={!!errors.password_confirmation}
-								/>
-								<Form.Control.Feedback type='invalid'>
-									{errors.password_confirmation}
-								</Form.Control.Feedback>
-							</Form.Group>
-
-							<div>
-								<Button
-									disabled={isValidating}
-									variant='dark'
-									type='submit'
+					<Container style={{ marginTop: '2rem' }}>
+						<Row className='justify-content-center'>
+							<Col xs={12} md={6}>
+								<h1>Signup Form</h1>
+								<Form
+									noValidate
+									onSubmit={handleSubmit}
+									style={{ paddingBottom: '3rem' }}
 								>
-									Signup
-								</Button>
-							</div>
-						</Form>
+									<Form.Group controlId='formBasicEmail'>
+										<Form.Label>Email address</Form.Label>
+										<Form.Control
+											placeholder='Enter email'
+											name='email_address'
+											value={values.email_address}
+											onBlur={handleBlur}
+											onChange={handleChange}
+											isValid={
+												touched.email_address &&
+												!errors.email_address
+											}
+											isInvalid={
+												touched.email_address &&
+												!!errors.email_address
+											}
+										/>
+										<Form.Control.Feedback type='invalid'>
+											{errors.email_address}
+										</Form.Control.Feedback>
+										<Form.Text className='text-muted'>
+											We'll never share your email with
+											anyone else.
+										</Form.Text>
+									</Form.Group>
+
+									<Form.Group controlId='formUsername'>
+										<Form.Label>Username</Form.Label>
+										<Form.Control
+											placeholder='Your display name'
+											type='text'
+											name='username'
+											value={values.username}
+											onBlur={handleBlur}
+											onChange={handleChange}
+											isValid={
+												touched.username &&
+												!errors.username
+											}
+											isInvalid={
+												touched.username &&
+												!!errors.username
+											}
+										/>
+										<Form.Control.Feedback type='invalid'>
+											{errors.username}
+										</Form.Control.Feedback>
+										<Form.Text className='text-muted'>
+											You can change it later
+										</Form.Text>
+									</Form.Group>
+
+									<Form.Group controlId='formBasicPassword'>
+										<Form.Label>Password</Form.Label>
+										<Form.Control
+											type='password'
+											placeholder='Password'
+											name='password'
+											value={values.password}
+											onBlur={handleBlur}
+											onChange={handleChange}
+											isValid={
+												touched.password &&
+												!errors.password
+											}
+											isInvalid={
+												touched.password &&
+												!!errors.password
+											}
+										/>
+										<Form.Control.Feedback type='invalid'>
+											{errors.password}
+										</Form.Control.Feedback>
+									</Form.Group>
+
+									<Form.Group controlId='formBasicPasswordConfirm'>
+										<Form.Label>
+											Confirm Password
+										</Form.Label>
+										<Form.Control
+											type='password'
+											placeholder='Confirm Password'
+											name='password_confirmation'
+											onChange={handleChange}
+											value={values.password_confirmation}
+											isValid={
+												!!values.password_confirmation &&
+												!errors.password_confirmation
+											}
+											isInvalid={
+												!!errors.password_confirmation
+											}
+										/>
+										<Form.Control.Feedback type='invalid'>
+											{errors.password_confirmation}
+										</Form.Control.Feedback>
+									</Form.Group>
+
+									<div
+										style={{
+											minWidth: '100%',
+										}}
+									>
+										<Button
+											disabled={isValidating}
+											variant='outline-dark'
+											type='submit'
+											style={{
+												right: '1rem',
+												bottom: '0',
+												position: 'absolute',
+											}}
+										>
+											Signup
+										</Button>
+									</div>
+								</Form>
+							</Col>
+						</Row>
 					</Container>
 				);
 			}}

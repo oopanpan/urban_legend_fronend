@@ -2,6 +2,7 @@
 	width: 100%;
 	min-height: 90vh !important;
 	overflow: hidden;
+	object-fit: cover;
 	z-index: 2;
 }
 

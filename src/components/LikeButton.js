@@ -7,7 +7,6 @@ import { newLike, unLike } from '../actions/likeActions';
 
 function LikeButton({ newLike, unLike, userId, likedUsers, dataId }) {
 	const [userArr, setUserArr] = useState(likedUsers);
-	console.log(userArr);
 	const userLiked = userArr.find((like) => like.user_id === userId);
 	const count = userArr.length;
 

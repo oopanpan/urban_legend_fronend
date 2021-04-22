@@ -10,6 +10,13 @@ function ModalComp({ displayModal, modal }) {
 		displayModal(false);
 	};
 
+	const handleText = (txt) => {
+		if (Array.isArray(txt)) {
+			return txt.map((ele) => <p key={ele}>{ele}</p>);
+		}
+		return txt;
+	};
+
 	const renderButtons = (arr) => {
 		return arr.map((button) => {
 			if (button.path) {
@@ -21,6 +28,20 @@ function ModalComp({ displayModal, modal }) {
 						title={button.content}
 						key={button.content}
 						onClick={handleClose}
+					>
+						{button.content}
+					</Button>
+				);
+			} else if (button.func) {
+				return (
+					<Button
+						variant='outline-dark'
+						title={button.content}
+						key={button.content}
+						onClick={() => {
+							button.func();
+							handleClose();
+						}}
 					>
 						{button.content}
 					</Button>
@@ -53,7 +74,7 @@ function ModalComp({ displayModal, modal }) {
 					<Modal.Header closeButton>
 						<Modal.Title>{modal.header}</Modal.Title>
 					</Modal.Header>
-					<Modal.Body>{modal.body}</Modal.Body>
+					<Modal.Body>{handleText(modal.body)}</Modal.Body>
 					<Modal.Footer>{renderButtons(modal.buttons)}</Modal.Footer>
 				</Modal>
 			)}

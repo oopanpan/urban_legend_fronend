@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import { setAuth } from '../actions/userActions';
+import { setModal } from '../actions/modalActions';
 
 const initialValues = {
 	email_address: '',
@@ -25,18 +26,30 @@ const signupSchema = yup.object().shape({
 		.required('Password cannot be blank'),
 });
 
-function Login({ routerProps, setAuth }) {
-	const backendSubmit = (data) => {
+function Login({ setAuth, setModal }) {
+	const backendSubmit = async (data) => {
 		const userObj = {
 			user: {
 				...data,
 			},
 		};
-		api.user.postLogin(userObj).then((r) => {
-			localStorage.setItem('token', r.jwt);
-			setAuth(r);
-			routerProps.history.push('/discuss');
-		});
+		const res = await api.user.postLogin(userObj);
+		if (res.jwt) {
+			localStorage.setItem('token', res.jwt);
+			setAuth(res);
+			const body = `Welcome Back to Urban Legend, ${res.user.username}. Where would you like to go?`;
+			const buttons = [
+				{ content: 'Explore', path: '/urban' },
+				{ content: 'All Post', path: '/discuss' },
+			];
+			setModal(true, 'Congratulations!', body, buttons);
+		} else {
+			const buttons = [
+				{ content: 'Close' },
+				{ content: 'Signup', path: '/signup' },
+			];
+			setModal(true, 'Login Error', res.message, buttons);
+		}
 	};
 
 	return (
@@ -115,10 +128,6 @@ function Login({ routerProps, setAuth }) {
 									<Row className='justify-content-center'>
 										<Button
 											variant='outline-dark'
-											size='lg'
-											block
-											style={{ borderRadius: '8px' }}
-											className='col-5 col-md-4 col-lg-2 mt-4 mb-3'
 											type='submit'
 											disabled={isValidating}
 										>
@@ -135,4 +144,4 @@ function Login({ routerProps, setAuth }) {
 	);
 }
 
-export default connect(null, { setAuth })(Login);
+export default connect(null, { setAuth, setModal })(Login);

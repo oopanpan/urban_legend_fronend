@@ -52,7 +52,6 @@ function CommentRender({
 			? thisComment.created_at.split('T')[0]
 			: '(edited) ' + thisComment.updated_at.split('T')[0];
 	};
-	console.log(thisComment);
 
 	return (
 		<>

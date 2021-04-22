@@ -83,7 +83,7 @@ function PostRender({ userId, data, setUpdated }) {
 	return (
 		<Row className='justify-content-center post-row'>
 			<Col xs={12} md={6}>
-				<Card style={{ marginBottom: '25px' }}>
+				<Card style={{ marginBottom: '25px' }} className='post-card'>
 					{/* might do another component to do some fancy stuff */}
 					<Card.Header>
 						<img

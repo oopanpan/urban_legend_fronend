@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Form, Card, Button, Row, Col } from 'react-bootstrap';
 import { Icon } from 'semantic-ui-react';
 
+import { setModal } from '../actions/modalActions';
 import { newUpdate, updatePost, deletePost } from '../actions/postActions';
 import api from '../service/api';
 import './EditingForm.css';
@@ -16,7 +17,7 @@ function EditingForm({
 	data,
 	updatePost,
 	deletePost,
-	setUpdated,
+	setModal,
 }) {
 	const [formHeader, setFormHeader] = useState(data.header);
 	const [formContent, setFormContent] = useState(data.content);
@@ -35,18 +36,28 @@ function EditingForm({
 				content: formContent,
 			};
 			api.post.patchPost(postObj).then((r) => {
-				setUpdated ? setUpdated(true) : updatePost(r);
-			}, handleEdit());
-			//! MODAL ACTIVATION && REDIRECTION
+				if (r.message) {
+					const buttons = [{ content: 'Close' }];
+					setModal(true, 'OOPS', r.message, buttons);
+				} else {
+					updatePost(r);
+					handleEdit();
+				}
+			});
 		} else {
 			const commentObj = {
 				id: data.id,
 				content: formContent,
 			};
-			api.comment
-				.patchComment(commentObj)
-				.then(setIsUpdate(true), handleEdit());
-			//! MODAL ACTIVATION && REDIRECTION
+			api.comment.patchComment(commentObj).then((r) => {
+				if (r.message) {
+					const buttons = [{ content: 'Close' }];
+					setModal(true, 'OOPS', r.message, buttons);
+				} else {
+					setIsUpdate(true);
+					handleEdit();
+				}
+			});
 		}
 	};
 
@@ -62,6 +73,14 @@ function EditingForm({
 					)
 				);
 		}
+	};
+
+	const deleteModal = () => {
+		const buttons = [
+			{ content: 'Yes', func: handleDelete },
+			{ content: 'No' },
+		];
+		setModal(true, 'Are you sure?', 'Please confirm', buttons);
 	};
 	return (
 		<Form onSubmit={handleSubmit}>
@@ -109,7 +128,7 @@ function EditingForm({
 						title='Delete'
 						name='trash alternate outline'
 						size='large'
-						onClick={handleDelete}
+						onClick={deleteModal}
 					/>
 				</Row>
 			</Card.Footer>
@@ -123,6 +142,6 @@ const mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { updatePost, deletePost })(
+export default connect(mapStateToProps, { updatePost, deletePost, setModal })(
 	EditingForm
 );
