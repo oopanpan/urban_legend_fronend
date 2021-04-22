@@ -81,6 +81,7 @@ function UserEditForm({ thisUser, patchProfile, setEditing, setModal }) {
 						/>
 						<Form.Label>Bio</Form.Label>
 						<Form.Control
+							as='textarea'
 							name='bio'
 							onChange={handleChange}
 							value={bio}

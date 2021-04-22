@@ -90,7 +90,10 @@ function PostForm({ addPost, userId, postKeyword, setModal }) {
 					</Row>
 				</>
 			) : (
-				<h2>Please login or sign up to post.</h2>
+				<h2>
+					Please <a href='/login'>log in</a> or{' '}
+					<a href='/signup'>sign up </a> to start.
+				</h2>
 			)}
 		</div>
 	);
