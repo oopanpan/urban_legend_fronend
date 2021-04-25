@@ -8,6 +8,7 @@ import { newFollow, unFollow } from '../actions/followActions';
 import UserHeader from './UserHeader';
 import PostRender from './PostRender';
 import UserDetails from './UserDetails';
+import NotFound from './NotFound';
 
 function UserProfile({
 	routerProps,
@@ -20,15 +21,17 @@ function UserProfile({
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [isFollowed, setIsFollowed] = useState(false);
 	const [onView, setOnView] = useState('posts');
+	const [notFound, setNotFound] = useState(false);
 
 	useEffect(async () => {
-		const following = await getProfile(
-			routerProps.match.params.id
-		).then((r) =>
-			r.inverse_friendships.find(
-				(friend) => friend.follower_id === currentUser.id
-			)
-		);
+		const following = await getProfile(routerProps.match.params.id)
+			.then((r) => {
+				console.log(r);
+				r.inverse_friendships.find(
+					(friend) => friend.follower_id === currentUser.id
+				);
+			})
+			.catch(() => setNotFound(true));
 		console.log(following);
 		following && setIsFollowed(true);
 	}, [isFollowed, routerProps]);
@@ -61,18 +64,24 @@ function UserProfile({
 		));
 	};
 	return (
-		<div>
-			{thisUser.id ? (
-				<Container style={{ marginTop: '3rem' }}>
-					<UserHeader
-						thisUser={thisUser}
-						isFollowed={isFollowed}
-						handleFollow={handleFollow}
-					/>
-					<UserDetails thisUser={thisUser} />
-				</Container>
-			) : null}
-		</div>
+		<>
+			{notFound ? (
+				<NotFound />
+			) : (
+				<div>
+					{thisUser.id ? (
+						<Container style={{ marginTop: '3rem' }}>
+							<UserHeader
+								thisUser={thisUser}
+								isFollowed={isFollowed}
+								handleFollow={handleFollow}
+							/>
+							<UserDetails thisUser={thisUser} />
+						</Container>
+					) : null}
+				</div>
+			)}
+		</>
 	);
 }
 

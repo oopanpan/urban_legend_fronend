@@ -47,6 +47,7 @@ const Signup = ({ setModal, setAuth }) => {
 			const buttons = [
 				{ content: 'Explore', path: '/urban' },
 				{ content: 'All Post', path: '/discuss' },
+				{ content: 'Your Profile', path: `/profile/${res.user.id}` },
 			];
 			setModal(true, 'Congratulations!', body, buttons);
 		} else {

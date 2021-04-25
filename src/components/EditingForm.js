@@ -13,6 +13,7 @@ function EditingForm({
 	setComments,
 	commentId,
 	setIsUpdate,
+	setUpdated,
 	handleEdit,
 	data,
 	updatePost,
@@ -40,6 +41,8 @@ function EditingForm({
 					const buttons = [{ content: 'Close' }];
 					setModal(true, 'OOPS', r.message, buttons);
 				} else {
+					console.log(r);
+					setUpdated && setUpdated(true);
 					updatePost(r);
 					handleEdit();
 				}

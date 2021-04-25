@@ -28,15 +28,15 @@ i {
 
 .comment-card {
 	/* padding-top: 0rem; */
-	border-left: 3px solid rgb(35, 115, 190);
+	border-left: 3px solid rgb(68, 141, 96);
 }
 
 .comment-card > .card-header {
-	background-color: rgb(232, 252, 250);
+	background-color: rgb(243, 247, 229);
 }
 
 .comment-card > .card-footer {
-	background-color: rgb(232, 252, 250);
+	background-color: rgb(243, 247, 229);
 }
 
 /* .comment-card:last-of-type {
@@ -50,7 +50,7 @@ i {
 .comment-card + form {
 	padding-left: 10px;
 	padding-right: 10px;
-	border-left: 3px solid rgb(35, 115, 190);
+	border-left: 3px solid rgb(68, 141, 96);
 	border-bottom-left-radius: 10px;
 }
 
@@ -67,4 +67,12 @@ i {
 	100% {
 		opacity: 1;
 	}
+}
+
+.post-card > .card-header {
+	background-color: rgb(239, 242, 252);
+}
+
+.post-card > .card-footer {
+	background-color: rgb(239, 242, 252);
 }

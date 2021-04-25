@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 
 const BACKEND_API = 'http://localhost:3000/';
 
-function PostRender({ userId, data, setUpdated }) {
+function PostRender({ userId, data, setUpdated, setData }) {
 	const [showMore, setShowMore] = useState(false);
 	const [showComment, setShowComment] = useState(false);
 	const [editing, setEditing] = useState(false);
@@ -51,7 +51,7 @@ function PostRender({ userId, data, setUpdated }) {
 	const contentFormatting = () => {
 		return (
 			<>
-				{data.content.slice(0, 150)}{' '}
+				{data.content.slice(0, 150)}
 				{showMore ? (
 					<>
 						{data.content.slice(150)}

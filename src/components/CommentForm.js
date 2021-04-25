@@ -57,7 +57,10 @@ function CommentForm({
 					</Form.Group>
 				</Form>
 			) : (
-				<div>Log in or singup to start banging</div>
+				<div style={{ textAlign: 'center', padding: '2rem' }}>
+					Please <a href='/login'>Log in</a> or{' '}
+					<a href='/signup'>Signup</a>
+				</div>
 			)}
 		</>
 	);

@@ -34,7 +34,7 @@ function NavBar({ userId, username, delAuth, setCityKeyword, avatar }) {
 						to='/discuss'
 						onClick={() => setCityKeyword('Global')}
 					>
-						<Nav.Link>Forum</Nav.Link>
+						<Nav.Link>Convos</Nav.Link>
 					</LinkContainer>
 					{/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

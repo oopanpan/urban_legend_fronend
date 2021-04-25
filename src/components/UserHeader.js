@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import UserEditForm from './UserEditForm';
 import { setCityKeyword } from '../actions/postActions';
-import './UserHeader.css';
+import './UserProfile.css';
 
 function UserHeader({
 	thisUser,
@@ -54,24 +54,33 @@ function UserHeader({
 									/>
 								</div>
 								<div>
-									{authUser ? (
-										<Button
-											className='profile-main'
-											size='sm'
-											variant='outline-dark'
-											onClick={handleEdit}
-										>
-											Edit Profile
-										</Button>
+									{currentUser.id ? (
+										authUser ? (
+											<Button
+												className='profile-main'
+												size='sm'
+												variant='outline-dark'
+												onClick={handleEdit}
+											>
+												Edit Profile
+											</Button>
+										) : (
+											<Button
+												className='profile-main'
+												size='sm'
+												variant='outline-dark'
+												onClick={handleFollow}
+											>
+												{isFollowed
+													? 'Unfollow'
+													: 'Follow'}
+											</Button>
+										)
 									) : (
-										<Button
-											className='profile-main'
-											size='sm'
-											variant='outline-dark'
-											onClick={handleFollow}
-										>
-											{isFollowed ? 'Unfollow' : 'Follow'}
-										</Button>
+										<p>
+											Please <a href='/login'>Log in</a>{' '}
+											or <a href='/signup'>Signup</a>
+										</p>
 									)}
 								</div>
 							</Col>
