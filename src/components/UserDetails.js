@@ -9,6 +9,7 @@ function UserDetails({ thisUser }) {
 
 	const handleClick = (e) => {
 		e.stopPropagation();
+		console.log(e.target);
 		setOnView(e.target.innerText.toLowerCase());
 	};
 
@@ -73,7 +74,11 @@ function UserDetails({ thisUser }) {
 									height='20'
 								/>
 							</td>
-							<td>{user.username}</td>
+							<td>
+								<Link to={`/profile/${user.follower_id}`}>
+									{user.username}
+								</Link>
+							</td>
 						</tr>
 					);
 				});

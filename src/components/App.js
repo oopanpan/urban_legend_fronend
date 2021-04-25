@@ -66,7 +66,7 @@ const App = ({ user, setAuth }) => {
 						)}
 					/>
 					<Route path='/newpost' render={() => <PostForm />} />
-					<Route component={NotFound} />
+					<Route render={() => <NotFound />} />
 				</Switch>
 				<Footer />
 				<ModalComp />

@@ -30,6 +30,7 @@ function PostsContainer({ routerProps, currentUser }) {
 				>
 					{data && (
 						<PostRender
+							setData={setData}
 							userId={currentUser.id}
 							data={data.post}
 							setUpdated={setUpdated}
