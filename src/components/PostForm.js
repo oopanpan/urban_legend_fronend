@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { addPost, newUpdate } from '../actions/postActions';
 import { setModal } from '../actions/modalActions';
 
-import api from '../service/api';
-
 function PostForm({ addPost, userId, postKeyword, setModal }) {
 	const [keyword, setKeyword] = useState(postKeyword);
 
