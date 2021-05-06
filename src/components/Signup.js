@@ -78,7 +78,7 @@ const Signup = ({ setModal, setAuth }) => {
 					<Container style={{ marginTop: '2rem' }}>
 						<Row className='justify-content-center'>
 							<Col xs={12} md={6}>
-								<h1>Signup Form</h1>
+								<h1>Signup </h1>
 								<Form
 									noValidate
 									onSubmit={handleSubmit}

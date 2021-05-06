@@ -1,4 +1,7 @@
 import React from 'react';
+import { Icon } from 'semantic-ui-react';
+
+const githubLink = 'https://github.com/oopanpan';
 
 function Footer() {
 	return (
@@ -9,10 +12,20 @@ function Footer() {
 				height: '50px',
 				bottom: '0',
 				backgroundColor: 'white',
-				color: 'white',
+				color: 'black',
+				textAlign: 'center',
+				display: 'flex',
+				justifyContent: 'center',
 			}}
 		>
-			Hello
+			<div style={{ padding: '1rem' }}>
+				Pan Li 2021
+				<Icon
+					onClick={() => window.open(githubLink, '_blank')}
+					name='github'
+					size='large'
+				/>
+			</div>
 		</div>
 	);
 }
