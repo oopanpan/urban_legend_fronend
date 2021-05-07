@@ -5,6 +5,8 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 import { patchProfile } from '../actions/profileActions';
 import { setModal } from '../actions/modalActions';
 
+import api from '../service/api';
+
 function UserEditForm({ thisUser, patchProfile, setEditing, setModal }) {
 	const [username, setUsername] = useState(thisUser.username);
 	const [bio, setBio] = useState(thisUser.bio);
@@ -54,7 +56,7 @@ function UserEditForm({ thisUser, patchProfile, setEditing, setModal }) {
 							<img
 								id='user-avatar'
 								alt='user-avatar'
-								src={'http://localhost:3000/' + thisUser.avatar}
+								src={api.AVATAR + thisUser.avatar}
 								width='120px'
 								height='120px'
 							/>
