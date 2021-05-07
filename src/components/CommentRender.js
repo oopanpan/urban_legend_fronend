@@ -9,8 +9,6 @@ import CommentForm from './CommentForm';
 import api from '../service/api';
 import { newUpdate } from '../actions/postActions';
 
-const BACKEND_API = 'http://localhost:3000/';
-
 function CommentRender({
 	comments,
 	setComments,
@@ -61,7 +59,7 @@ function CommentRender({
 					<Card.Header>
 						<img
 							alt='user-avatar'
-							src={BACKEND_API + thisComment.user.avatar}
+							src={api.AVATAR + thisComment.user.avatar}
 							width='20'
 							height='20'
 						/>

@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const BACKEND_API = 'http://localhost:3000/api/v1';
+const BACKEND_API = 'https://urban-legend.herokuapp.com/api/v1';
 
 const TELEPORT_API = 'https://api.teleport.org/api/';
 
-const AVATAR = 'http://localhost:3000';
+const AVATAR = 'https://urban-legend.herokuapp.com';
 
 const token = () => localStorage.getItem('token');
 

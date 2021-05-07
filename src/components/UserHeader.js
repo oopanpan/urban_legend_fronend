@@ -7,6 +7,8 @@ import UserEditForm from './UserEditForm';
 import { setCityKeyword } from '../actions/postActions';
 import './UserProfile.css';
 
+import api from '../service/api';
+
 function UserHeader({
 	thisUser,
 	handleFollow,
@@ -45,10 +47,7 @@ function UserHeader({
 									<img
 										id='user-avatar'
 										alt='user-avatar'
-										src={
-											'http://localhost:3000/' +
-											thisUser.avatar
-										}
+										src={api.AVATAR + thisUser.avatar}
 										width='120px'
 										height='120px'
 									/>

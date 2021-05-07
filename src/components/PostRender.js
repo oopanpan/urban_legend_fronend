@@ -9,9 +9,9 @@ import EditingForm from './EditingForm';
 import LikeButton from './LikeButton';
 import OnScreenKeyword from './OnScreenKeyword';
 
-import { Link } from 'react-router-dom';
+import api from '../service/api';
 
-const BACKEND_API = 'http://localhost:3000/';
+import { Link } from 'react-router-dom';
 
 function PostRender({ userId, data, setUpdated, setData }) {
 	const [showMore, setShowMore] = useState(false);
@@ -89,7 +89,7 @@ function PostRender({ userId, data, setUpdated, setData }) {
 						<img
 							className='user-avatar'
 							alt='user-avatar'
-							src={BACKEND_API + data.user.avatar}
+							src={api.AVATAR + data.user.avatar}
 							width='30'
 							height='30'
 						/>
