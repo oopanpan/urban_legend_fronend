@@ -131,7 +131,12 @@ const UrbanView = ({ city, setCityKeyword }) => {
 						</Col>
 					</Row>
 					<Row className='button-row' style={{ margin: '2rem' }}>
-						<Button title='link to discuss' variant='outline-dark'>
+						<Button
+							as={Link}
+							to='/discuss'
+							title='link to discuss'
+							variant='outline-dark'
+						>
 							See what people are talking about
 						</Button>
 					</Row>
