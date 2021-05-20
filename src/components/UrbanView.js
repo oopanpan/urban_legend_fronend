@@ -111,16 +111,8 @@ const UrbanView = ({ city, setCityKeyword }) => {
 								</Button>
 							</Row>
 						</Col>
-						{/* <Col className='left-container' xs={12} md={6}>
-							{renderScores()}
-						</Col> */}
 					</Row>
 					<Row className='left-container'>{renderScores()}</Row>
-					{/* <ButtonGroup style={{ margin: '3rem' }}>
-						<Button>See post for this place</Button>
-						<Button>All Post</Button>
-						<Button>Start Writing Post</Button>
-					</ButtonGroup> */}
 					<div style={{ margin: '5rem' }}>-</div>
 				</>
 			) : (
