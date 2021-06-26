@@ -9,7 +9,7 @@ function HomePage() {
 	return (
 		<div>
 			{/* <div id='home' style={{ backgroundImage: `url(${backDrop})` }}> */}
-			<img src={backDrop} id='home' />
+			<img src={backDrop} alt='backDrop' id='home' />
 			<div id='main-title'>Urban Legend</div>
 			<div id='fade-in'>
 				<p>Connecting made easy</p>
@@ -17,6 +17,7 @@ function HomePage() {
 			<div id='cloud-div'>
 				<img
 					src={cloud}
+					alt='cloud'
 					className='cloud-img'
 					width='95px'
 					height='95px'
@@ -27,6 +28,7 @@ function HomePage() {
 				/>
 				<img
 					src={cloud}
+					alt='cloud'
 					className='cloud-img'
 					width='120px'
 					height='120px'
@@ -39,6 +41,7 @@ function HomePage() {
 				/>
 				<img
 					src={cloud}
+					alt='cloud'
 					className='cloud-img'
 					width='75px'
 					height='75px'

@@ -1,6 +1,4 @@
 import React from 'react';
-
-import PostForm from './PostForm';
 import ForumDisplay from './ForumDisplay';
 
 function ForumContainer() {

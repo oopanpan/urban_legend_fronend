@@ -68,8 +68,6 @@ function Login({ setAuth, setModal }) {
 					handleChange,
 					handleBlur,
 					isValidating,
-					isValid,
-					dirty,
 				} = formik;
 				return (
 					<Container style={{ marginTop: '3rem' }}>

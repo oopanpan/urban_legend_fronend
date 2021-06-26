@@ -30,12 +30,11 @@ function CommentRender({
 		};
 		getOneComment();
 		setIsUpdate(false);
-	}, [isUpdate]);
+	}, [data.id, isUpdate]);
 
 	const renderNestedCard = (arr) => {
 		return arr.map((ele) => {
 			return <CommentRender userId={userId} key={ele.id} data={ele} />;
-			// return <ContentRender key={ele.id} data={ele} />;
 		});
 	};
 

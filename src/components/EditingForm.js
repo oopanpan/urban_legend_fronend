@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Form, Card, Button, Row, Col } from 'react-bootstrap';
+import { Form, Card, Row, Col } from 'react-bootstrap';
 import { Icon } from 'semantic-ui-react';
 
 import { setModal } from '../actions/modalActions';
-import { newUpdate, updatePost, deletePost } from '../actions/postActions';
+import { updatePost, deletePost } from '../actions/postActions';
 import api from '../service/api';
 import './EditingForm.css';
 

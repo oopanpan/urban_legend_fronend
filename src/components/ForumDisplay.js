@@ -42,7 +42,7 @@ function ForumDisplay({
 			resetPage();
 			clearPosts();
 		};
-	}, [keyword]);
+	}, [clearPosts, fetchPosts, keyword, resetPage]);
 
 	useEffect(() => {
 		if (currentPage < totalPage && isBottom) {
@@ -50,7 +50,7 @@ function ForumDisplay({
 			nextPage();
 			fetchPosts(keyword, currentPage + 1);
 		}
-	}, [isBottom]);
+	}, [currentPage, fetchPosts, isBottom, keyword, nextPage, totalPage]);
 
 	const handleScroll = () => {
 		const scrollTop =

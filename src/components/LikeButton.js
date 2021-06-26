@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { Icon } from 'semantic-ui-react';
