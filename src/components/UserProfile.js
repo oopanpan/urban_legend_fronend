@@ -34,7 +34,7 @@ function UserProfile({
 				})
 				.catch(() => setNotFound(true));
 			console.log(following);
-			following && setIsFollowed(true);
+			following ? setIsFollowed(true) : setIsFollowed(false);
 		};
 		getUser();
 	}, [currentUser.id, getProfile, isFollowed, routerProps]);

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Col, Row, Table, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import api from '../service/api';
+
 function UserDetails({ thisUser }) {
 	const [onView, setOnView] = useState('post');
 
@@ -11,6 +13,17 @@ function UserDetails({ thisUser }) {
 		e.stopPropagation();
 		console.log(e.target);
 		setOnView(e.target.innerText.toLowerCase());
+	};
+
+	const renderAvatar = (user) => {
+		return (
+			<img
+				src={api.AVATAR + user.avatar}
+				alt='avatar'
+				width='20'
+				height='20'
+			/>
+		);
 	};
 
 	const renderTable = (user) => {
@@ -48,13 +61,7 @@ function UserDetails({ thisUser }) {
 				return user.following.map((user) => {
 					return (
 						<tr>
-							<td>
-								<img
-									src={'http://localhost:3000/' + user.avatar}
-									width='20'
-									height='20'
-								/>
-							</td>
+							<td>{renderAvatar(user)}</td>
 							<td>
 								<Link to={`/profile/${user.following_id}`}>
 									{user.username}
@@ -67,13 +74,7 @@ function UserDetails({ thisUser }) {
 				return user.follower.map((user) => {
 					return (
 						<tr>
-							<td>
-								<img
-									src={'http://localhost:3000/' + user.avatar}
-									width='20'
-									height='20'
-								/>
-							</td>
+							<td>{renderAvatar(user)}</td>
 							<td>
 								<Link to={`/profile/${user.follower_id}`}>
 									{user.username}
@@ -82,6 +83,8 @@ function UserDetails({ thisUser }) {
 						</tr>
 					);
 				});
+			default:
+				return <></>;
 		}
 	};
 	return (
