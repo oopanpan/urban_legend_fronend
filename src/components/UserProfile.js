@@ -23,18 +23,21 @@ function UserProfile({
 	const [onView, setOnView] = useState('posts');
 	const [notFound, setNotFound] = useState(false);
 
-	useEffect(async () => {
-		const following = await getProfile(routerProps.match.params.id)
-			.then((r) => {
-				console.log(r);
-				r.inverse_friendships.find(
-					(friend) => friend.follower_id === currentUser.id
-				);
-			})
-			.catch(() => setNotFound(true));
-		console.log(following);
-		following && setIsFollowed(true);
-	}, [isFollowed, routerProps]);
+	useEffect(() => {
+		const getUser = async () => {
+			const following = await getProfile(routerProps.match.params.id)
+				.then((r) => {
+					console.log(r);
+					r.inverse_friendships.find(
+						(friend) => friend.follower_id === currentUser.id
+					);
+				})
+				.catch(() => setNotFound(true));
+			console.log(following);
+			following && setIsFollowed(true);
+		};
+		getUser();
+	}, [currentUser.id, getProfile, isFollowed, routerProps]);
 
 	const handleFollow = async () => {
 		const friendship = thisUser.follower.find(
@@ -58,11 +61,11 @@ function UserProfile({
 		}
 	};
 
-	const postRender = () => {
-		return thisUser.posts.map((post) => (
-			<PostRender userId={thisUser.id} data={post} />
-		));
-	};
+	// const postRender = () => {
+	// 	return thisUser.posts.map((post) => (
+	// 		<PostRender userId={thisUser.id} data={post} />
+	// 	));
+	// };
 	return (
 		<>
 			{notFound ? (

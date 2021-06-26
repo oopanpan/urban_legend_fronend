@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { Card, Col, Row, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import UserEditForm from './UserEditForm';
