@@ -38,7 +38,6 @@ const Signup = ({ setModal, setAuth }) => {
 			user: { ...data },
 		};
 		const res = await api.user.postSignup(userObj);
-		// console.log(r);
 		console.log(res);
 		if (res.jwt) {
 			localStorage.setItem('token', res.jwt);
