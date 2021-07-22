@@ -7,7 +7,6 @@ import { Icon } from 'semantic-ui-react';
 import './NavBar.css';
 import { delAuth } from '../actions/userActions';
 import { setCityKeyword } from '../actions/postActions';
-import api from '../service/api';
 
 function NavBar({ userId, username, delAuth, setCityKeyword, avatar }) {
 	const handleLogout = () => {
@@ -42,7 +41,7 @@ function NavBar({ userId, username, delAuth, setCityKeyword, avatar }) {
 							<Nav.Link>
 								<img
 									className='user-avatar'
-									src={api.AVATAR + avatar}
+									src={avatar}
 									width='20'
 									height='20'
 								/>{' '}
