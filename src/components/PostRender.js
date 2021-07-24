@@ -89,7 +89,7 @@ function PostRender({ userId, data, setUpdated, setData }) {
 						<img
 							className='user-avatar'
 							alt='user-avatar'
-							src={api.AVATAR + data.user.avatar}
+							src={data.user.avatar}
 							width='30'
 							height='30'
 						/>

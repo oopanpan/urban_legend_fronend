@@ -58,7 +58,7 @@ function CommentRender({
 					<Card.Header>
 						<img
 							alt='user-avatar'
-							src={api.AVATAR + thisComment.user.avatar}
+							src={thisComment.user.avatar}
 							width='20'
 							height='20'
 						/>

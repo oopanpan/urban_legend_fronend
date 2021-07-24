@@ -56,7 +56,7 @@ function UserEditForm({ thisUser, patchProfile, setEditing, setModal }) {
 							<img
 								id='user-avatar'
 								alt='user-avatar'
-								src={api.AVATAR + thisUser.avatar}
+								src={thisUser.avatar}
 								width='120px'
 								height='120px'
 							/>
