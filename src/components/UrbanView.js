@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Button, ButtonGroup, Row, Col } from 'react-bootstrap';
+import { Button, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ const UrbanView = ({ city, setCityKeyword }) => {
 				});
 				setScoreLink(city['_links']['ua:scores'].href);
 			});
-	}, [city]);
+	}, [city, images]);
 
 	useEffect(() => {
 		scoreLink &&
@@ -67,7 +67,7 @@ const UrbanView = ({ city, setCityKeyword }) => {
 					<Row className='urban-container'>
 						<div className='img-container'>
 							<img
-								src={width > 800 ? images.web : images.mobile}
+								src={width > 800 ? images.web : images.mobile} alt={city.full_name}
 							/>
 							<div>{city.name}</div>
 						</div>

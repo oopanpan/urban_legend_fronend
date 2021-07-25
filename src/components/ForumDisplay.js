@@ -34,8 +34,6 @@ function ForumDisplay({
 		};
 	}, []);
 
-	console.log(isBottom);
-
 	useEffect(() => {
 		fetchPosts(keyword, 0);
 		return () => {

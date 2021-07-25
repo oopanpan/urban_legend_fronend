@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 
 import { Col, Row, Table, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';

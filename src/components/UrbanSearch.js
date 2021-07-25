@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Form, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import {
@@ -23,7 +23,7 @@ const UrbanSearch = ({
 	useEffect(() => {
 		setAllConts();
 		getAllUrbans();
-	}, []);
+	},[getAllUrbans, setAllConts]);
 
 	const renderContsOption = () => {
 		return allConts.map((cont) => (
@@ -60,7 +60,6 @@ const UrbanSearch = ({
 			className='justify-content-center'
 			style={{ marginTop: '1rem', marginBottom: '1rem' }}
 		>
-			{/* <Form> */}
 			<Col xs={12} md={4}>
 				<Form.Label>Urban City</Form.Label>
 				<Form.Control
@@ -82,7 +81,6 @@ const UrbanSearch = ({
 					{allConts && renderContsOption()}
 				</Form.Control>
 			</Col>
-			{/* </Form> */}
 		</Row>
 	);
 };

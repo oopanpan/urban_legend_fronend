@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button, Form, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
@@ -9,7 +9,6 @@ import EditingForm from './EditingForm';
 import LikeButton from './LikeButton';
 import OnScreenKeyword from './OnScreenKeyword';
 
-import api from '../service/api';
 
 import { Link } from 'react-router-dom';
 
@@ -22,7 +21,13 @@ function PostRender({ userId, data, setUpdated, setData }) {
 	useEffect(() => {
 		setComments(data.comments);
 	}, [data]);
+	
+	const handleShow = () => setShowMore(!showMore);
 
+	const handleComment = () => setShowComment(!showComment);
+
+	const handleEdit = () => setEditing(!editing);
+	
 	const renderNestedCard = () => {
 		return comments.map((comment) => {
 			return (
@@ -36,11 +41,6 @@ function PostRender({ userId, data, setUpdated, setData }) {
 		});
 	};
 
-	const handleShow = () => setShowMore(!showMore);
-
-	const handleComment = () => setShowComment(!showComment);
-
-	const handleEdit = () => setEditing(!editing);
 
 	const displayTime = () => {
 		return data.created_at === data.updated_at

@@ -10,7 +10,7 @@ function OnScreenKeyword({ setCityKeyword, string }) {
 	};
 
 	const capitalize = (string) =>
-		`${string[0].toUpperCase()}` + `${string.slice(1)}`;
+		`${string[0].toUpperCase()}${string.slice(1)}`;
 
 	const renderArr = () => {
 		const strArr = string.split('#');

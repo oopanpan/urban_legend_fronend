@@ -8,17 +8,18 @@ function PostsContainer({ routerProps, currentUser }) {
 	const [data, setData] = useState(null);
 	const [updated, setUpdated] = useState(false);
 	const [notFound, setNotFound] = useState(false);
+	const paramsId = routerProps.match.params.id;
 
 	useEffect(() => {
 		api.post
-			.getOnePost(routerProps.match.params.id)
+			.getOnePost(paramsId)
 			.then((r) => {
 				console.log(r);
 				setData(r);
 				setUpdated(false);
 			})
 			.catch(() => setNotFound(true));
-	}, [updated]);
+	}, [updated, paramsId]);
 	return (
 		<>
 			{notFound ? (

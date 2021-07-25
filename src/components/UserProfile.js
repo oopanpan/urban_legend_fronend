@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { getProfile } from '../actions/profileActions';
 import { newFollow, unFollow } from '../actions/followActions';
 
 import UserHeader from './UserHeader';
-import PostRender from './PostRender';
 import UserDetails from './UserDetails';
 import NotFound from './NotFound';
 
@@ -18,9 +17,7 @@ function UserProfile({
 	newFollow,
 	unFollow,
 }) {
-	const [selectedFile, setSelectedFile] = useState(null);
 	const [isFollowed, setIsFollowed] = useState(false);
-	const [onView, setOnView] = useState('posts');
 	const [notFound, setNotFound] = useState(false);
 
 	useEffect(() => {

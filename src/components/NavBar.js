@@ -41,6 +41,7 @@ function NavBar({ userId, username, delAuth, setCityKeyword, avatar }) {
 							<Nav.Link>
 								<img
 									className='user-avatar'
+									alt='user-avatar'
 									src={avatar}
 									width='20'
 									height='20'

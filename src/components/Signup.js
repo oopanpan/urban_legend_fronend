@@ -70,8 +70,8 @@ const Signup = ({ setModal, setAuth }) => {
 					touched,
 					handleBlur,
 					isValidating,
-					isValid,
-					dirty,
+					// isValid,
+					// dirty,
 				} = formik;
 				return (
 					<Container style={{ marginTop: '2rem' }}>

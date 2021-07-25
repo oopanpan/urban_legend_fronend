@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function NotFound() {
 	return (
 		<div>
-			<img src={backDrop} id='home' alt='background image' />
+			<img src={backDrop} id='home' alt='background' />
 			<div id='main-title' style={{ color: 'white' }}>
 				404 Watcha doin'
 			</div>

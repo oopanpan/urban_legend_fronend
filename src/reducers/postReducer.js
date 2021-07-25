@@ -10,7 +10,6 @@ export const postReducer = (
 			return { ...state, keyword: stylizePayload };
 
 		case KEYS.SET_ALL_POSTS:
-			console.log(action.payload);
 			return { ...state, posts: [...state.posts, ...action.payload] };
 
 		case KEYS.CLEAR_POSTS:

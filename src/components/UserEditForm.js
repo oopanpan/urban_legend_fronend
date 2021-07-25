@@ -5,8 +5,6 @@ import { Row, Col, Form, Button } from 'react-bootstrap';
 import { patchProfile } from '../actions/profileActions';
 import { setModal } from '../actions/modalActions';
 
-import api from '../service/api';
-
 function UserEditForm({ thisUser, patchProfile, setEditing, setModal }) {
 	const [username, setUsername] = useState(thisUser.username);
 	const [bio, setBio] = useState(thisUser.bio);
@@ -26,6 +24,8 @@ function UserEditForm({ thisUser, patchProfile, setEditing, setModal }) {
 					break;
 				case 'keyword':
 					setKeyword(e.target.value);
+					break;
+				default:
 					break;
 			}
 		}

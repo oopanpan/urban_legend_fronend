@@ -10,7 +10,6 @@ export const setCityKeyword = (keyword) => {
 
 export const fetchPosts = (keyword, currentPage) => async (dispatch) => {
 	const res = await api.post.getAllPosts(keyword, currentPage);
-	console.log(res);
 	dispatch({
 		type: KEYS.SET_ALL_POSTS,
 		payload: res.posts,
@@ -24,7 +23,6 @@ export const fetchPosts = (keyword, currentPage) => async (dispatch) => {
 
 export const fetchCityPosts = (keyword, currentPage) => async (dispatch) => {
 	const res = await api.post.getCityPosts(keyword, currentPage);
-	console.log(res);
 };
 
 export const nextPage = () => {
@@ -60,7 +58,6 @@ export const addPost = (obj) => async (dispatch) => {
 	// 		payload: res,
 	// 	});
 	// }
-	console.log(res);
 	return res;
 };
 
